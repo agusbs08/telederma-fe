@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -95,5 +96,7 @@
                 </div>
             </div>
         </div>
+        @yield('content')
     </body>
+    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 </html>

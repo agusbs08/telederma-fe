@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('puskesmas/data-table-patient');
 });
+
+Route::get('patient', 'PuskesmasController@getPatients')->name('get_patients');

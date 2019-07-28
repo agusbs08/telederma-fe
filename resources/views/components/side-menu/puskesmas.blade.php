@@ -5,19 +5,19 @@ $pagename = Request::segment(2);
 <li class="app-sidebar__heading">Menu</li>
 <li>
     <a href="{{ route('puskesmas.dashboard') }}" @php echo $pagename=="dashboard" ? $class : null @endphp>
-        <i class="metismenu-icon pe-7s-graph2">
+        <i class="metismenu-icon pe-7s-monitor">
         </i>Dashboard
     </a>
 </li>
 <li>
     <a href="{{ route('puskesmas.patients') }}" @php echo $pagename=="patients" ? $class : null @endphp>
-        <i class="metismenu-icon pe-7s-graph">
+        <i class="metismenu-icon pe-7s-users">
         </i>Pasien
     </a>
 </li>
 <li>
     <a href="{{ route('puskesmas.examinations') }}" @php echo $pagename=="examinations" ? $class : null @endphp>
-        <i class="metismenu-icon pe-7s-graph1">
+        <i class="metismenu-icon pe-7s-eyedropper">
         </i>Pemeriksaan
     </a>
 </li>

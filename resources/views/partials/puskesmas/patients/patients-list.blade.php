@@ -12,6 +12,11 @@
         </div>
       </div>
     </div>
+    <div class="page-title-actions">
+      <button type="button" class="btn-shadow mr-3 btn btn-dark" data-toggle="modal" data-target="#addPatientFormModal">
+        <i class="fa fa-plus"></i> Tambah Pasien
+      </button>
+    </div>
   </div>
 </div>
 <div class="main-card mb-3 card">

@@ -11,18 +11,48 @@
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Puskesmas Route
+|--------------------------------------------------------------------------
+*/
+
+// Patients
+
 Route::get('/puskesmas/patients', function () {
-    return view('partials.puskesmas.patients-list');
+    return view('partials.puskesmas.patients.patients-list');
 })->name('puskesmas.patients');
 
 Route::get('/puskesmas/patients/{patient_id}/details', function () {
-    return view('partials.puskesmas.patient-detail');
+    return view('partials.puskesmas.patients.patient-detail');
 })->name('puskesmas.patient-details');
 
+Route::get('/puskesmas/patients/{patient_id}/examinations', function () {
+    return view('partials.puskesmas.patients.examination-form');
+})->name('puskesmas.examination-form');
+
+// Examinations
+
 Route::get('/puskesmas/examinations', function () {
-    return view('partials.puskesmas.examinations-list');
+    return view('partials.puskesmas.examinations.examinations-list');
 })->name('puskesmas.examinations');
 
+Route::get('/puskesmas/examinations/{examination_id}', function () {
+    return view('partials.puskesmas.examinations.examination-details');
+})->name('puskesmas.examination-details');
+
+// Dashboards
+
 Route::get('/puskesmas/dashboard', function () {
-    return view('partials.puskesmas.patients-list');
+    return view('partials.puskesmas.patients.patients-list');
 })->name('puskesmas.dashboard');
+
+/*
+|--------------------------------------------------------------------------
+| Authentication Route
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/auth/login', function () {
+    return view('pages.login');
+})->name('auth.login');

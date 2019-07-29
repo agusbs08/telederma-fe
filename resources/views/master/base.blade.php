@@ -1142,12 +1142,7 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-</div>
-<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="{{asset('js/main.js')}}"></script></body>
-=======
-    <script type="text/javascript" src="{{asset('js/main.cba69814a806ecc7945a.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
 </body>
->>>>>>> 2455cda328b56061e109a239dd70d934c5f47a05
 
 </html>

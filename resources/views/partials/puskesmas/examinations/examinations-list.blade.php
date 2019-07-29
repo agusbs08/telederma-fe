@@ -1,4 +1,4 @@
-@extends('master.base')
+@extends('base')
 @section('content')
 <div class="app-page-title">
   <div class="page-title-wrapper">
@@ -31,8 +31,8 @@
           <td>12 Juni 1998</td>
           <td>Rojali</td>
           <td style="text-align: center; vertical-align: middle;">
-            <a href=""><button class="mb-2 mr-2 btn-icon btn-pill btn btn-info"><i
-                  class="lnr-arrow-right-circle btn-icon-wrapper">
+            <a href="{{ route('puskesmas.examination-details', ['examination_id' => 1]) }}"><button
+                class="mb-2 mr-2 btn-icon btn-pill btn btn-info"><i class="lnr-arrow-right-circle btn-icon-wrapper">
                 </i>Detail</button></a>
           </td>
         </tr>

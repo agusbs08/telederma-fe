@@ -33,8 +33,10 @@
   <div class="scrollbar-sidebar">
     <div class="app-sidebar__inner">
       <ul class="vertical-nav-menu">
-        @if (true)
+        @if (Request::segment(1) == "puskesmas")
         @include('components.side-menu.puskesmas')
+        @elseif (Request::segment(1) == "doctor")
+        @include('components.side-menu.doctor')
         @endif
       </ul>
     </div>

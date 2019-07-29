@@ -54,26 +54,25 @@
           <h6 class="mt-3">Hubungi admin bila ingin membuat mendaftar sebagai puskesmas atau dokter.</h6>
           <div class="divider row"></div>
           <div>
-            <form class="">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="position-relative form-group"><label for="username" class="">Username</label><input
-                      name="username" id="username" placeholder="contoh: jokowi" type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="position-relative form-group"><label for="password" class="">Password</label><input
-                      name="password" id="password" placeholder="***********" type="password" class="form-control">
-                  </div>
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="position-relative form-group"><label for="username" class="">Username</label><input
+                    name="username" id="username" placeholder="contoh: jokowi" type="text" class="form-control">
                 </div>
               </div>
-              <div class="divider row"></div>
-              <div class="d-flex align-items-center">
-                <div class="ml-auto"><a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a>
-                  <button class="btn btn-primary btn-lg">Masuk ke Dashboard</button>
+              <div class="col-md-6">
+                <div class="position-relative form-group"><label for="password" class="">Password</label><input
+                    name="password" id="password" placeholder="***********" type="password" class="form-control">
                 </div>
               </div>
-            </form>
+            </div>
+            <div class="divider row"></div>
+            <div class="d-flex align-items-center">
+              <div class="ml-auto">
+                <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a>
+                <button class="btn btn-primary btn-lg" type="button" onclick="login()">Masuk ke Dashboard</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,15 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', 'IndexController@index')->name('index');
 
 /*
 |--------------------------------------------------------------------------
@@ -17,33 +8,27 @@
 |--------------------------------------------------------------------------
 */
 
-// Patients
-
-Route::get('/puskesmas/patients', 'PuskesmasPatientController@getPatients')->name('puskesmas.patients');
-
-Route::get('/puskesmas/patients/{patient_id}/details', function () {
-    return view('partials.puskesmas.patients.patient-detail');
-})->name('puskesmas.patient-details');
-
-Route::get('/puskesmas/patients/{patient_id}/examinations', function () {
-    return view('partials.puskesmas.patients.examination-form');
-})->name('puskesmas.examination-form');
-
-// Examinations
-
-Route::get('/puskesmas/examinations', function () {
-    return view('partials.puskesmas.examinations.examinations-list');
-})->name('puskesmas.examinations');
-
-Route::get('/puskesmas/examinations/{examination_id}', function () {
-    return view('partials.puskesmas.examinations.examination-details');
-})->name('puskesmas.examination-details');
-
-// Dashboards
-
-Route::get('/puskesmas/dashboard', function () {
-    return view('partials.puskesmas.patients-list');
-})->name('puskesmas.dashboard');
+Route::prefix('puskesmas')->group(function () {
+    // Patients
+    Route::get('patients', 'PuskesmasPatientController@getPatientsListView')->name('puskesmas.patients');
+    Route::get('patients/{patient_id}/details', function () {
+        return view('partials.puskesmas.patients.patient-detail');
+    })->name('puskesmas.patient-details');
+    Route::get('patients/{patient_id}/examinations', function () {
+        return view('partials.puskesmas.patients.examination-form');
+    })->name('puskesmas.examination-form');
+    // Examinations
+    Route::get('examinations', function () {
+        return view('partials.puskesmas.examinations.examinations-list');
+    })->name('puskesmas.examinations');
+    Route::get('examinations/{examination_id}', function () {
+        return view('partials.puskesmas.examinations.examination-details');
+    })->name('puskesmas.examination-details');
+    // Dashboards
+    Route::get('dashboard', function () {
+        return view('partials.puskesmas.patients-list');
+    })->name('puskesmas.dashboard');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -51,13 +36,14 @@ Route::get('/puskesmas/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/doctor/examinations', function () {
-    return view('partials.doctor.examinations.examinations-list');
-})->name('doctor.examinations');
-
-Route::get('/doctor/examinations/{examination_id}', function () {
-    return view('partials.doctor.examinations.examination-details');
-})->name('doctor.examination-details');
+Route::prefix('doctor', function(){
+    Route::get('examinations', function () {
+        return view('partials.doctor.examinations.examinations-list');
+    })->name('doctor.examinations');
+    Route::get('examinations/{examination_id}', function () {
+        return view('partials.doctor.examinations.examination-details');
+    })->name('doctor.examination-details');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -65,5 +51,9 @@ Route::get('/doctor/examinations/{examination_id}', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/auth/login', 'LoginController@getLoginView')->name('auth.getLoginView');
-Route::post('/auth/login', 'LoginController@login')->name('auth.login');
+Route::prefix('auth')->group(function(){
+    Route::prefix('login')->group(function(){
+        Route::get('/', 'LoginController@getLoginView')->name('auth.getLoginView');
+        Route::post('/', 'LoginController@login')->name('auth.login');
+    });
+});

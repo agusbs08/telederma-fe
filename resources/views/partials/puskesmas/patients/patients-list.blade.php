@@ -1,4 +1,4 @@
-@extends('base')
+{{-- @extends('base')
 @section('content')
 <div class="app-page-title">
   <div class="page-title-wrapper">
@@ -39,22 +39,25 @@
           <td>1111222233334444</td>
           <td style="text-align: center; vertical-align: middle;">
             <a href="{{ route('puskesmas.patient-details', ['patient_id'=>1]) }}"><button
-                class="mb-2 mr-2 btn-icon btn-pill btn btn-info">
-                <i class="lnr-arrow-right-circle btn-icon-wrapper">
-                </i>Detail</button></a>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th>No</th>
-          <th>Nama</th>
-          <th>Tanggal Lahir</th>
-          <th>NIK</th>
-          <th>Detail Pasien</th>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
+  class="mb-2 mr-2 btn-icon btn-pill btn btn-info">
+  <i class="lnr-arrow-right-circle btn-icon-wrapper">
+  </i>Detail</button></a>
+</td>
+</tr>
+</tbody>
+<tfoot>
+  <tr>
+    <th>No</th>
+    <th>Nama</th>
+    <th>Tanggal Lahir</th>
+    <th>NIK</th>
+    <th>Detail Pasien</th>
+  </tr>
+</tfoot>
+</table>
 </div>
-@endsection
+</div>
+@endsection --}}
+@php
+print_r($data);
+@endphp

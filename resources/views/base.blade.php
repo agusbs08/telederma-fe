@@ -18,6 +18,67 @@
         </div>
     </div>
     <script type="text/javascript" src="{{asset('js/main.cba69814a806ecc7945a.js')}}"></script>
+    @if ($pagename == 'puskesmas.examination-form')
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        function submitExamination() {
+            $.ajax({
+                type: "POST",
+                url: '{{ route("puskesmas.submit-examination") }}',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: {
+                    hospitalId: 'hospital',
+                    patientId: '{{ $patientId }}'
+                },
+                success: (data) => {
+                    console.log({'no':1, data})
+                    $.ajax({
+                        type: "POST",
+                        url: '{{ route("puskesmas.submit-examination-result") }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: {
+                            examinationId: data.examinationId,
+                            description: $('#description').val()
+                        },
+                        success: (data) => {
+                            console.log({'no':2, data})
+                            let formData = new FormData()
+                            formData.append('examinationId', data.examinationId)
+                            formData.append('image', $('input[type=file]')[0].files[0])
+                            $.ajax({
+                                type: "POST",
+                                url: '{{ route("puskesmas.submit-examination-image") }}',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: (data) => {
+                                    console.log({'no':3, data})
+                                    window.location = '/puskesmas/patients/{{$patientId}}/details'
+                                },
+                                error: (error) => {
+                                    console.log(error)
+                                }
+                            });
+                        },
+                        error: (error) => {
+                            console.log(error)
+                        }
+                    });
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            });
+        }
+    </script>
+    @endif
 </body>
 
 </html>

@@ -70,7 +70,12 @@
             <div class="d-flex align-items-center">
               <div class="ml-auto">
                 <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a>
-                <button class="btn btn-primary btn-lg" type="button" onclick="login()">Masuk ke Dashboard</button>
+                <button class="ladda-button mb-2 mr-2 btn btn-focus" data-style="zoom-in" onclick="login()">
+                  <span class="ladda-label">Masuk ke Dashboard
+                  </span>
+                  <span class="ladda-spinner">
+                  </span>
+                </button>
               </div>
             </div>
           </div>

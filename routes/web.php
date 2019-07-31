@@ -36,9 +36,7 @@ Route::prefix('puskesmas')->group(function () {
 
 Route::prefix('doctor')->group(function(){
     Route::get('examinations', 'Doctor\DoctorExaminationsController@getDoctorExaminationListView')->name('doctor.examinations');
-    Route::get('examinations/{examination_id}', function () {
-        return view('partials.doctor.examinations.examination-details');
-    })->name('doctor.examination-details');
+    Route::get('examinations/{examination_id}', 'Doctor\DoctorExaminationsController@getDoctorExaminationDetailView')->name('doctor.examination-details');
 });
 
 /*
@@ -52,5 +50,6 @@ Route::prefix('auth')->group(function(){
         Route::get('/', 'AuthController@getLoginView')->name('auth.getLoginView');
         Route::post('/', 'AuthController@login')->name('auth.login');
     });
+    Route::post('/signup', 'AuthController@signUpPatient')->name('auth.signupPatient');
     Route::get('/logout', 'AuthController@logout')->name('auth.logout');
 });

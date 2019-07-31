@@ -11,6 +11,8 @@
       </div>
       <div class="modal-body">
         <form class="">
+          <div class="position-relative form-group"><label for="email" class="">Email</label><input name="email"
+              id="email" placeholder="contoh: user@email.com" type="email" class="form-control"></div>
           <div class="position-relative form-group"><label for="nik" class="">NIK</label><input name="nik" id="nik"
               placeholder="contoh: 1111222233334444" type="number" class="form-control"></div>
           <div class="position-relative form-group"><label for="name" class="">Nama</label><input name="name" id="name"
@@ -21,7 +23,7 @@
           </div>
           <div class="position-relative form-group">
             <label for="address" class="">Alamat</label>
-            <textarea name="text" id="exampleText" class="form-control" name="address" id="address"
+            <textarea name="address" id="address" class="form-control" name="address" id="address"
               placeholder="contoh: Jalan Kebayoran Barat"></textarea>
           </div>
           <div class="position-relative form-group"><label for="username" class="">Username</label><input
@@ -30,7 +32,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary">Simpan</button>
+        <button type="button" class="btn btn-primary" onclick="submitPatient()">Simpan</button>
       </div>
     </div>
   </div>

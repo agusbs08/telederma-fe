@@ -68,7 +68,7 @@
         </div>
         <div id="step-322">
           <div class="no-results">
-            <div class="swal2-icon swal2-success swal2-animate-success-icon">
+            <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: none;">
               <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
               <span class="swal2-success-line-tip"></span>
               <span class="swal2-success-line-long"></span>
@@ -76,8 +76,16 @@
               <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
               <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
             </div>
-            <div class="results-subtitle mt-4">Selesai!</div>
-            <div class="results-title">Periksa hasil pemeriksaan dan klik 'Submit' untuk mengirim ke dokter!</div>
+            <div class="results-title">Pilih dokter yang akan menangani dan SUBMIT !</div>
+            <div class="mt-3 mb-3"></div>
+            <div class="mt-3 mb-3"></div>
+            <select class="multiselect-dropdown form-control" id="doctor">
+              <optgroup label="Nama Dokter - Asal RS">
+                @foreach ($doctors as $doc)
+                <option value="{{ $doc['username'] }}">{{ $doc['name']  . ' - ' . $doc['hospital'] }} </option>
+                @endforeach
+              </optgroup>
+            </select>
             <div class="mt-3 mb-3"></div>
             <div class="text-center">
               <button class="btn-shadow btn-wide btn btn-success btn-lg mr-2 mb-2 block-page-btn-example-3"

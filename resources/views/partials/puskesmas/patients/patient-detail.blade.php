@@ -14,8 +14,8 @@
           </div>
           <div>
             <h5 class="menu-header-title">{{ $user_details['name'] }}</h5>
-            <h6 class="menu-header-subtitle">NIK : {{ $user_details['NIK'] }}</h6>
-            <h6 class="menu-header-subtitle">Tanggal lahir : {{ $user_details['birthDate'] }}</h6>
+            <h6 class="menu-header-subtitle">NIK : {{ $user_details['nik'] }}</h6>
+            <h6 class="menu-header-subtitle">Tanggal lahir : {{ $user_details['birthdate'] }}</h6>
           </div>
         </div>
       </div>

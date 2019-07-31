@@ -28,31 +28,27 @@
       </thead>
       <tbody>
         <tr>
-          <td>1</td>
-          <td>Puskesmas Tanah Abang</td>
-          <td>22 Juli 2019</td>
-          <td><strong>
+          @foreach ($examinations as $i => $e)
+          <td>{{ $i+1 }}</td>
+          <td>{{ $e['puskesmasId'] }}</td>
+          <td>{{  date('d-M-Y', strtotime($e['createdAt'])) . ', pukul: ' . date('H:i', strtotime($e['createdAt']))}}
+          </td>
+          <td>
+            <strong>
+              @if ($e['checked'] == false)
               <div class="mb-2 mr-2 badge badge-danger">Belum ditanggapi</div>
-            </strong></td>
-          <td style="text-align: center; vertical-align: middle;">
-            <a href="{{ route('doctor.examination-details', ['examination_id' => 1]) }}"><button
-                class="mb-2 mr-2 btn-icon btn-pill btn btn-info"><i class="lnr-arrow-right-circle btn-icon-wrapper">
-                </i>Detail</button></a>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Puskesmas Tanah Abang Jak...</td>
-          <td>22 Juli 2019</td>
-          <td><strong>
+              @else
               <div class="mb-2 mr-2 badge badge-success">Sudah ditanggapi</div>
-            </strong></td>
+              @endif
+            </strong>
+          </td>
           <td style="text-align: center; vertical-align: middle;">
-            <a href="{{ route('doctor.examination-details', ['examination_id' => 1]) }}"><button
+            <a href="{{ route('doctor.examination-details', ['  examination_id' => $e['examinationId']]) }}"><button
                 class="mb-2 mr-2 btn-icon btn-pill btn btn-info"><i class="lnr-arrow-right-circle btn-icon-wrapper">
                 </i>Detail</button></a>
           </td>
         </tr>
+        @endforeach
       </tbody>
       <tfoot>
         <tr>

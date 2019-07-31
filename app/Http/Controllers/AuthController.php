@@ -26,12 +26,16 @@ class AuthController extends Controller
           'password' => $request->input('password')
         ]
       ]);
+      $token = json_decode($loginResponse->getBody(), true)['token'];
       $loginResponseCode = $loginResponse->getStatusCode();
       if ($loginResponseCode == 200){
+        $guzzle_params = config('app.guzzle_params');
+        $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . $token];
+        $client = new Client($guzzle_params);
         $getUserDetailResponse = $client->request('GET', 'users/' . $request->input('username'));
         $userDetails = json_decode($getUserDetailResponse->getBody(), true);
         session([
-          'auth-key' => json_decode($loginResponse->getBody(), true)['token'],
+          'auth-key' => $token,
           'authenticated' => "true",
           'username' => $userDetails['username'],
           'role' => $userDetails['role']
@@ -54,6 +58,26 @@ class AuthController extends Controller
       $request->session()->flush();
       header('Location: http://localhost:3000/auth/login');
       exit();
+    }
+
+    public function signUpPatient(Request $request)
+    {
+      $guzzle_params = config('app.guzzle_params');
+      $client = new Client($guzzle_params);
+      $submitPatientResponse = $client->request('POST', 'signup', [
+        'form_params' => [
+          'email' => $request->input("email"),
+          'username' => $request->input("username"),
+          'password' => 'password',
+          'confirmPassword' => 'password',
+          'role' => "PATIENT",
+          'name' => $request->input("name"),
+          'birthdate' => $request->input("birthDate"),
+          'nik' => $request->input("nik"),
+          'puskesmasId' => Session::get('username')
+        ]
+      ]);
+      return json_decode($submitPatientResponse->getBody(), true);
     }
 }
 

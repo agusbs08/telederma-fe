@@ -14,22 +14,23 @@
       <div class="card-body">
         <div class="tab-content">
           <div class="tab-pane show active" id="tab-eg115-0" role="tabpanel">
-            <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-              more recently with desktop publishing
-              software like Aldus PageMaker
-              including versions of Lorem Ipsum.</p>
+            <p>{{ $examination_details['description'] }}</p>
           </div>
           <div class="tab-pane show" id="tab-eg115-1" role="tabpanel">
-            <p>Like Aldus PageMaker including versions of Lorem. It has survived not only five centuries, but also the
-              leap into electronic typesetting, remaining
-              essentially unchanged. </p>
+            {{-- <div class="col-md-3">
+              <div class="demo-image-bg" style="background-image: url('{{ asset('images/sidebar/abstract1.jpg') }}';">
           </div>
-        </div>
-      </div>
-      <div class="d-block text-center card-footer">
-        <a href="javascript:void(0);" class="btn-wide btn-shadow btn btn-block btn-primary">Lakukan Diagnosa</a>
+        </div> --}}
+        @foreach ($examination_details['images'] as $i)
+        <img src="{{ $i['image'] }}" alt="">
+        @endforeach
       </div>
     </div>
   </div>
+  <div class="d-block text-center card-footer">
+    <a href="javascript:void(0);" class="btn-wide btn-shadow btn btn-block btn-primary">Lakukan Diagnosa</a>
+  </div>
+</div>
+</div>
 </div>
 @endsection

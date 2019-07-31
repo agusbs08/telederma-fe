@@ -18,8 +18,8 @@
         </div>
     </div>
     <script type="text/javascript" src="{{asset('js/main.cba69814a806ecc7945a.js')}}"></script>
-    @if ($pagename == 'puskesmas.examination-form')
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    @if ($pagename == 'puskesmas.examination-form')
     <script>
         function submitExamination() {
             $.ajax({
@@ -29,11 +29,12 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 data: {
+                    doctorId: $('#doctor').val(),
                     hospitalId: 'hospital',
                     patientId: '{{ $patientId }}'
                 },
                 success: (data) => {
-                    console.log({'no':1, data})
+                    console.log(data);
                     $.ajax({
                         type: "POST",
                         url: '{{ route("puskesmas.submit-examination-result") }}',
@@ -71,6 +72,34 @@
                             console.log(error)
                         }
                     });
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            });
+        }
+    </script>
+    @elseif($pagename == 'puskesmas.get-patient-list-view')
+    <script>
+        function submitPatient(){
+            const data = {
+                nik: $('#nik').val(),
+                name: $('#name').val(),
+                birthDate: $('#birth-date').val(),
+                address: $('#address').val(),
+                username: $('#username').val(),
+                email: $('#email').val()
+            }
+            $.ajax({
+                type: "POST",
+                url: '{{ route("auth.signupPatient") }}',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: data,
+                success: (res) => {
+                    // console.log(res);
+                    location.reload();
                 },
                 error: (error) => {
                     console.log(error)

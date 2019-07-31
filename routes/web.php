@@ -19,9 +19,7 @@
 
 // Patients
 
-Route::get('/puskesmas/patients', function () {
-    return view('partials.puskesmas.patients.patients-list');
-})->name('puskesmas.patients');
+Route::get('/puskesmas/patients', 'PuskesmasPatientController@getPatients')->name('puskesmas.patients');
 
 Route::get('/puskesmas/patients/{patient_id}/details', function () {
     return view('partials.puskesmas.patients.patient-detail');
@@ -49,10 +47,23 @@ Route::get('/puskesmas/dashboard', function () {
 
 /*
 |--------------------------------------------------------------------------
+| Doctor Route
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/doctor/examinations', function () {
+    return view('partials.doctor.examinations.examinations-list');
+})->name('doctor.examinations');
+
+Route::get('/doctor/examinations/{examination_id}', function () {
+    return view('partials.doctor.examinations.examination-details');
+})->name('doctor.examination-details');
+
+/*
+|--------------------------------------------------------------------------
 | Authentication Route
 |--------------------------------------------------------------------------
 */
 
-Route::get('/auth/login', function () {
-    return view('pages.login');
-})->name('auth.login');
+Route::get('/auth/login', 'LoginController@getLoginView')->name('auth.getLoginView');
+Route::post('/auth/login', 'LoginController@login')->name('auth.login');

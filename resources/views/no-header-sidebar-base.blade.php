@@ -17,27 +17,21 @@
           type: "POST",
           url: '{{route("auth.login")}}',
           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
           },
           data: {
               username: $('#username').val(),
               password: $('#password').val()
           },
-          success: () => {
-              console.log("sukses");
+          success: (data) => {
+            // window.location = '/';
+            console.log(data);
           },
-          error: () => {
-            console.log("bgsd");
+          error: (error) => {
+            console.log(error)
           }
       });
     }
-  </script>
-  <script>
-    $.ajaxSetup({
-      headers : {
-        'csrftoken' : '{{ csrf_token() }}'
-      }
-    });
   </script>
   @endif
 </body>

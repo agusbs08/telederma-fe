@@ -70,7 +70,7 @@ class AuthController extends Controller
           'username' => $request->input("username"),
           'password' => 'password',
           'confirmPassword' => 'password',
-          'role' => "PATIENT",
+          'role' => "patient",
           'name' => $request->input("name"),
           'birthdate' => $request->input("birthDate"),
           'nik' => $request->input("nik"),

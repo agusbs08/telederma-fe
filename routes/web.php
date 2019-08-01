@@ -37,6 +37,7 @@ Route::prefix('puskesmas')->group(function () {
 Route::prefix('doctor')->group(function(){
     Route::get('examinations', 'Doctor\DoctorExaminationsController@getDoctorExaminationListView')->name('doctor.examinations');
     Route::get('examinations/{examination_id}', 'Doctor\DoctorExaminationsController@getDoctorExaminationDetailView')->name('doctor.examination-details');
+    Route::post('diagnose', 'Doctor\DoctorExaminationsController@postDiagnose')->name('doctor.post-diagnose');
 });
 
 /*

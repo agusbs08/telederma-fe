@@ -17,20 +17,63 @@
             <p>{{ $examination_details['description'] }}</p>
           </div>
           <div class="tab-pane show" id="tab-eg115-1" role="tabpanel">
-            {{-- <div class="col-md-3">
-              <div class="demo-image-bg" style="background-image: url('{{ asset('images/sidebar/abstract1.jpg') }}';">
+            @foreach ($examination_details['images'] as $i)
+            <img src="{{ $i['image'] }}" alt="">
+            @endforeach
           </div>
-        </div> --}}
-        @foreach ($examination_details['images'] as $i)
-        <img src="{{ $i['image'] }}" alt="">
-        @endforeach
+        </div>
+      </div>
+    </div>
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <h5 class="card-title">Hasil Diagnosa</h5>
+        <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Deskripsi</label>
+          <div class="col-sm-10">
+            <textarea rows="3" class="form-control autosize-input" style="height: 35px;" id="description"
+              placeholder="tuliskan hasil diagnosa"></textarea>
+          </div>
+        </div>
+        <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Biaya
+            Pemeriksaan</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <div class="input-group-prepend"><span class="input-group-text">Rp </span></div>
+              <input placeholder="tuliskan biaya pemeriksaan" step="1" type="number" class="form-control"
+                id="diagnose-cost">
+              <div class="input-group-append"><span class="input-group-text">.00</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="position-relative row form-group"><label for="\" class="col-sm-2 col-form-label">Penyakit</label>
+          <div class="col-sm-10">
+            <input name="password" id="disease-name" placeholder="tuliskan nama penyakit kulit yang diderita"
+              type="text" class="form-control">
+          </div>
+        </div>
+        <fieldset id="recipe-field">
+          <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Resep</label>
+            <div class="col-sm-10">
+              <div class="form-inline">
+                <div class="position-relative form-group">
+                  <input name="medicine-name" placeholder="nama obat" type="text" class="mr-2 form-control">
+                </div>
+                <div class="position-relative form-group ">
+                  <input name="usage-rule" placeholder="aturan pakai" type="text" class="mr-2 form-control">
+                </div>
+                <div class="position-relative form-group ">
+                  <input name="recipe-desc" placeholder="keterangan" type="text" class="mr-2 form-control">
+                </div>
+                <button class="btn btn-primary" id="add-recipe-form" type="button">Tambah Obat</button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="d-block text-center card-footer">
+        <button href="" class="btn-wide btn-shadow btn btn-block btn-primary" onclick="submitDiagnose()">Submit Hasil
+          Diagnosa</button>
       </div>
     </div>
   </div>
-  <div class="d-block text-center card-footer">
-    <a href="javascript:void(0);" class="btn-wide btn-shadow btn btn-block btn-primary">Lakukan Diagnosa</a>
-  </div>
-</div>
-</div>
 </div>
 @endsection

@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{asset('js/main.cba69814a806ecc7945a.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/main.cba69814a806ecc7945a.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     @if ($pagename == 'puskesmas.examination-form')
     <script>
@@ -79,7 +79,8 @@
             });
         }
     </script>
-    @elseif($pagename == 'puskesmas.get-patient-list-view')
+    @endif
+    @if($pagename == 'puskesmas.get-patient-list-view')
     <script>
         function submitPatient(){
             const data = {
@@ -98,11 +99,65 @@
                 },
                 data: data,
                 success: (res) => {
-                    // console.log(res);
                     location.reload();
                 },
                 error: (error) => {
                     console.log(error)
+                }
+            });
+        }
+    </script>
+    @endif
+    @if ($pagename == 'get-doctor-examination-detail-view')
+    <script>
+        $('#add-recipe-form').click(() => {
+            let fieldWrapper = $("<div class=\"position-relative row form-group\"></div>");
+            let element = "<label class=\"col-sm-2 col-form-label\"></label>"
+            element += "<div class=\"col-sm-10\">"
+            element += "<div class=\"form-inline\">"
+            element += "<div class=\"position-relative form-group\">"
+            element += "<input name=\"medicine-name\" placeholder=\"nama obat\" type=\"text\" class=\"medicine-name mr-2 form-control\">"
+            element += "</div>"
+            element += "<div class=\"position-relative form-group \">"
+            element += "<input name=\"usage-rule\" placeholder=\"aturan pakai\" type=\"text\" class=\"usage-rule mr-2 form-control\">"
+            element += "</div>"
+            element += "<div class=\"position-relative form-group \">"
+            element += "<input name=\"recipe-desc\" placeholder=\"keterangan\" type=\"text\" class=\"recipe-desc mr-2 form-control\">"
+            element += "<button class=\"btn btn-danger btn-remove-field\" type=\"button\">Hapus Resep</button></div></div></div>";
+            $(document).on("click", ".btn-remove-field", function(){
+                $(this).closest('.row').remove()
+            });
+            fieldWrapper.append($(element));
+            $('#recipe-field').append(fieldWrapper);
+        })
+        function submitDiagnose(){
+            let data = {}
+            data.examinationId = '{{ $examination_id }}'
+            data.desc = $('#description').val()
+            data.diagnoseCost = $('#diagnose-cost').val()
+            data.diseaseName = $('#disease-name').val()
+            data.recipes = []
+            let noRecipe = document.getElementsByName('medicine-name').length
+            for(let i=0; i < noRecipe; i++){
+                data.recipes.push({
+                    'medicineName': document.getElementsByName('medicine-name')[i].value,
+                    'usageRule': document.getElementsByName('usage-rule')[i].value,
+                    'recipeDesc': document.getElementsByName('recipe-desc')[i].value,
+                })
+            }
+            $.ajax({
+                type: "POST",
+                url: '{{ route("doctor.post-diagnose") }}',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: data,
+                success: (res) => {
+                    console.log(res)
+                    window.location = '//localhost:3000/doctor/examinations'
+                },
+                error: (error) => {
+                    console.error(error)
                 }
             });
         }

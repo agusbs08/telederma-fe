@@ -24,7 +24,7 @@ Route::prefix('puskesmas')->group(function () {
     })->name('puskesmas.examination-details');
     // Dashboards
     Route::get('dashboard', function () {
-        return view('partials.puskesmas.patients-list');
+        return view('partials.puskesmas.patients.patients-list');
     })->name('puskesmas.dashboard');
 });
 

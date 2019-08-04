@@ -59,7 +59,7 @@
                 <div class="card-body">
                   <div class="position-relative form-group"><label for="exampleFile" class="">Gambar</label>
                     <input name="file" id="examination-image" type="file" class="form-control-file" multiple="multiple">
-                    <small class="form-text text-muted">Anda dapat mengupload maksimal 5 gambar.</small>
+                    <small class="form-text text-muted">Anda dapat mengupload maksimal x gambar.</small>
                   </div>
                 </div>
               </div>
@@ -108,11 +108,10 @@
     </div>
     <div class="divider"></div>
     <div class="clearfix">
-      <button type="button" id="reset-btn22" class="btn-shadow float-left btn btn-link">Reset</button>
       <button type="button" id="next-btn22"
-        class="btn-shadow btn-wide float-right btn-pill btn-hover-shine btn btn-primary">Next</button>
+        class="btn-shadow btn-wide float-right btn-pill btn-hover-shine btn btn-primary">Lanjut</button>
       <button type="button" id="prev-btn22"
-        class="btn-shadow float-right btn-wide btn-pill mr-3 btn btn-outline-secondary">Previous</button>
+        class="btn-shadow float-right btn-wide btn-pill mr-3 btn btn-outline-secondary">Kembali</button>
     </div>
   </div>
 </div>

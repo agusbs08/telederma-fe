@@ -8,7 +8,7 @@
         </i>
       </div>
       <div>Daftar Pasien
-        <div class="page-title-subheading">Daftar pasien yang pernah berobat di **Nama Puskesmas**
+        <div class="page-title-subheading">Daftar pasien yang pernah berobat di {{ Session::get('name') }}
         </div>
       </div>
     </div>

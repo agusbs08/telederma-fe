@@ -35,6 +35,7 @@ class AuthController extends Controller
         $getUserDetailResponse = $client->request('GET', 'users/' . $request->input('username'));
         $userDetails = json_decode($getUserDetailResponse->getBody(), true);
         session([
+          'name' => $userDetails['name'],
           'auth-key' => $token,
           'authenticated' => "true",
           'username' => $userDetails['username'],

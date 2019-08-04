@@ -19,15 +19,15 @@
               </button>
             </div>
             <div data-parent="#accordion" id="collapseOne1" aria-labelledby="headingOne" class="collapse show">
-              <div class="card-body">1. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                nesciunt
-                laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                nesciunt
-                sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
-                VHS.
+              <div class="card-body">
+                <p>Dokter Pemeriksa: </p>
+                <strong>
+                  <p class="examination-doctor-name">loading ...</p>
+                </strong>
+                <p>Deskripsi: </p>
+                <strong>
+                  <p class="examination-desc">loading ...</p>
+                </strong>
               </div>
             </div>
           </div>
@@ -39,15 +39,9 @@
               </button>
             </div>
             <div data-parent="#accordion" id="collapseOne2" class="collapse">
-              <div class="card-body">2. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                nesciunt
-                laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                nesciunt
-                sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
-                VHS.
+              <div class="card-body">
+                <div class="examination-image-wrapper">
+                </div>
               </div>
             </div>
           </div>
@@ -72,24 +66,31 @@
         </button>
       </div>
       <div class="modal-body">
-        <div id="accordion" class="accordion-wrapper mb-3">
+        <div class="alert alert-danger fade show examination-check-status-label" role="alert">
+          Dokter belum melakukan diagnosa.
+        </div>
+        <div id="accordion" class="accordion-wrapper mb-3 diagnoses-result-wrapper">
           <div class="card">
             <div id="headingOne" class="card-header">
               <button type="button" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true"
                 aria-controls="collapseOne" class="text-left m-0 p-0 btn btn-link btn-block">
-                <h5 class="m-0 p-0">Deskripsi Hasil Diagnosa</h5>
+                <h5 class="m-0 p-0">Hasil Diagnosa</h5>
               </button>
             </div>
             <div data-parent="#accordion" id="collapseOne1" aria-labelledby="headingOne" class="collapse show">
-              <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                nesciunt
-                laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
-                nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-                nesciunt
-                sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable
-                VHS.
+              <div class="card-body">
+                <p>Dokter pemeriksa: </p>
+                <strong>
+                  <p class="diagnose-doctor-name">loading ...</p>
+                </strong>
+                <p>Penyakit terdiagnosa: </p>
+                <strong>
+                  <p class="disease-name">loading ...</p>
+                </strong>
+                <p>Keterangan: </p>
+                <strong>
+                  <p class="diagnoses-desc">loading ...</p>
+                </strong>
               </div>
             </div>
           </div>
@@ -102,7 +103,9 @@
             </div>
             <div data-parent="#accordion" id="collapseOne2" class="collapse">
               <div class="card-body">
-                <h3><strong>Rp. 50.000</strong></h3>
+                <strong>
+                  <h3 class="diagnose-cost">loading ...</h3>
+                </strong>
               </div>
             </div>
           </div>
@@ -115,30 +118,16 @@
             </div>
             <div data-parent="#accordion" id="collapseOne3" class="collapse">
               <div class="card-body">
-                <table class="mb-0 table">
+                <table class="mb-0 table recipe-table">
                   <thead>
                     <tr>
                       <th>#</th>
                       <th>Obat</th>
                       <th>Aturan Pakai</th>
+                      <th>Keterangan</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Paracetamol</td>
-                      <td>2x3</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Paracetamol</td>
-                      <td>2x3</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Paracetamol</td>
-                      <td>2x3</td>
-                    </tr>
                   </tbody>
                 </table>
               </div>

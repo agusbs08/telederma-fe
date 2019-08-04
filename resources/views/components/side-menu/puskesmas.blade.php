@@ -15,9 +15,3 @@ $pagename = Request::segment(2);
         </i>Pasien
     </a>
 </li>
-<li>
-    <a href="{{ route('puskesmas.examinations') }}" @php echo $pagename=="examinations" ? $class : null @endphp>
-        <i class="metismenu-icon pe-7s-eyedropper">
-        </i>Pemeriksaan
-    </a>
-</li>

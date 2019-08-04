@@ -163,6 +163,72 @@
         }
     </script>
     @endif
+    @if ($pagename == 'puskesmas.get-patient-details-view')
+    <script>
+        $(document).ready(function(){
+            $(".examinationDetailsModalBtn").click(function(){
+                const examinationId = $(this).data('id')
+                $.ajax({
+                    type: "GET",
+                    url: "{{ config('app.API_endpoint') }}" + 'examinations/' + examinationId,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
+                    },
+                    success: (res) => {
+                        $('.examination-desc').text(res.description)
+                        $('.examination-doctor-name').text($(this).data('doctor-name'))
+                        $('.examination-image-wrapper').empty()
+                        res.images.forEach(i => {
+                            $('.examination-image-wrapper').prepend("<img src='"+i.image+"'/>")
+                        });
+                    },
+                    error: (error) => {
+                        console.error(error)
+                    }
+                });
+            });
+            $(".examinationResultModalBtn").click(function(){
+                const examinationId = $(this).data('id')
+                $.ajax({
+                    type: "GET",
+                    url: "{{ config('app.API_endpoint') }}" + 'examinations/' + examinationId + '/diagnoses',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
+                    },
+                    success: (res, textStatus, xhr) => {
+                        $('.diagnoses-result-wrapper').show()
+                        $('.examination-check-status-label').show()
+                        if (xhr.status == 200 && res.error == 'no diagnoses found') {
+                            $('.diagnoses-result-wrapper').hide()
+                        } else {
+                            $('.examination-check-status-label').hide()
+                            $('.disease-name').text(res.diseaseName)
+                            $('.diagnoses-desc').text(res.desc)
+                            $('.diagnose-doctor-name').text(res.doctorId)
+                            $('.diagnose-cost').text("Rp. " + res.diagnoseCost)
+                            $('.recipe-table > tbody:last-child').empty()
+                            res.recipes.forEach((recipe, i) => {
+                                const row = 
+                                    "<tr>" + 
+                                    "<th scope='row'>" + (parseInt(i)+parseInt(1)) + "</th>" +
+                                    "<td>" + recipe.medicineName + "</td>" +
+                                    "<td>" + recipe.usageRule + "</td>" +
+                                    "<td>" + recipe.recipeDesc + "</td>" +
+                                    "</tr>"
+                                $('.recipe-table > tbody:last-child').append(row);
+                            })
+                        }                    
+                    },
+                    error: (xhr, ajaxOptions, thrownError) => {
+                        console.log(xhr)
+                    }
+                });
+            });
+        });
+    </script>
+    @endif
 </body>
 
 </html>

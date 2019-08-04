@@ -24,6 +24,7 @@
               password: $('#password').val()
           },
           success: (data) => {
+            // console.log(data)
             window.location = data;
           },
           error: (error) => {

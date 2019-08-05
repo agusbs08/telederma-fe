@@ -40,7 +40,6 @@ class PuskesmasPatientController extends Controller
       $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
       $client = new Client($guzzle_params);
       $doctors = $client->request('GET', 'doctors');
-      // dd(json_decode($doctors->getBody(), true));
       return view('partials.puskesmas.patients.examination-form')
         ->with('pagename', 'puskesmas.examination-form')
         ->with('patientId', $patient_username)

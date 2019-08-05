@@ -24,7 +24,7 @@ Route::prefix('puskesmas')->group(function () {
     })->name('puskesmas.examination-details');
     // Dashboards
     Route::get('dashboard', function () {
-        return view('partials.puskesmas.patients-list');
+        return view('partials.puskesmas.patients.patients-list');
     })->name('puskesmas.dashboard');
 });
 
@@ -37,6 +37,20 @@ Route::prefix('puskesmas')->group(function () {
 Route::prefix('doctor')->group(function(){
     Route::get('examinations', 'Doctor\DoctorExaminationsController@getDoctorExaminationListView')->name('doctor.examinations');
     Route::get('examinations/{examination_id}', 'Doctor\DoctorExaminationsController@getDoctorExaminationDetailView')->name('doctor.examination-details');
+    Route::post('diagnose', 'Doctor\DoctorExaminationsController@postDiagnose')->name('doctor.post-diagnose');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Admin Route
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('admin')->group(function(){
+    Route::get('doctors', 'Admin\AdminDoctorController@getAdminDoctorListView')->name('admin.doctors');
+    Route::get('doctors/{doctor_id}', 'Admin\AdminDoctorController@getAdminDoctorDetailView')->name('admin.doctor-details');
+    Route::get('puskesmas', 'Admin\AdminPuskesmasController@getAdminPuskesmasListView')->name('admin.puskesmas');
+    Route::get('puskesmas/{puskesmas_id}', 'Admin\AdminPuskesmasController@getAdminPuskesmasDetailView')->name('admin.puskesmas-details');
 });
 
 /*

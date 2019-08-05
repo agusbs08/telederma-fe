@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{asset('js/main.cba69814a806ecc7945a.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/main.cba69814a806ecc7945a.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     @if ($pagename == 'puskesmas.examination-form')
     <script>
@@ -34,7 +34,6 @@
                     patientId: '{{ $patientId }}'
                 },
                 success: (data) => {
-                    console.log(data);
                     $.ajax({
                         type: "POST",
                         url: '{{ route("puskesmas.submit-examination-result") }}',
@@ -46,7 +45,6 @@
                             description: $('#description').val()
                         },
                         success: (data) => {
-                            console.log({'no':2, data})
                             let formData = new FormData()
                             formData.append('examinationId', data.examinationId)
                             formData.append('image', $('input[type=file]')[0].files[0])
@@ -60,7 +58,6 @@
                                 processData: false,
                                 contentType: false,
                                 success: (data) => {
-                                    console.log({'no':3, data})
                                     window.location = '/puskesmas/patients/{{$patientId}}/details'
                                 },
                                 error: (error) => {
@@ -79,7 +76,8 @@
             });
         }
     </script>
-    @elseif($pagename == 'puskesmas.get-patient-list-view')
+    @endif
+    @if($pagename == 'puskesmas.get-patient-list-view')
     <script>
         function submitPatient(){
             const data = {
@@ -98,7 +96,204 @@
                 },
                 data: data,
                 success: (res) => {
-                    // console.log(res);
+                    location.reload();
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            });
+        }
+    </script>
+    @endif
+    @if ($pagename == 'get-doctor-examination-detail-view')
+    <script>
+        $('#add-recipe-form').click(() => {
+            let fieldWrapper = $("<div class=\"position-relative row form-group\"></div>");
+            let element = "<label class=\"col-sm-2 col-form-label\"></label>"
+            element += "<div class=\"col-sm-10\">"
+            element += "<div class=\"form-inline\">"
+            element += "<div class=\"position-relative form-group\">"
+            element += "<input name=\"medicine-name\" placeholder=\"nama obat\" type=\"text\" class=\"medicine-name mr-2 form-control\">"
+            element += "</div>"
+            element += "<div class=\"position-relative form-group \">"
+            element += "<input name=\"usage-rule\" placeholder=\"aturan pakai\" type=\"text\" class=\"usage-rule mr-2 form-control\">"
+            element += "</div>"
+            element += "<div class=\"position-relative form-group \">"
+            element += "<input name=\"recipe-desc\" placeholder=\"keterangan\" type=\"text\" class=\"recipe-desc mr-2 form-control\">"
+            element += "<button class=\"btn btn-danger btn-remove-field\" type=\"button\">Hapus Resep</button></div></div></div>";
+            $(document).on("click", ".btn-remove-field", function(){
+                $(this).closest('.row').remove()
+            });
+            fieldWrapper.append($(element));
+            $('#recipe-field').append(fieldWrapper);
+        })
+        function submitDiagnose(){
+            let data = {}
+            data.examinationId = '{{ $examination_id }}'
+            data.desc = $('#description').val()
+            data.diagnoseCost = $('#diagnose-cost').val()
+            data.diseaseName = $('#disease-name').val()
+            data.recipes = []
+            let noRecipe = document.getElementsByName('medicine-name').length
+            for(let i=0; i < noRecipe; i++){
+                data.recipes.push({
+                    'medicineName': document.getElementsByName('medicine-name')[i].value,
+                    'usageRule': document.getElementsByName('usage-rule')[i].value,
+                    'recipeDesc': document.getElementsByName('recipe-desc')[i].value,
+                })
+            }
+            $.ajax({
+                type: "POST",
+                url: '{{ route("doctor.post-diagnose") }}',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: data,
+                success: (res) => {
+                    window.location = '//localhost:3000/doctor/examinations'
+                },
+                error: (error) => {
+                    console.error(error)
+                }
+            });
+        }
+    </script>
+    @endif
+    @if ($pagename == 'puskesmas.get-patient-details-view')
+    <script>
+        $(document).ready(function(){
+            $(".examinationDetailsModalBtn").click(function(){
+                const examinationId = $(this).data('id')
+                $.ajax({
+                    type: "GET",
+                    url: "{{ config('app.API_endpoint') }}" + 'examinations/' + examinationId,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
+                    },
+                    success: (res) => {
+                        $('.examination-desc').text(res.description)
+                        $('.examination-doctor-name').text($(this).data('doctor-name'))
+                        $('.examination-image-wrapper').empty()
+                        res.images.forEach(i => {
+                            $('.examination-image-wrapper').prepend("<img src='"+i.image+"'/>")
+                        });
+                    },
+                    error: (error) => {
+                        console.error(error)
+                    }
+                });
+            });
+            $(".examinationResultModalBtn").click(function(){
+                const examinationId = $(this).data('id')
+                $.ajax({
+                    type: "GET",
+                    url: "{{ config('app.API_endpoint') }}" + 'examinations/' + examinationId + '/diagnoses',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
+                    },
+                    success: (res, textStatus, xhr) => {
+                        $('.diagnoses-result-wrapper').show()
+                        $('.examination-check-status-label').show()
+                        if (xhr.status == 200 && res.error == 'no diagnoses found') {
+                            $('.diagnoses-result-wrapper').hide()
+                        } else {
+                            $('.examination-check-status-label').hide()
+                            $('.disease-name').text(res.diseaseName)
+                            $('.diagnoses-desc').text(res.desc)
+                            $('.diagnose-doctor-name').text(res.doctorId)
+                            $('.diagnose-cost').text("Rp. " + res.diagnoseCost)
+                            $('.recipe-table > tbody:last-child').empty()
+                            res.recipes.forEach((recipe, i) => {
+                                const row = 
+                                    "<tr>" + 
+                                    "<th scope='row'>" + (parseInt(i)+parseInt(1)) + "</th>" +
+                                    "<td>" + recipe.medicineName + "</td>" +
+                                    "<td>" + recipe.usageRule + "</td>" +
+                                    "<td>" + recipe.recipeDesc + "</td>" +
+                                    "</tr>"
+                                $('.recipe-table > tbody:last-child').append(row);
+                            })
+                        }                    
+                    },
+                    error: (xhr, ajaxOptions, thrownError) => {
+                        console.log(xhr)
+                    }
+                });
+            });
+        });
+    </script>
+    @endif
+    @if ($pagename == 'admin.doctors-list-view')
+    <script>
+        function openAddDoctorFormModal(){
+            $.ajax({
+                type: "GET",
+                url: '{{ config('app.API_endpoint') }}hospitals',
+                headers: {
+                    'Authorization': 'Bearer {{ Session::get('auth-key') }}'
+                },
+                success: (res) => {
+                    $('#hospital').empty()
+                    $('#hospital').append('<option selected disabled>Pilih Rumah Sakit: </option>')
+                    res.forEach(r => {
+                        $("#hospital").append(new Option(r.name, r.name));
+                    })
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            });
+        }
+        function submitDoctor(){
+            const data = {
+                role: "doctor",
+                nik: $('#nik').val(),
+                name: $('#name').val(),
+                birthdate: $('#birth-date').val(),
+                username: $('#username').val(),
+                email: $('#email').val(),
+                password: $('#password').val(),
+                confirmPassword: $('#confirm-password').val(),
+                hospital: $('#hospital').val()
+            }
+            $.ajax({
+                type: "POST",
+                url: '{{ config('app.API_endpoint') }}signup',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: data,
+                success: (res) => {
+                    location.reload();
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            });
+        }
+    </script>
+    @endif
+    @if ($pagename == 'admin.puskesmas-list-view')
+    <script>
+        function submitPuskesmas(){
+            const data = {
+                role: "puskesmas",
+                name: $('#name').val(),
+                username: $('#username').val(),
+                email: $('#email').val(),
+                password: $('#password').val(),
+                confirmPassword: $('#confirm-password').val(),
+            }
+            $.ajax({
+                type: "POST",
+                url: '{{ config('app.API_endpoint') }}signup',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: data,
+                success: (res) => {
                     location.reload();
                 },
                 error: (error) => {
@@ -117,4 +312,8 @@
 @include('partials.puskesmas.modals.examination-detail')
 @elseif (Request::segment(1) == "puskesmas" && Request::segment(2) == "patients")
 @include('partials.puskesmas.modals.add-patient')
+@elseif (Request::segment(1) == "admin" && Request::segment(2) == "doctors")
+@include('partials.admin.modals.add-doctor')
+@elseif (Request::segment(1) == "admin" && Request::segment(2) == "puskesmas")
+@include('partials.admin.modals.add-puskesmas')
 @endif

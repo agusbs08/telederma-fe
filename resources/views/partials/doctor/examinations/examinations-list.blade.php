@@ -8,7 +8,7 @@
         </i>
       </div>
       <div>Daftar Pemeriksaan
-        <div class="page-title-subheading">Daftar pemeriksaan pasien yang telah dilakukan di **Nama Puskesmas**
+        <div class="page-title-subheading">Daftar pemeriksaan pasien yang diajukan ke Anda
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Guzzle Parameter
+    | API & Backend Parameter
     |--------------------------------------------------------------------------
     */
 
@@ -12,6 +12,8 @@ return [
         'base_uri' => 'http://localhost:5000/teledermatology-20e41/us-central1/api/',
         'http_errors' => false
     ],
+
+    'API_endpoint' => 'http://localhost:5000/teledermatology-20e41/us-central1/api/',
 
     /*
     |--------------------------------------------------------------------------

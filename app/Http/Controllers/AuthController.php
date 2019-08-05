@@ -35,6 +35,7 @@ class AuthController extends Controller
         $getUserDetailResponse = $client->request('GET', 'users/' . $request->input('username'));
         $userDetails = json_decode($getUserDetailResponse->getBody(), true);
         session([
+          'name' => $userDetails['name'],
           'auth-key' => $token,
           'authenticated' => "true",
           'username' => $userDetails['username'],
@@ -44,6 +45,8 @@ class AuthController extends Controller
           return route('puskesmas.patients', [], false);
         elseif ($userDetails['role'] == 'DOCTOR')
           return route('doctor.examinations', [], false);
+        elseif ($userDetails['role'] == 'ADMIN')
+          return route('admin.doctors', [], false);
       } elseif ($loginResponseCode == 400) {
         return response()->json(['msg' => 'wrong password']);
       } elseif ($loginResponseCode == 404) {
@@ -70,7 +73,7 @@ class AuthController extends Controller
           'username' => $request->input("username"),
           'password' => 'password',
           'confirmPassword' => 'password',
-          'role' => "PATIENT",
+          'role' => "patient",
           'name' => $request->input("name"),
           'birthdate' => $request->input("birthDate"),
           'nik' => $request->input("nik"),

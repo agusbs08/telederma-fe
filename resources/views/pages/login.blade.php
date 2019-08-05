@@ -12,9 +12,8 @@
                 <div class="slide-img-bg" style="background-image: url('{{ asset('images/originals/city.jpg') }}');">
                 </div>
                 <div class="slider-content">
-                  <h3>Perfect Balance</h3>
-                  <p>ArchitectUI is like a dream. Some think it's too good to be true! Extensive collection of unified
-                    React Boostrap Components and Elements.</p>
+                  <h3>Keuntungan 1</h3>
+                  <p>Keterangan keuntungan 1</p>
                 </div>
               </div>
             </div>
@@ -25,9 +24,8 @@
                   style="background-image: url('{{ asset('images/originals/citynights.jpg') }}');">
                 </div>
                 <div class="slider-content">
-                  <h3>Scalable, Modular, Consistent</h3>
-                  <p>Easily exclude the components you don't require. Lightweight, consistent Bootstrap based styles
-                    across all elements and components</p>
+                  <h3>Keuntungan 2</h3>
+                  <p>Keterangan keuntungan 2</p>
                 </div>
               </div>
             </div>
@@ -37,8 +35,8 @@
                 <div class="slide-img-bg"
                   style="background-image: url('{{ asset('images/originals/citydark.jpg') }}');"></div>
                 <div class="slider-content">
-                  <h3>Complex, but lightweight</h3>
-                  <p>We've included a lot of components that cover almost all use cases for any type of application.</p>
+                  <h3>Keuntungan 3</h3>
+                  <p>Keterangan keuntungan 3</p>
                 </div>
               </div>
             </div>
@@ -57,19 +55,19 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="position-relative form-group"><label for="username" class="">Username</label><input
-                    name="username" id="username" placeholder="contoh: jokowi" type="text" class="form-control">
+                    name="username" id="username" placeholder="Masukkan username Anda" type="text" class="form-control">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="position-relative form-group"><label for="password" class="">Password</label><input
-                    name="password" id="password" placeholder="***********" type="password" class="form-control">
+                    name="password" id="password" placeholder="Masukkan password Anda" type="password" class="form-control">
                 </div>
               </div>
             </div>
             <div class="divider row"></div>
             <div class="d-flex align-items-center">
               <div class="ml-auto">
-                <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a>
+                {{-- <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a> --}}
                 <button class="ladda-button mb-2 mr-2 btn btn-focus" data-style="zoom-in" onclick="login()">
                   <span class="ladda-label">Masuk ke Dashboard
                   </span>

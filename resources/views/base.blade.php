@@ -19,8 +19,6 @@
     </div>
     <script type="text/javascript" src="{{ asset('js/main.cba69814a806ecc7945a.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
-    </script>
     @if ($pagename == 'puskesmas.examination-form')
     <script>
         function submitExamination() {
@@ -36,7 +34,6 @@
                     patientId: '{{ $patientId }}'
                 },
                 success: (data) => {
-                    console.log(data);
                     $.ajax({
                         type: "POST",
                         url: '{{ route("puskesmas.submit-examination-result") }}',
@@ -48,7 +45,6 @@
                             description: $('#description').val()
                         },
                         success: (data) => {
-                            console.log({'no':2, data})
                             let formData = new FormData()
                             formData.append('examinationId', data.examinationId)
                             formData.append('image', $('input[type=file]')[0].files[0])
@@ -62,7 +58,6 @@
                                 processData: false,
                                 contentType: false,
                                 success: (data) => {
-                                    console.log({'no':3, data})
                                     window.location = '/puskesmas/patients/{{$patientId}}/details'
                                 },
                                 error: (error) => {
@@ -155,7 +150,6 @@
                 },
                 data: data,
                 success: (res) => {
-                    console.log(res)
                     window.location = '//localhost:3000/doctor/examinations'
                 },
                 error: (error) => {
@@ -246,7 +240,6 @@
                     res.forEach(r => {
                         $("#hospital").append(new Option(r.name, r.name));
                     })
-                    $('#addDoctorFormModal').modal('toggle');
                 },
                 error: (error) => {
                     console.log(error)
@@ -284,9 +277,6 @@
     @endif
     @if ($pagename == 'admin.puskesmas-list-view')
     <script>
-        function openAddPuskesmasFormModal(){
-            $('#addPuskesmasFormModal').modal('toggle')
-        }
         function submitPuskesmas(){
             const data = {
                 role: "puskesmas",
@@ -322,7 +312,7 @@
 @include('partials.puskesmas.modals.examination-detail')
 @elseif (Request::segment(1) == "puskesmas" && Request::segment(2) == "patients")
 @include('partials.puskesmas.modals.add-patient')
-@elseif (Request::segment(1) == "admin" && Request::segment(2) == "doctor")
+@elseif (Request::segment(1) == "admin" && Request::segment(2) == "doctors")
 @include('partials.admin.modals.add-doctor')
 @elseif (Request::segment(1) == "admin" && Request::segment(2) == "puskesmas")
 @include('partials.admin.modals.add-puskesmas')

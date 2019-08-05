@@ -13,7 +13,8 @@
       </div>
     </div>
     <div class="page-title-actions">
-      <button type="button" class="btn-shadow mr-3 btn btn-primary" onclick="openAddPuskesmasFormModal()">
+      <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal"
+        data-target="#addPuskesmasFormModal">
         <i class="fa fa-plus"></i> Tambah Puskesmas
       </button>
     </div>

@@ -265,7 +265,37 @@
                 confirmPassword: $('#confirm-password').val(),
                 hospital: $('#hospital').val()
             }
-            console.log(data)
+            $.ajax({
+                type: "POST",
+                url: '{{ config('app.API_endpoint') }}signup',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: data,
+                success: (res) => {
+                    location.reload();
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            });
+        }
+    </script>
+    @endif
+    @if ($pagename == 'admin.puskesmas-list-view')
+    <script>
+        function openAddPuskesmasFormModal(){
+            $('#addPuskesmasFormModal').modal('toggle')
+        }
+        function submitPuskesmas(){
+            const data = {
+                role: "puskesmas",
+                name: $('#name').val(),
+                username: $('#username').val(),
+                email: $('#email').val(),
+                password: $('#password').val(),
+                confirmPassword: $('#confirm-password').val(),
+            }
             $.ajax({
                 type: "POST",
                 url: '{{ config('app.API_endpoint') }}signup',
@@ -294,4 +324,6 @@
 @include('partials.puskesmas.modals.add-patient')
 @elseif (Request::segment(1) == "admin" && Request::segment(2) == "doctor")
 @include('partials.admin.modals.add-doctor')
+@elseif (Request::segment(1) == "admin" && Request::segment(2) == "puskesmas")
+@include('partials.admin.modals.add-puskesmas')
 @endif

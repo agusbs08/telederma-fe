@@ -80013,6 +80013,7 @@ function (_Component) {
       hasMedia: false,
       otherUserId: null
     };
+    _this.howCallUserId = null;
     _this.user = window.user;
     _this.user.stream = null;
     _this.peers = {};
@@ -80064,7 +80065,21 @@ function (_Component) {
       });
       this.channel = this.pusher.subscribe('presence-video-channel');
       this.channel.bind("client-signal-".concat(this.user.id), function (signal) {
-        var peer = _this3.peers[signal.userId]; // if peer is not already exists, we got an incoming call
+        console.log(_this3.howCallUserId); // if(this.howCallUserId === null){
+        //     if(confirm(`Anda mendapat panggilan dari ${signal.howCallUserId}`)) {
+        //         let peer = this.peers[signal.userId];
+        //         if(peer === undefined) {
+        //             this.setState({otherUserId: signal.userId});
+        //             peer = this.startPeer(signal.userId, false);
+        //         }
+        //         peer.signal(signal.data);
+        //         this.peers[signal.userId] = peer;
+        //     } else {
+        //         alert('Anda menolak panggilan');
+        //     }
+        //} else {
+
+        var peer = _this3.peers[signal.userId];
 
         if (peer === undefined) {
           _this3.setState({
@@ -80075,6 +80090,7 @@ function (_Component) {
         }
 
         peer.signal(signal.data);
+        _this3.peers[signal.userId] = peer; //}
       });
     }
   }, {
@@ -80090,12 +80106,14 @@ function (_Component) {
       });
       peer.on('signal', function (data) {
         console.log('on signal');
-
-        _this4.channel.trigger("client-signal-".concat(userId), {
+        var signal = {
           type: 'signal',
           userId: _this4.user.id,
+          userName: _this4.howCallUserId,
           data: data
-        });
+        };
+
+        _this4.channel.trigger("client-signal-".concat(userId), signal);
       });
       peer.on('stream', function (stream) {
         console.log('on stream');
@@ -80112,17 +80130,20 @@ function (_Component) {
         console.log('on close');
         var peer = _this4.peers[userId];
 
-        if (peer !== undefined) {
-          peer.destroy();
+        try {
+          if (peer !== undefined) {
+            peer.destroy();
+          }
+        } catch (error) {} finally {
+          _this4.peers[userId] = undefined;
         }
-
-        _this4.peers[userId] = undefined;
       });
       return peer;
     }
   }, {
     key: "callTo",
     value: function callTo(userId) {
+      this.howCallUserId = userId;
       this.peers[userId] = this.startPeer(userId);
     }
   }, {
@@ -80132,7 +80153,7 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "App"
-      }, [1, 2].map(function (userId) {
+      }, ["kola", "lala"].map(function (userId) {
         return _this5.user.id !== userId ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           key: userId,
           onClick: function onClick() {

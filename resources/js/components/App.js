@@ -15,6 +15,7 @@ export default class App extends Component {
             otherUserId: null
         };
 
+        this.howCallUserId = null;
         this.user = window.user;
         this.user.stream = null;
         this.peers = {};
@@ -40,7 +41,7 @@ export default class App extends Component {
                 }
 
                 this.myVideo.play();
-            })
+            });
     }
 
     setupPusher() {
@@ -58,15 +59,30 @@ export default class App extends Component {
         this.channel = this.pusher.subscribe('presence-video-channel');
 
         this.channel.bind(`client-signal-${this.user.id}`, (signal) => {
-            let peer = this.peers[signal.userId];
+            console.log(this.howCallUserId);
+            // if(this.howCallUserId === null){
+            //     if(confirm(`Anda mendapat panggilan dari ${signal.howCallUserId}`)) {
+            //         let peer = this.peers[signal.userId];
 
-            // if peer is not already exists, we got an incoming call
-            if(peer === undefined) {
-                this.setState({otherUserId: signal.userId});
-                peer = this.startPeer(signal.userId, false);
-            }
-
-            peer.signal(signal.data);
+            //         if(peer === undefined) {
+            //             this.setState({otherUserId: signal.userId});
+            //             peer = this.startPeer(signal.userId, false);
+            //         }
+            //         peer.signal(signal.data);
+            //         this.peers[signal.userId] = peer;
+            //     } else {
+            //         alert('Anda menolak panggilan');
+            //     }
+            //} else {
+                let peer = this.peers[signal.userId];
+                    if(peer === undefined) {
+                        this.setState({otherUserId: signal.userId});
+                        peer = this.startPeer(signal.userId, false);
+                    }
+                    peer.signal(signal.data);
+                    this.peers[signal.userId] = peer;
+            //}
+            
         });
     }
 
@@ -79,11 +95,13 @@ export default class App extends Component {
 
         peer.on('signal', (data) => {
             console.log('on signal');
-            this.channel.trigger(`client-signal-${userId}`, {
-                type: 'signal',
-                userId: this.user.id,
-                data: data
-            });
+            const signal = {
+                    type: 'signal',
+                    userId: this.user.id,
+                    userName: this.howCallUserId,
+                    data: data
+                };
+            this.channel.trigger(`client-signal-${userId}`, signal);
         });
 
         peer.on('stream', (stream) => {
@@ -93,24 +111,28 @@ export default class App extends Component {
             } catch (e) {
                 this.userVideo.src = URL.createObjectURL(stream);
             }
-
             this.userVideo.play();
         });
 
         peer.on('close', () => {
             console.log('on close');
             let peer = this.peers[userId];
-            if(peer !== undefined) {
-                peer.destroy();
+            try {
+                if(peer !== undefined) {
+                    peer.destroy();
+                }
+            } catch (error) {
+                
+            } finally {
+                this.peers[userId] = undefined;
             }
-
-            this.peers[userId] = undefined;
         });
 
         return peer;
     }
 
     callTo(userId) {
+        this.howCallUserId = userId;
         this.peers[userId] = this.startPeer(userId);
     }
 
@@ -118,7 +140,7 @@ export default class App extends Component {
         return (
             <div className="App">
 
-                {[1,2].map((userId) => {
+                {["kola","lala"].map((userId) => {
                     return this.user.id !== userId ? <button key={userId} onClick={() => this.callTo(userId)}>Call {userId}</button> : null;
                 })}
 

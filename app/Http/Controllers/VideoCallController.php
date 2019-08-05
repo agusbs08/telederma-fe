@@ -20,5 +20,28 @@ class VideoCallController extends Controller
         $key = $pusher->presence_auth($channelName, $socketId, $id, $presence_data);
 
         return response($key);
+        // error_log('Anjing');
+         
+        // $url = "http://localhost:5000/teledermatology-20e41/asia-northeast1/api/pusher/auth/" .$id;
+        
+        // $request = $client->post($url,  ['body'=>$body]);
+        // $response = $request->send();
+        // // return $response;
+        // error_log('socket_id:' . $socketId);    
+        // $client = new \GuzzleHttp\Client();
+        // error_log('channel: ' .$channelName);
+        // $response = $client->post(
+        //     $url,
+        //     [
+        //         \GuzzleHttp\RequestOptions::JSON => 
+        //         [   'socket_id' => $socketId,
+        //             'channel_name' => $channelName
+        //         ]
+        //     ],
+        //     ['Content-Type' => 'application/json']
+        // );
+        // error_log('BGSD JING');
+        // return json_decode($response->getBody(), true);
     }
+
 }

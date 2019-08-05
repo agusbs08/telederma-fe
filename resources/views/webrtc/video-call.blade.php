@@ -2,9 +2,8 @@
 <head>
 <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
-        console.log({{$id}});
         window.user = {
-            id : {{$id}},
+            id : "{{$id}}",
             name : "lala"
         };
          window.csrfToken = "{{ csrf_token() }}";

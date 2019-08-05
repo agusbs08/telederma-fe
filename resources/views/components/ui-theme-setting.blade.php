@@ -5,7 +5,7 @@
     <div class="theme-settings__inner">
         <div class="scrollbar-container">
             <div class="theme-settings__options-wrapper">
-                <h3 class="themeoptions-heading">Layout Options
+                <h3 class="themeoptions-heading">Pengaturan Tampilan
                 </h3>
                 <div class="p-3">
                     <ul class="list-group">
@@ -13,8 +13,7 @@
                             <div class="widget-content p-0">
                                 <div class="widget-content-wrapper">
                                     <div class="widget-content-left mr-3">
-                                        <div class="switch has-switch switch-container-class"
-                                            data-class="fixed-header">
+                                        <div class="switch has-switch switch-container-class" data-class="fixed-header">
                                             <div class="switch-animate switch-on">
                                                 <input type="checkbox" checked data-toggle="toggle"
                                                     data-onstyle="success">
@@ -57,11 +56,9 @@
                             <div class="widget-content p-0">
                                 <div class="widget-content-wrapper">
                                     <div class="widget-content-left mr-3">
-                                        <div class="switch has-switch switch-container-class"
-                                            data-class="fixed-footer">
+                                        <div class="switch has-switch switch-container-class" data-class="fixed-footer">
                                             <div class="switch-animate switch-off">
-                                                <input type="checkbox" data-toggle="toggle"
-                                                    data-onstyle="success">
+                                                <input type="checkbox" data-toggle="toggle" data-onstyle="success">
                                             </div>
                                         </div>
                                     </div>

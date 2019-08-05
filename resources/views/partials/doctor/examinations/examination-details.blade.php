@@ -82,7 +82,7 @@
         </ul>
       </div>
     </div>
-    @if (sizeof($diagnoses) == 0)
+    @if (array_key_exists('error', $diagnoses))
     <div class="main-card mb-3 card">
       <div class="card-body">
         <h5 class="card-title">Hasil Diagnosa</h5>

@@ -19,6 +19,8 @@
     </div>
     <script type="text/javascript" src="{{ asset('js/main.cba69814a806ecc7945a.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
     @if ($pagename == 'puskesmas.examination-form')
     <script>
         function submitExamination() {
@@ -229,6 +231,58 @@
         });
     </script>
     @endif
+    @if ($pagename == 'admin.doctors-list-view')
+    <script>
+        function openAddDoctorFormModal(){
+            $.ajax({
+                type: "GET",
+                url: '{{ config('app.API_endpoint') }}hospitals',
+                headers: {
+                    'Authorization': 'Bearer {{ Session::get('auth-key') }}'
+                },
+                success: (res) => {
+                    $('#hospital').empty()
+                    $('#hospital').append('<option selected disabled>Pilih Rumah Sakit: </option>')
+                    res.forEach(r => {
+                        $("#hospital").append(new Option(r.name, r.name));
+                    })
+                    $('#addDoctorFormModal').modal('toggle');
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            });
+        }
+        function submitDoctor(){
+            const data = {
+                role: "doctor",
+                nik: $('#nik').val(),
+                name: $('#name').val(),
+                birthdate: $('#birth-date').val(),
+                username: $('#username').val(),
+                email: $('#email').val(),
+                password: $('#password').val(),
+                confirmPassword: $('#confirm-password').val(),
+                hospital: $('#hospital').val()
+            }
+            console.log(data)
+            $.ajax({
+                type: "POST",
+                url: '{{ config('app.API_endpoint') }}signup',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: data,
+                success: (res) => {
+                    location.reload();
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            });
+        }
+    </script>
+    @endif
 </body>
 
 </html>
@@ -238,4 +292,6 @@
 @include('partials.puskesmas.modals.examination-detail')
 @elseif (Request::segment(1) == "puskesmas" && Request::segment(2) == "patients")
 @include('partials.puskesmas.modals.add-patient')
+@elseif (Request::segment(1) == "admin" && Request::segment(2) == "doctor")
+@include('partials.admin.modals.add-doctor')
 @endif

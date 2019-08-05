@@ -37,6 +37,8 @@
         @include('components.side-menu.puskesmas')
         @elseif (Request::segment(1) == "doctor")
         @include('components.side-menu.doctor')
+        @elseif (Request::segment(1) == "admin")
+        @include('components.side-menu.admin')
         @endif
       </ul>
     </div>

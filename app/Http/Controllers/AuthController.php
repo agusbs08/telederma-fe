@@ -45,6 +45,8 @@ class AuthController extends Controller
           return route('puskesmas.patients', [], false);
         elseif ($userDetails['role'] == 'DOCTOR')
           return route('doctor.examinations', [], false);
+        elseif ($userDetails['role'] == 'ADMIN')
+          return route('admin.doctors', [], false);
       } elseif ($loginResponseCode == 400) {
         return response()->json(['msg' => 'wrong password']);
       } elseif ($loginResponseCode == 404) {

@@ -55,19 +55,19 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="position-relative form-group"><label for="username" class="">Username</label><input
-                    name="username" id="username" placeholder="contoh: jokowi" type="text" class="form-control">
+                    name="username" id="username" placeholder="Masukkan username Anda" type="text" class="form-control">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="position-relative form-group"><label for="password" class="">Password</label><input
-                    name="password" id="password" placeholder="***********" type="password" class="form-control">
+                    name="password" id="password" placeholder="Masukkan password Anda" type="password" class="form-control">
                 </div>
               </div>
             </div>
             <div class="divider row"></div>
             <div class="d-flex align-items-center">
               <div class="ml-auto">
-                <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a>
+                {{-- <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a> --}}
                 <button class="ladda-button mb-2 mr-2 btn btn-focus" data-style="zoom-in" onclick="login()">
                   <span class="ladda-label">Masuk ke Dashboard
                   </span>

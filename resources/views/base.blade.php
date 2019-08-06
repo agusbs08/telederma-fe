@@ -10,6 +10,12 @@
         <div class="app-main">
             @include('components.sidebar')
             <div class="app-main__outer">
+                @if (session('errors'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin: 10px 5px;">
+                    <button type="button" class="close" aria-label="Close"></button>
+                    <strong>{{ session('errors') }}</strong>
+                </div>
+                @endif
                 <div class="app-main__inner">
                     @yield('content')
                 </div>

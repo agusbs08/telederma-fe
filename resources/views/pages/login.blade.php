@@ -50,6 +50,12 @@
             <span class="d-block">Selamat datang,</span>
             <span>Silakan login ke akun Anda.</span></h4>
           <h6 class="mt-3">Hubungi admin bila ingin membuat mendaftar sebagai puskesmas atau dokter.</h6>
+          @if (session('errors'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" aria-label="Close"></button>
+            {{ session('errors') }}
+          </div>
+          @endif
           <div class="divider row"></div>
           <div>
             <div class="form-row">
@@ -60,7 +66,8 @@
               </div>
               <div class="col-md-6">
                 <div class="position-relative form-group"><label for="password" class="">Password</label><input
-                    name="password" id="password" placeholder="Masukkan password Anda" type="password" class="form-control">
+                    name="password" id="password" placeholder="Masukkan password Anda" type="password"
+                    class="form-control">
                 </div>
               </div>
             </div>

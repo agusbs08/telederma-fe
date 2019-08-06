@@ -26,9 +26,9 @@ class AuthController extends Controller
           'password' => $request->input('password')
         ]
       ]);
-      $token = json_decode($loginResponse->getBody(), true)['token'];
       $loginResponseCode = $loginResponse->getStatusCode();
       if ($loginResponseCode == 200){
+        $token = json_decode($loginResponse->getBody(), true)['token'];
         $guzzle_params = config('app.guzzle_params');
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . $token];
         $client = new Client($guzzle_params);
@@ -58,9 +58,8 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-      $request->session()->flush();
-      header('Location: http://localhost:3000/auth/login');
-      exit();
+      Session::flush();
+      return redirect()->route('auth.getLoginView');
     }
 
     public function signUpPatient(Request $request)

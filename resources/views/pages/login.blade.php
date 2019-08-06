@@ -72,6 +72,9 @@
               </div>
             </div>
             <div class="divider row"></div>
+            <div class="alert alert-danger alert-dismissible fade show login-message" role="alert"
+              style="display: none;">
+            </div>
             <div class="d-flex align-items-center">
               <div class="ml-auto">
                 {{-- <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a> --}}

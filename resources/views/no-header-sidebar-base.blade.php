@@ -10,7 +10,6 @@
   <script type="text/javascript" src="{{asset('js/main.cba69814a806ecc7945a.js')}}"></script>
   @if ($pagename == 'login')
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="{{asset('js/login.js')}}"></script>
   <script>
     function login() {
       $.ajax({
@@ -25,7 +24,19 @@
           },
           success: (data) => {
             console.log(data)
-            // window.location = data;
+            if (data.hasOwnProperty('msg')){
+              $('.login-message').show()
+              if (data.msg === "user not found"){
+                console.log("User Tidak Ditemukan")
+                $('.login-message').text("User Tidak Ditemukan")
+              }
+              else if (data.msg === "wrong password"){
+                console.log("Password Salah")
+                $('.login-message').text("Password Salah")
+              }
+            } else {
+              window.location = data;
+            }
           },
           error: (error) => {
             console.log(error)

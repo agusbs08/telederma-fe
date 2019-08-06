@@ -68,7 +68,8 @@ class PuskesmasPatientController extends Controller
       $client = new Client($guzzle_params);
       $response = $client->request('POST', 'examinations/' . $request->input('examinationId') . '/results', [
         'form_params' => [
-          'description' => $request->input('description')
+          'description' => $request->input('description'),
+          'automatedDiagnoseResult' => $request->input('automatedDiagnoseResult')
         ]
       ]);
       return json_decode($response->getBody(), true);

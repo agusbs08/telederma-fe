@@ -50,7 +50,7 @@ class AuthController extends Controller
       } elseif ($loginResponseCode == 400) {
         return response()->json(['msg' => 'wrong password']);
       } elseif ($loginResponseCode == 404) {
-        return response()->json(['msg' => 'user not found']);
+        return response()->json(['msg' => 'user not found', 'data' => json_decode($loginResponse->getBody(), true)]);
       } else {
         return response()->json(['msg' => 'something went wrong']);
       }

@@ -18,7 +18,7 @@
           </div>
           <div class="tab-pane show" id="tab-eg115-1" role="tabpanel">
             @foreach ($examination_details['images'] as $i)
-            <img src="{{ $i['image'] }}" alt="">
+            <img src="{{ $i['image'] }}" alt="" id="skin-image">
             @endforeach
           </div>
         </div>

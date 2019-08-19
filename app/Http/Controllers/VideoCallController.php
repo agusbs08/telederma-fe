@@ -16,7 +16,7 @@ class VideoCallController extends Controller
             'encrypted' => true
         ]);
 
-        $presence_data = ['name' => 'kola'];
+        $presence_data = ['name' => "BGSD" ];
         $key = $pusher->presence_auth($channelName, $socketId, $id, $presence_data);
 
         return response($key);

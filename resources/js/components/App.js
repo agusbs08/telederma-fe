@@ -33,7 +33,6 @@ export default class App extends Component {
             .then((stream) => {
                 this.setState({hasMedia: true});
                 this.user.stream = stream;
-
                 try {
                     this.myVideo.srcObject = stream;
                 } catch (e) {

@@ -42,11 +42,12 @@
                 },
                 data: {
                     doctorId: $('#doctor').val(),
-                    hospitalId: 'hospital',
+                    hospitalId: 'rsua',
                     patientId: '{{ $patientId }}'
                 },
                 success: (res) => {
                     console.log("1")
+                    console.log(res)
                     $.ajax({
                         type: "POST",
                         url: '{{ route("puskesmas.submit-examination-result") }}',
@@ -60,6 +61,7 @@
                         },
                         success: (data) => {
                             console.log("2")
+                            console.log(data)
                             let formData = new FormData()
                             formData.append('examinationId', data.examinationId)
                             formData.append('image', $('input[type=file]')[0].files[0])
@@ -73,6 +75,7 @@
                                 processData: false,
                                 contentType: false,
                                 success: (data) => {
+                                    console.log(data)
                                     console.log("3")
                                     window.location = '/puskesmas/patients/{{$patientId}}/details'
                                 },

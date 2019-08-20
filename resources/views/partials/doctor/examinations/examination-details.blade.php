@@ -30,55 +30,15 @@
       </div>
       <div class="card-body">
         <ul class="nav flex-column">
+          @foreach ($examination_details['automatedDiagnoseResult'] as $adr)
           <li class="nav-item">
             <a href="javascript:void(0);" class="nav-link disabled">
               <i class="nav-link-icon lnr-checkmark-circle"></i>
-              <span>Melanocytic Nevi (nv)</span>
-              <div class="ml-auto badge badge-pill badge-secondary">- %</div>
+              <span>{{ $adr['className'] }}</span>
+              <div class="ml-auto badge badge-pill badge-secondary">{{ $adr['probability'] }} %</div>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="javascript:void(0);" class="nav-link disabled">
-              <i class="nav-link-icon lnr-checkmark-circle"></i>
-              <span>Melanoma (mel)</span>
-              <div class="ml-auto badge badge-pill badge-secondary">- %</div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="javascript:void(0);" class="nav-link disabled">
-              <i class="nav-link-icon lnr-checkmark-circle"></i>
-              <span>Benign keratosis-like lesions (bkl)</span>
-              <div class="ml-auto badge badge-pill badge-secondary">- %</div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="javascript:void(0);" class="nav-link disabled">
-              <i class="nav-link-icon lnr-checkmark-circle"></i>
-              <span>Basal cell carcinoma (bcc)</span>
-              <div class="ml-auto badge badge-pill badge-secondary">- %</div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="javascript:void(0);" class="nav-link disabled">
-              <i class="nav-link-icon lnr-checkmark-circle"></i>
-              <span>Actinic keratoses (akiec)</span>
-              <div class="ml-auto badge badge-pill badge-secondary">- %</div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="javascript:void(0);" class="nav-link disabled">
-              <i class="nav-link-icon lnr-checkmark-circle"></i>
-              <span>Vascular lesions (vasc)</span>
-              <div class="ml-auto badge badge-pill badge-secondary">- %</div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="javascript:void(0);" class="nav-link disabled">
-              <i class="nav-link-icon lnr-checkmark-circle"></i>
-              <span>Dermatofibroma (df)</span>
-              <div class="ml-auto badge badge-pill badge-secondary">- %</div>
-            </a>
-          </li>
+          @endforeach
         </ul>
       </div>
     </div>

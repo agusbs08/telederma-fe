@@ -64,9 +64,12 @@
     </div>
     <div class="text-center d-block card-footer">
       <a href="{{route('puskesmas.examination-form', ['patient_id' => $user_details['username']])}}"><button
-          class="border-0 btn-transition btn btn-outline-success"><i class="pe-7s-add-user btn-icon-wrapper"></i>
+          class="border-0 btn-transition btn btn-outline-primary"><i class="pe-7s-add-user btn-icon-wrapper"></i>
           Tambah
-          Pemeriksaan untuk Pasien Ini</button></a>
+          Pemeriksaan</button></a>
+      <a href="#"><button class="border-0 btn-transition btn btn-outline-success"><i
+            class="pe-7s-headphones btn-icon-wrapper"></i>
+          Live Interactive dengan Dokter</button></a>
     </div>
   </div>
 </div>

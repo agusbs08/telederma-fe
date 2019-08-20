@@ -5,7 +5,7 @@
         <ul class="header-megamenu nav">
           <li class="nav-item">
             <a class="nav-link">
-              Made with love. Copyright 2019
+              Dikembangkan oleh ITS - RSUA, 2019
             </a>
           </li>
         </ul>

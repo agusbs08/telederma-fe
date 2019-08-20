@@ -27,6 +27,7 @@ class PuskesmasPatientController extends Controller
       $client = new Client($guzzle_params);
       $user_details = $client->request('GET', 'users/' . $patient_username);
       $examinations = $client->request('GET', 'examinations/puskesmass/' . Session::get('username') . '/patients/' . $patient_username);
+      // dd(Session::get('username'));
       // dd(json_decode($examinations->getBody(), true));
       return view('partials.puskesmas.patients.patient-detail')
         ->with('pagename', 'puskesmas.get-patient-details-view')

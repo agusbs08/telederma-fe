@@ -35,8 +35,9 @@
                 <div class="slide-img-bg"
                   style="background-image: url('{{ asset('images/originals/citydark.jpg') }}');"></div>
                 <div class="slider-content">
-                  <h3>Keuntungan 3</h3>
-                  <p>Keterangan keuntungan 3</p>
+                  <h3>Mudah Digunakan</h3>
+                  <p>Aplikasi teledermatology sangat mudah digunakan karena didesain dengan layout yang sederhana namun
+                    tetap indah dipandang dan mudah digunakan untuk semua orang.</p>
                 </div>
               </div>
             </div>

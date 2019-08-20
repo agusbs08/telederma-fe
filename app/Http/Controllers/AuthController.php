@@ -41,11 +41,11 @@ class AuthController extends Controller
           'username' => $userDetails['username'],
           'role' => $userDetails['role']
         ]);
-        if ($userDetails['role'] == 'PUSKESMAS')
+        if ($userDetails['role'] == 'puskesmas')
           return route('puskesmas.patients', [], false);
-        elseif ($userDetails['role'] == 'DOCTOR')
+        elseif ($userDetails['role'] == 'doctor')
           return route('doctor.examinations', [], false);
-        elseif ($userDetails['role'] == 'ADMIN')
+        elseif ($userDetails['role'] == 'admin')
           return route('admin.doctors', [], false);
       } elseif ($loginResponseCode == 400) {
         return response()->json(['msg' => 'wrong password']);

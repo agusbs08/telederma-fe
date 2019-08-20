@@ -22,6 +22,8 @@
           </div>
           <div class="position-relative form-group"><label for="username" class="">Username</label><input
               name="username" id="username" placeholder="contoh: jokowi" type="text" class="form-control"></div>
+          <div class="position-relative form-group"><label for="phone" class="">Telepon/HP</label><input name="username"
+              id="phone" placeholder="contoh: 0888888888888" type="text" class="form-control"></div>
           <div class="position-relative form-group"><label for="password" class="">Password</label><input
               name="password" id="password" placeholder="***********" type="password" class="form-control"></div>
           <div class="position-relative form-group"><label for="confirm-password" class="">Konfirmasi

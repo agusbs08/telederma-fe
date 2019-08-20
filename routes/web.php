@@ -8,7 +8,7 @@ Route::get('/', 'IndexController@index')->name('index');
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['role:PUSKESMAS'])->group(function(){
+Route::middleware(['role:puskesmas'])->group(function(){
     Route::prefix('puskesmas')->group(function () {
         Route::prefix('patients')->group(function(){
             Route::get('/', 'PuskesmasPatientController@getPatientsListView')->name('puskesmas.patients');
@@ -35,7 +35,7 @@ Route::middleware(['role:PUSKESMAS'])->group(function(){
 | Doctor Route
 |--------------------------------------------------------------------------
 */
-Route::middleware(['role:DOCTOR'])->group(function(){
+Route::middleware(['role:doctor'])->group(function(){
     Route::prefix('doctor')->group(function(){
         Route::prefix('examinations')->group(function(){
             Route::get('/', 'Doctor\DoctorExaminationsController@getDoctorExaminationListView')->name('doctor.examinations');
@@ -51,11 +51,13 @@ Route::middleware(['role:DOCTOR'])->group(function(){
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['role:ADMIN'])->group(function(){
+Route::middleware(['role:admin'])->group(function(){
     Route::prefix('admin')->group(function(){
         Route::get('doctors', 'Admin\AdminDoctorController@getAdminDoctorListView')->name('admin.doctors');
         Route::get('doctors/{doctor_id}', 'Admin\AdminDoctorController@getAdminDoctorDetailView')->name('admin.doctor-details');
+        Route::post('doctors', 'Admin\AdminDoctorController@submitDoctor')->name('admin.submit-doctors');
         Route::get('puskesmas', 'Admin\AdminPuskesmasController@getAdminPuskesmasListView')->name('admin.puskesmas');
+        Route::post('puskesmas', 'Admin\AdminPuskesmasController@submitClinic')->name('admin.submit-clinic');
         Route::get('puskesmas/{puskesmas_id}', 'Admin\AdminPuskesmasController@getAdminPuskesmasDetailView')->name('admin.puskesmas-details');
     });
 });

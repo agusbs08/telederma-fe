@@ -268,23 +268,24 @@
         function submitDoctor(){
             const data = {
                 role: "doctor",
-                nik: $('#nik').val(),
+                identityNumber: $('#nik').val(),
                 name: $('#name').val(),
-                birthdate: $('#birth-date').val(),
+                dob: $('#birth-date').val(),
                 username: $('#username').val(),
                 email: $('#email').val(),
                 password: $('#password').val(),
                 confirmPassword: $('#confirm-password').val(),
-                hospital: $('#hospital').val()
+                hospital: $('#hospital').val(),
+                phone: $('#phone').val()
             }
             $.ajax({
                 type: "POST",
-                url: '{{ config('app.API_endpoint') }}signup',
+                url: "{{ route('admin.submit-doctors') }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 data: data,
-                success: (res) => {
+                success: () => {
                     location.reload();
                 },
                 error: (error) => {
@@ -304,15 +305,18 @@
                 email: $('#email').val(),
                 password: $('#password').val(),
                 confirmPassword: $('#confirm-password').val(),
+                phone: $('#phone').val(),
+                identityNumber: $('#identity-number').val()
             }
             $.ajax({
                 type: "POST",
-                url: '{{ config('app.API_endpoint') }}signup',
+                url: "{{ route('admin.submit-clinic') }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 data: data,
                 success: (res) => {
+                    console.log(res)
                     location.reload();
                 },
                 error: (error) => {

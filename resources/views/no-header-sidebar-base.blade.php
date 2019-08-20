@@ -15,7 +15,7 @@
       if (!this.validateLogin()) return
       $.ajax({
           type: "POST",
-          url: '{{route("auth.login")}}',
+          url: '{{ route("auth.login") }}',
           headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
           },

@@ -37,7 +37,7 @@
                 $('.login-message').text("Password Salah")
               }
             } else {
-              window.location = data;
+            window.location = data;
             }
           },
           error: (error) => {

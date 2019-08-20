@@ -41,7 +41,7 @@ class AuthController extends Controller
           'username' => $userDetails['username'],
           'role' => $userDetails['role']
         ]);
-        if ($userDetails['role'] == 'puskesmas')
+        if ($userDetails['role'] == 'clinic')
           return route('puskesmas.patients', [], false);
         elseif ($userDetails['role'] == 'doctor')
           return route('doctor.examinations', [], false);
@@ -58,6 +58,10 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+      $guzzle_params = config('app.guzzle_params');
+      $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
+      $client = new Client($guzzle_params);
+      $response = $client->request('POST', 'users/me/logout');
       Session::flush();
       return redirect()->route('auth.getLoginView');
     }

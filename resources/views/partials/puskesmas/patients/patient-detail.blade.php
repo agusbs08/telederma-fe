@@ -9,13 +9,15 @@
         </div>
         <div class="menu-header-content">
           <div class="avatar-icon-wrapper avatar-icon-lg">
-            <div class="avatar-icon rounded btn-hover-shine"><img src="{{ $user_details['imageUrl'] }}" alt="Avatar 5">
+            <div class="avatar-icon rounded btn-hover-shine"><img src="{{ $user_details['profilePicture'] }}"
+                alt="Avatar 5">
             </div>
           </div>
           <div>
             <h5 class="menu-header-title">{{ $user_details['name'] }}</h5>
             <h6 class="menu-header-subtitle">NIK : {{ $user_details['nik'] }}</h6>
-            <h6 class="menu-header-subtitle">Tanggal lahir : {{ $user_details['birthdate'] }}</h6>
+            <h6 class="menu-header-subtitle">Tanggal lahir : {{ date("d M, Y", strtotime(date($user_details['dob']))) }}
+            </h6>
           </div>
         </div>
       </div>
@@ -63,7 +65,7 @@
       </div>
     </div>
     <div class="text-center d-block card-footer">
-      <a href="{{route('puskesmas.examination-form', ['patient_id' => $user_details['username']])}}"><button
+      <a href="{{route('puskesmas.examination-form', ['patient_code' => $user_details['_id']])}}"><button
           class="border-0 btn-transition btn btn-outline-primary"><i class="pe-7s-add-user btn-icon-wrapper"></i>
           Tambah
           Pemeriksaan</button></a>

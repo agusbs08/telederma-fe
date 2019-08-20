@@ -33,67 +33,83 @@
     <script src="{{ asset('js/diagnoses-recommendation.js') }}"></script>
     <script>
         function submitExamination() {
-            console.log(automatedDiagnoseResult)
             $.ajax({
-                type: "POST",
-                url: '{{ route("puskesmas.submit-examination") }}',
+                type: 'POST',
+                url: {{ 'puskesmas.submit-examination' }},
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 data: {
-                    doctorId: $('#doctor').val(),
-                    hospitalId: 'rsua',
-                    patientId: '{{ $patientId }}'
+                    doctorUsername: $('#doctor').val()
                 },
-                success: (res) => {
-                    console.log("1")
-                    console.log(res)
-                    $.ajax({
-                        type: "POST",
-                        url: '{{ route("puskesmas.submit-examination-result") }}',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        data: {
-                            examinationId: res.examinationId,
-                            description: $('#description').val(),
-                            automatedDiagnoseResult: automatedDiagnoseResult
-                        },
-                        success: (data) => {
-                            console.log("2")
-                            console.log(data)
-                            let formData = new FormData()
-                            formData.append('examinationId', data.examinationId)
-                            formData.append('image', $('input[type=file]')[0].files[0])
-                            $.ajax({
-                                type: "POST",
-                                url: '{{ route("puskesmas.submit-examination-image") }}',
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: (data) => {
-                                    console.log(data)
-                                    console.log("3")
-                                    window.location = '/puskesmas/patients/{{$patientId}}/details'
-                                },
-                                error: (error) => {
-                                    console.log(error)
-                                }
-                            });
-                        },
-                        error: (error) => {
-                            console.log(error)
-                        }
-                    });
-                },
+                success: (res) => {},
                 error: (error) => {
                     console.log(error)
                 }
-            });
+            })
         }
+        // function submitExamination() {
+        //     console.log(automatedDiagnoseResult)
+        //     $.ajax({
+        //         type: "POST",
+        //         url: '{{ route("puskesmas.submit-examination") }}',
+        //         headers: {
+        //             'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        //         },
+        //         data: {
+        //             doctorId: $('#doctor').val(),
+        //             hospitalId: 'rsua',
+        //             patientId: '{{ $patientId }}'
+        //         },
+        //         success: (res) => {
+        //             console.log("1")
+        //             console.log(res)
+        //             $.ajax({
+        //                 type: "POST",
+        //                 url: '{{ route("puskesmas.submit-examination-result") }}',
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        //                 },
+        //                 data: {
+        //                     examinationId: res.examinationId,
+        //                     description: $('#description').val(),
+        //                     automatedDiagnoseResult: automatedDiagnoseResult
+        //                 },
+        //                 success: (data) => {
+        //                     console.log("2")
+        //                     console.log(data)
+        //                     let formData = new FormData()
+        //                     formData.append('examinationId', data.examinationId)
+        //                     formData.append('image', $('input[type=file]')[0].files[0])
+        //                     $.ajax({
+        //                         type: "POST",
+        //                         url: '{{ route("puskesmas.submit-examination-image") }}',
+        //                         headers: {
+        //                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        //                         },
+        //                         data: formData,
+        //                         processData: false,
+        //                         contentType: false,
+        //                         success: (data) => {
+        //                             console.log(data)
+        //                             console.log("3")
+        //                             window.location = '/puskesmas/patients/{{$patientId}}/details'
+        //                         },
+        //                         error: (error) => {
+        //                             console.log(error)
+        //                         }
+        //                     });
+        //                 },
+        //                 error: (error) => {
+        //                     console.log(error)
+        //                 }
+        //             });
+        //         },
+        //         error: (error) => {
+        //             console.log(error)
+        //         }
+        //     });
+        // }
     </script>
     @endif
     @if($pagename == 'puskesmas.get-patient-list-view')

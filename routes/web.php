@@ -8,7 +8,7 @@ Route::get('/', 'IndexController@index')->name('index');
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['role:puskesmas'])->group(function(){
+Route::middleware(['role:clinic'])->group(function(){
     Route::prefix('puskesmas')->group(function () {
         Route::prefix('patients')->group(function(){
             Route::get('/', 'PuskesmasPatientController@getPatientsListView')->name('puskesmas.patients');

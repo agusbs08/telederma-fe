@@ -37,10 +37,10 @@
         <tr>
           <td>{{ $i+1 }}</td>
           <td>{{ $d['name'] }}</td>
-          <td>{{ $d['birthdate'] }}</td>
+          <td>{{ date("d M, Y", strtotime(date($d['dob']))) }}</td>
           <td>{{ $d['nik'] }}</td>
           <td style="text-align: center; vertical-align: middle;">
-            <a href="{{ route('puskesmas.patient-details', ['username' => $d['username']]) }}"><button
+            <a href="{{ route('puskesmas.patient-details', ['id' => $d['_id']]) }}"><button
                 class="mb-2 mr-2 btn-icon btn-pill btn btn-info">
                 <i class="lnr-arrow-right-circle btn-icon-wrapper">
                 </i>Detail</button></a>

@@ -9,11 +9,11 @@ return [
     */
 
     'guzzle_params' => [
-        'base_uri' => 'http://localhost:5000/teledermatology-20e41/asia-northeast1/api/',
+        'base_uri' => 'http://localhost:5001/teledermatology-20e41/asia-northeast1/api/',
         'http_errors' => false
     ],
 
-    'API_endpoint' => 'http://localhost:5000/teledermatology-20e41/asia-northeast1/api/',
+    'API_endpoint' => 'http://localhost:5001/teledermatology-20e41/asia-northeast1/api/',
 
     /*
     |--------------------------------------------------------------------------

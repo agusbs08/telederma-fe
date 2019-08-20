@@ -59,9 +59,31 @@
                 <div class="card-body">
                   <div class="position-relative form-group"><label for="exampleFile" class="">Gambar</label>
                     <input name="file" id="examination-image" type="file" class="form-control-file" multiple="multiple">
+                    <img id="examination-image-preview" src="#" alt="your image" style="display: none; margin: 20px;" />
                     <small class="form-text text-muted">Anda dapat mengupload maksimal x gambar.</small>
+                    <div class="loader-wrapper justify-content-center align-items-center" style="margin: 10px auto;">
+                      <div id="loading-spinner" class="loader" style="display: none;">
+                        <div class="line-scale">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="card automated-diagnose-wrapper" style="display: none;">
+              <div class="card-header"><i class="header-icon lnr-screen icon-gradient bg-warm-flame"> </i>Hasil
+                Diagnosa
+                Otomatis Sistem
+              </div>
+              <div class="card-body">
+                <ul class="nav flex-column automated-diagnose-result-wrapper">
+                </ul>
               </div>
             </div>
           </div>

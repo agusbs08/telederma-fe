@@ -50,26 +50,41 @@
             <span class="d-block">Selamat datang,</span>
             <span>Silakan login ke akun Anda.</span></h4>
           <h6 class="mt-3">Hubungi admin bila ingin membuat mendaftar sebagai puskesmas atau dokter.</h6>
+          @if (session('errors'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" aria-label="Close"></button>
+            {{ session('errors') }}
+          </div>
+          @endif
           <div class="divider row"></div>
           <div>
             <div class="form-row">
               <div class="col-md-6">
-                <div class="position-relative form-group"><label for="username" class="">Username</label><input
-                    name="username" id="username" placeholder="Masukkan username Anda" type="text" class="form-control">
+                <div class="position-relative form-group"><label for="username" class="">Username</label>
+                  <input name="username" id="username" placeholder="Masukkan username Anda" type="text"
+                    class="form-control">
+                  <em id="username-error" class="error invalid-feedback" style="display: none;">Username tidak boleh
+                    kosong</em>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="position-relative form-group"><label for="password" class="">Password</label><input
-                    name="password" id="password" placeholder="Masukkan password Anda" type="password" class="form-control">
+                <div class="position-relative form-group"><label for="password" class="">Password</label>
+                  <input name="password" id="password" placeholder="Masukkan password Anda" type="password"
+                    class="form-control">
+                  <em id="password-error" class="error invalid-feedback" style="display: none;">Password tidak boleh
+                    kosong</em>
                 </div>
               </div>
             </div>
             <div class="divider row"></div>
+            <div class="alert alert-danger alert-dismissible fade show login-message" role="alert"
+              style="display: none;">
+            </div>
             <div class="d-flex align-items-center">
               <div class="ml-auto">
                 {{-- <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a> --}}
-                <button class="ladda-button mb-2 mr-2 btn btn-focus" data-style="zoom-in" onclick="login()">
-                  <span class="ladda-label">Masuk ke Dashboard
+                <button class="ladda-button mb-2 mr-2 btn btn-primary" data-style="zoom-in" onclick="login()">
+                  <span class="ladda-label">Login
                   </span>
                   <span class="ladda-spinner">
                   </span>

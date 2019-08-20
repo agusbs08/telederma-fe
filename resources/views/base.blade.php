@@ -10,6 +10,12 @@
         <div class="app-main">
             @include('components.sidebar')
             <div class="app-main__outer">
+                @if (session('errors'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin: 10px 5px;">
+                    <button type="button" class="close" aria-label="Close"></button>
+                    <strong>{{ session('errors') }}</strong>
+                </div>
+                @endif
                 <div class="app-main__inner">
                     @yield('content')
                 </div>
@@ -21,7 +27,13 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     @if ($pagename == 'puskesmas.examination-form')
     <script>
+        let automatedDiagnoseResult = [];
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"></script>
+    <script src="{{ asset('js/diagnoses-recommendation.js') }}"></script>
+    <script>
         function submitExamination() {
+            console.log(automatedDiagnoseResult)
             $.ajax({
                 type: "POST",
                 url: '{{ route("puskesmas.submit-examination") }}',
@@ -33,7 +45,8 @@
                     hospitalId: 'hospital',
                     patientId: '{{ $patientId }}'
                 },
-                success: (data) => {
+                success: (res) => {
+                    console.log("1")
                     $.ajax({
                         type: "POST",
                         url: '{{ route("puskesmas.submit-examination-result") }}',
@@ -41,10 +54,12 @@
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
                         data: {
-                            examinationId: data.examinationId,
-                            description: $('#description').val()
+                            examinationId: res.examinationId,
+                            description: $('#description').val(),
+                            automatedDiagnoseResult: automatedDiagnoseResult
                         },
                         success: (data) => {
+                            console.log("2")
                             let formData = new FormData()
                             formData.append('examinationId', data.examinationId)
                             formData.append('image', $('input[type=file]')[0].files[0])
@@ -58,6 +73,7 @@
                                 processData: false,
                                 contentType: false,
                                 success: (data) => {
+                                    console.log("3")
                                     window.location = '/puskesmas/patients/{{$patientId}}/details'
                                 },
                                 error: (error) => {

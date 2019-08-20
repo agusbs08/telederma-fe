@@ -27,7 +27,6 @@ class DoctorExaminationsController extends Controller
         $client = new Client($guzzle_params);
         $examinationDetailResponse = $client->request('GET', 'examinations/' . $examination_id);
         $diagnoseResponse = $client->request('GET', 'examinations/' . $examination_id . '/diagnoses');
-        // dd(json_decode($diagnoseResponse->getBody(), true));
         return view('partials.doctor.examinations.examination-details')
             ->with('pagename', 'get-doctor-examination-detail-view')
             ->with('examination_id', $examination_id)

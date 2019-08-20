@@ -8,24 +8,26 @@ Route::get('/', 'IndexController@index')->name('index');
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('puskesmas')->group(function () {
-    // Patients
-    Route::get('patients', 'PuskesmasPatientController@getPatientsListView')->name('puskesmas.patients');
-    Route::get('patients/{patient_username}/details', 'PuskesmasPatientController@getPatientDetailsView')
-        ->name('puskesmas.patient-details');
-    Route::get('patients/{patient_id}/examinations', 'PuskesmasPatientController@getPatientAddExaminationForm')->name('puskesmas.examination-form');
-    Route::post('patients/examinations', 'PuskesmasPatientController@submitExamination')->name('puskesmas.submit-examination');
-    Route::post('patients/examinations/result', 'PuskesmasPatientController@submitExaminationResult')->name('puskesmas.submit-examination-result');
-    Route::post('patients/examinations/image', 'PuskesmasPatientController@submitExaminationImage')->name('puskesmas.submit-examination-image');
-    // Examinations
-    Route::get('examinations', 'PuskesmasExaminationController@getExaminationsListView')->name('puskesmas.examinations');
-    Route::get('examinations/{examination_id}', function () {
-        return view('partials.puskesmas.examinations.examination-details');
-    })->name('puskesmas.examination-details');
-    // Dashboards
-    Route::get('dashboard', function () {
-        return view('partials.puskesmas.patients.patients-list');
-    })->name('puskesmas.dashboard');
+Route::middleware(['role:PUSKESMAS'])->group(function(){
+    Route::prefix('puskesmas')->group(function () {
+        Route::prefix('patients')->group(function(){
+            Route::get('/', 'PuskesmasPatientController@getPatientsListView')->name('puskesmas.patients');
+            Route::get('{patient_username}/details', 'PuskesmasPatientController@getPatientDetailsView')
+                ->name('puskesmas.patient-details');
+            Route::get('{patient_id}/examinations', 'PuskesmasPatientController@getPatientAddExaminationForm')->name('puskesmas.examination-form');
+            Route::prefix('examinations')->group(function(){
+                Route::post('/', 'PuskesmasPatientController@submitExamination')->name('puskesmas.submit-examination');
+                Route::post('result', 'PuskesmasPatientController@submitExaminationResult')->name('puskesmas.submit-examination-result');
+                Route::post('image', 'PuskesmasPatientController@submitExaminationImage')->name('puskesmas.submit-examination-image');
+            });
+        });
+        Route::prefix('examinations')->group(function(){
+            Route::get('/', 'PuskesmasExaminationController@getExaminationsListView')->name('puskesmas.examinations');
+            Route::get('{examination_id}', function () {
+                return view('partials.puskesmas.examinations.examination-details');
+            })->name('puskesmas.examination-details');
+        });
+    });
 });
 
 /*
@@ -33,11 +35,14 @@ Route::prefix('puskesmas')->group(function () {
 | Doctor Route
 |--------------------------------------------------------------------------
 */
-
-Route::prefix('doctor')->group(function(){
-    Route::get('examinations', 'Doctor\DoctorExaminationsController@getDoctorExaminationListView')->name('doctor.examinations');
-    Route::get('examinations/{examination_id}', 'Doctor\DoctorExaminationsController@getDoctorExaminationDetailView')->name('doctor.examination-details');
-    Route::post('diagnose', 'Doctor\DoctorExaminationsController@postDiagnose')->name('doctor.post-diagnose');
+Route::middleware(['role:DOCTOR'])->group(function(){
+    Route::prefix('doctor')->group(function(){
+        Route::prefix('examinations')->group(function(){
+            Route::get('/', 'Doctor\DoctorExaminationsController@getDoctorExaminationListView')->name('doctor.examinations');
+            Route::get('{examination_id}', 'Doctor\DoctorExaminationsController@getDoctorExaminationDetailView')->name('doctor.examination-details');
+        });
+        Route::post('diagnose', 'Doctor\DoctorExaminationsController@postDiagnose')->name('doctor.post-diagnose');
+    });
 });
 
 /*
@@ -46,11 +51,13 @@ Route::prefix('doctor')->group(function(){
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('admin')->group(function(){
-    Route::get('doctors', 'Admin\AdminDoctorController@getAdminDoctorListView')->name('admin.doctors');
-    Route::get('doctors/{doctor_id}', 'Admin\AdminDoctorController@getAdminDoctorDetailView')->name('admin.doctor-details');
-    Route::get('puskesmas', 'Admin\AdminPuskesmasController@getAdminPuskesmasListView')->name('admin.puskesmas');
-    Route::get('puskesmas/{puskesmas_id}', 'Admin\AdminPuskesmasController@getAdminPuskesmasDetailView')->name('admin.puskesmas-details');
+Route::middleware(['role:ADMIN'])->group(function(){
+    Route::prefix('admin')->group(function(){
+        Route::get('doctors', 'Admin\AdminDoctorController@getAdminDoctorListView')->name('admin.doctors');
+        Route::get('doctors/{doctor_id}', 'Admin\AdminDoctorController@getAdminDoctorDetailView')->name('admin.doctor-details');
+        Route::get('puskesmas', 'Admin\AdminPuskesmasController@getAdminPuskesmasListView')->name('admin.puskesmas');
+        Route::get('puskesmas/{puskesmas_id}', 'Admin\AdminPuskesmasController@getAdminPuskesmasDetailView')->name('admin.puskesmas-details');
+    });
 });
 
 /*
@@ -69,8 +76,12 @@ Route::prefix('auth')->group(function(){
 });
 
 //video call
-Route::get('/lala/{id}', function($id){
-    return view('webrtc.video-call')->with(['id' => $id]);
+Route::get('/videocall/doctor/{id}', function($id){
+    return view('webrtc.video-call-doctor')->with(['id' => $id]);
 });
 
-Route::post('/pusher/auth/{id}', 'VideoCallController@callToUser')->name('pusher.callToUser');
+Route::get('/videocall/patient/{id}', function($id){
+    return view('webrtc.video-call-patient')->with(['id' => $id]);
+});
+
+Route::post('/pusher/auth/{id}/{name}', 'VideoCallController@callToUser')->name('pusher.callToUser');

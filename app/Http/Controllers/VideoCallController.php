@@ -7,7 +7,7 @@ use \Pusher\Pusher;
 
 class VideoCallController extends Controller
 {
-    public function callToUser(Request $request, $id) {
+    public function callToUser(Request $request, $id, $name) {
         $socketId = $request->socket_id;
         $channelName = $request->channel_name;
 
@@ -16,7 +16,7 @@ class VideoCallController extends Controller
             'encrypted' => true
         ]);
 
-        $presence_data = ['name' => "BGSD" ];
+        $presence_data = ['name' => $name ];
         $key = $pusher->presence_auth($channelName, $socketId, $id, $presence_data);
 
         return response($key);

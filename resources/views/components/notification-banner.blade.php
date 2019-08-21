@@ -31,7 +31,7 @@
                             <div class="p-3">
                                 <div
                                     class="vertical-without-time vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
-                                    @for ($i = 0; $i < 10; $i++) <div
+                                    {{-- @for ($i = 0; $i < 10; $i++) <div
                                         class="vertical-timeline-item vertical-timeline-element">
                                         <div><span class="vertical-timeline-element-icon bounce-in"><i
                                                     class="badge badge-dot badge-dot-xl badge-success">
@@ -43,19 +43,30 @@
                                             </div>
                                         </div>
                                 </div>
-                                @endfor
+                                @endfor --}}
+                                    <div class="vertical-timeline-item vertical-timeline-element">
+                                        <div><span class="vertical-timeline-element-icon bounce-in"><i
+                                                    class="badge badge-dot badge-dot-xl badge-success">
+                                                </i></span>
+                                            <div class="vertical-timeline-element-content bounce-in">
+                                                <h4 class="timeline-title">Tidak ada pemberitahuan.</h4>
+                                                {{-- <p>Hari ini pukul <a href="javascript:void(0);">09:44</a></p> --}}
+                                                <span class="vertical-timeline-element-date"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <ul class="nav flex-column">
+                <li class="nav-item-divider nav-item"></li>
+                <li class="nav-item-btn text-center nav-item">
+                    <button class="btn-shadow btn-wide btn-pill btn btn-focus btn-sm">Lihat Semua Pemberitahuan</button>
+                </li>
+            </ul>
         </div>
-        <ul class="nav flex-column">
-            <li class="nav-item-divider nav-item"></li>
-            <li class="nav-item-btn text-center nav-item">
-                <button class="btn-shadow btn-wide btn-pill btn btn-focus btn-sm">Lihat Semua Pemberitahuan</button>
-            </li>
-        </ul>
     </div>
-</div>
 </div>

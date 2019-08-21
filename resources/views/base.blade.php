@@ -216,7 +216,7 @@
                 data: data,
                 success: (res) => {
                     // console.log(res)
-                    window.location = '//localhost:3000/doctor/examinations'
+                    window.location = '//localhost:8000/doctor/examinations'
                 },
                 error: (error) => {
                     console.error(error)

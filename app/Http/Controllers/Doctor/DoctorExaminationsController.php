@@ -14,8 +14,9 @@ class DoctorExaminationsController extends Controller
         $guzzle_params = config('app.guzzle_params');
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
         $client = new Client($guzzle_params);
-        $response = $client->request('GET', 'examinations/doctors/' . Session::get('username'));
-        // dd(json_decode($response->getBody(), true));
+        $response = $client->request('GET', 'examinations/', [
+            'query' => ['doctor' => Session::get('username')]
+        ]);
         return view('partials.doctor.examinations.examinations-list')
             ->with('pagename', 'doctor-get-examination-list')
             ->with('examinations', json_decode($response->getBody(), true));
@@ -27,36 +28,33 @@ class DoctorExaminationsController extends Controller
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
         $client = new Client($guzzle_params);
         $examinationDetailResponse = $client->request('GET', 'examinations/' . $examination_id);
-        $diagnoseResponse = $client->request('GET', 'examinations/' . $examination_id . '/diagnoses');
         // dd(json_decode($examinationDetailResponse->getBody(), true));
         return view('partials.doctor.examinations.examination-details')
             ->with('pagename', 'get-doctor-examination-detail-view')
             ->with('examination_id', $examination_id)
-            ->with('diagnoses', json_decode($diagnoseResponse->getBody(), true))
             ->with('examination_details', json_decode($examinationDetailResponse->getBody(), true));
     }
 
-    public function postDiagnose(Request $request){
-
+    public function postDiagnose(Request $request)
+    {
         $data = array();
-        $data['doctorId'] = Session::get('username');
-        $data['examinationId'] = $request->input('examinationId');
-        $data['desc'] = $request->input('desc');
-        $data['diagnoseCost'] = $request->input('diagnoseCost');
-        $data['diseaseName'] = $request->input('diseaseName');
+        $data['description'] = $request->input('desc');
+        $data['cost'] = $request->input('diagnoseCost');
+        $data['disease'] = $request->input('diseaseName');
         $data['recipes'] = array();
         foreach($request->input('recipes') as $recipe)
         {
             array_push($data['recipes'], [
-                'medicineName' => $recipe['medicineName'],
-                'usageRule' => $recipe['usageRule'],
-                'recipeDesc' => $recipe['recipeDesc'],
-            ]);
+                'medicine' => $recipe['medicineName'],
+                'usage' => $recipe['usageRule'],
+                'description' => $recipe['recipeDesc'],
+                ]);
         }
         $guzzle_params = config('app.guzzle_params');
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key', 'default')];
         $client = new Client($guzzle_params);
-        $loginResponse = $client->request('POST', 'diagnoses', [ 'form_params' => $data ]);
-        return json_decode($loginResponse->getBody(), true);
+        // $response = $client->request('POST', 'examinations/' . $request->input('examinationId') . '/images');
+        $response = $client->request('POST', 'examinations/' . $request->input('examinationId') . '/diagnoses', [ 'form_params' => $data ]);
+        return json_decode($response->getBody(), true);
     }
 }

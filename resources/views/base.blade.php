@@ -35,14 +35,44 @@
         function submitExamination() {
             $.ajax({
                 type: 'POST',
-                url: {{ 'puskesmas.submit-examination' }},
+                url: "{{ route('puskesmas.submit-examination') }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 data: {
-                    doctorUsername: $('#doctor').val()
+                    doctorUsername: $('#doctor').val(),
+                    type: 'store',
+                    patientId: '{{ $patientId }}',
+                    automatedDiagnoseResult: automatedDiagnoseResult,
+                    description: $('#description').val(),
+                    officer: 'Indriyani'
                 },
-                success: (res) => {},
+                success: (res) => {
+                    console.log(res)
+                    let id = res.examination._id
+                    let formData = new FormData()
+                    $.each($("input[type='file']")[0].files, function(i, file) {
+                        formData.append('images', file);
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ config('app.API_endpoint') }}" + 'examinations/' + id + "/images",
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
+                        },
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: (data) => {
+                            // console.log(data)
+                            window.location = '/puskesmas/patients/{{$patientId}}/details'
+                        },
+                        error: (error) => {
+                            console.log(error)
+                        }
+                    });
+                },
                 error: (error) => {
                     console.log(error)
                 }
@@ -80,7 +110,7 @@
         //                     console.log(data)
         //                     let formData = new FormData()
         //                     formData.append('examinationId', data.examinationId)
-        //                     formData.append('image', $('input[type=file]')[0].files[0])
+        //                     formData.append('images', $('input[type=file]')[0].files[0])
         //                     $.ajax({
         //                         type: "POST",
         //                         url: '{{ route("puskesmas.submit-examination-image") }}',
@@ -185,6 +215,7 @@
                 },
                 data: data,
                 success: (res) => {
+                    // console.log(res)
                     window.location = '//localhost:3000/doctor/examinations'
                 },
                 error: (error) => {
@@ -207,11 +238,13 @@
                         'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
                     },
                     success: (res) => {
-                        $('.examination-desc').text(res.description)
-                        $('.examination-doctor-name').text($(this).data('doctor-name'))
+                        console.log(res)
+                        $('.examination-desc').text(res.results.manual)
+                        $('.examination-doctor-name').text(res.doctor.name)
+                        $('.examination-officer-name').text(res.clinic.officer)
                         $('.examination-image-wrapper').empty()
-                        res.images.forEach(i => {
-                            $('.examination-image-wrapper').prepend("<img src='"+i.image+"'/>")
+                        res.images.microscopic.forEach(i => {
+                            $('.examination-image-wrapper').prepend("<img style='width:100%;max-width:300px;margin:5px;' src='{{ config('app.server_url') }}" + i.url + "'/>")
                         });
                     },
                     error: (error) => {
@@ -223,7 +256,7 @@
                 const examinationId = $(this).data('id')
                 $.ajax({
                     type: "GET",
-                    url: "{{ config('app.API_endpoint') }}" + 'examinations/' + examinationId + '/diagnoses',
+                    url: "{{ config('app.API_endpoint') }}" + 'examinations/' + examinationId,
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
@@ -231,7 +264,7 @@
                     success: (res, textStatus, xhr) => {
                         $('.diagnoses-result-wrapper').show()
                         $('.examination-check-status-label').show()
-                        if (xhr.status == 200 && res.error == 'no diagnoses found') {
+                        if (xhr.status == 200 && !res.hasOwnProperty('diagnoses')) {
                             $('.diagnoses-result-wrapper').hide()
                         } else {
                             $('.examination-check-status-label').hide()

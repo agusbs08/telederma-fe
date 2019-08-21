@@ -47,12 +47,12 @@
                 </div>
                 <div class="widget-content-right widget-content-actions">
                   <button class="mr-1 btn-icon btn-icon-only btn btn-primary btn-sm examinationDetailsModalBtn"
-                    data-toggle="modal" data-target="#examinationDetailsModal" data-id="{{ $item['examinationId'] }}"
-                    data-doctor-name="{{ $item['doctorId'] }}">
+                    data-toggle="modal" data-target="#examinationDetailsModal" data-id="{{ $item['_id'] }}"
+                    data-doctor-name="{{ $item['doctor']['username'] }}">
                     <i class="pe-7s-look btn-icon-wrapper"> </i>
                     Detail</button>
                   <button class="mr-1 btn-icon btn-icon-only btn btn-warning btn-sm examinationResultModalBtn"
-                    data-toggle="modal" data-target="#examinationResultModal" data-id="{{ $item['examinationId'] }}">
+                    data-toggle="modal" data-target="#examinationResultModal" data-id="{{ $item['_id'] }}">
                     <i class=" pe-7s-glasses btn-icon-wrapper"> </i>
                     Hasil
                   </button>

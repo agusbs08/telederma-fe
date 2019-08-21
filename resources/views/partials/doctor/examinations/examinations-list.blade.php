@@ -27,10 +27,10 @@
         </tr>
       </thead>
       <tbody>
+        @foreach ($examinations as $i => $e)
         <tr>
-          @foreach ($examinations as $i => $e)
           <td>{{ $i+1 }}</td>
-          <td>{{ $e['puskesmasId'] }}</td>
+          <td>{{ $e['clinic']['name'] }}</td>
           <td>{{  date('d-M-Y', strtotime($e['createdAt'])) . ', pukul: ' . date('H:i', strtotime($e['createdAt']))}}
           </td>
           <td>
@@ -43,7 +43,7 @@
             </strong>
           </td>
           <td style="text-align: center; vertical-align: middle;">
-            <a href="{{ route('doctor.examination-details', ['  examination_id' => $e['examinationId']]) }}"><button
+            <a href="{{ route('doctor.examination-details', ['examination_id' => $e['_id']]) }}"><button
                 class="mb-2 mr-2 btn-icon btn-pill btn btn-info"><i class="lnr-arrow-right-circle btn-icon-wrapper">
                 </i>Detail</button></a>
           </td>

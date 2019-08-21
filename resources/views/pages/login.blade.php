@@ -9,11 +9,13 @@
             <div>
               <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-plum-plate"
                 tabindex="-1">
-                <div class="slide-img-bg" style="background-image: url('{{ asset('images/originals/city.jpg') }}');">
+                <div class="slide-img-bg"
+                  style="background-image: url('{{ asset('images/originals/citydark.jpg') }}');">
                 </div>
                 <div class="slider-content">
-                  <h3>Keuntungan 1</h3>
-                  <p>Keterangan keuntungan 1</p>
+                  <h3>Mudah Digunakan</h3>
+                  <p>Aplikasi teledermatology sangat mudah digunakan karena didesain dengan layout yang sederhana namun
+                    tetap indah dipandang dan mudah digunakan untuk semua orang.</p>
                 </div>
               </div>
             </div>
@@ -21,11 +23,12 @@
               <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-premium-dark"
                 tabindex="-1">
                 <div class="slide-img-bg"
-                  style="background-image: url('{{ asset('images/originals/citynights.jpg') }}');">
+                  style="background-image: url('{{ asset('images/originals/citydark.jpg') }}');">
                 </div>
                 <div class="slider-content">
-                  <h3>Keuntungan 2</h3>
-                  <p>Keterangan keuntungan 2</p>
+                  <h3>Mudah Digunakan</h3>
+                  <p>Aplikasi teledermatology sangat mudah digunakan karena didesain dengan layout yang sederhana namun
+                    tetap indah dipandang dan mudah digunakan untuk semua orang.</p>
                 </div>
               </div>
             </div>

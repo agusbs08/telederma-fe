@@ -43,11 +43,6 @@ class PuskesmasPatientController extends Controller
       $doctors = $client->request('GET', 'users', [
         'query' => ['role' => 'doctor']
       ]);
-
-      // $getDoctorResponse = json_decode($client->request('GET', 'users/doctor2')->getBody(), true);
-      // $getPatientResponse = json_decode($client->request('GET', 'clinics/' . $clinicUsername . '/patients/' . $request->input('patientId'))->getBody(), true);
-      // $getClinicResponse = json_decode($client->request('GET', 'users/' . $clinicUsername)->getBody(), true);
-
       return view('partials.puskesmas.patients.examination-form')
         ->with('pagename', 'puskesmas.examination-form')
         ->with('patientId', $patient_username)
@@ -77,9 +72,8 @@ class PuskesmasPatientController extends Controller
           'clinic' => [
             'name' => $getClinicResponse['name'],
             'username' => $getClinicResponse['username'],
-            'officer' => $getClinicResponse['officer']
+            'officer' => $request->input('officer')
           ],
-          'images' => [],
           'type' => $request->input('type'),
           'results' => [
             'automatic' => $request->input('automatedDiagnoseResult'),
@@ -87,7 +81,7 @@ class PuskesmasPatientController extends Controller
           ]
         ]
       ]);
-      return json_decode($response->getBody(), true);
+      return json_decode($submitExaminationResponse->getBody(), true);
     }
 
     public function submitExaminationResult(Request $request)

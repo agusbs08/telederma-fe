@@ -24,6 +24,10 @@
                 <strong>
                   <p class="examination-doctor-name">loading ...</p>
                 </strong>
+                <p>Petugas Penerima: </p>
+                <strong>
+                  <p class="examination-officer-name">loading ...</p>
+                </strong>
                 <p>Deskripsi: </p>
                 <strong>
                   <p class="examination-desc">loading ...</p>

@@ -14,11 +14,12 @@
       <div class="card-body">
         <div class="tab-content">
           <div class="tab-pane show active" id="tab-eg115-0" role="tabpanel">
-            <p>{{ $examination_details['description'] }}</p>
+            <p>{{ $examination_details['results']['manual'] }}</p>
           </div>
           <div class="tab-pane show" id="tab-eg115-1" role="tabpanel">
-            @foreach ($examination_details['images'] as $i)
-            <img src="{{ $i['image'] }}" alt="" id="skin-image">
+            @foreach ($examination_details['images']['microscopic'] as $i)
+            <img style="width:100%;max-width:300px;margin:5px;" src="{{ config('app.server_url') . $i['url'] }}" alt=""
+              id="skin-image">
             @endforeach
           </div>
         </div>
@@ -30,11 +31,11 @@
       </div>
       <div class="card-body">
         <ul class="nav flex-column">
-          @foreach ($examination_details['automatedDiagnoseResult'] as $adr)
+          @foreach ($examination_details['results']['automatic'] as $adr)
           <li class="nav-item">
             <a href="javascript:void(0);" class="nav-link disabled">
               <i class="nav-link-icon lnr-checkmark-circle"></i>
-              <span>{{ $adr['className'] }}</span>
+              <span>{{ $adr['class'] }}</span>
               <div class="ml-auto badge badge-pill badge-secondary">{{ $adr['probability'] }} %</div>
             </a>
           </li>
@@ -42,7 +43,7 @@
         </ul>
       </div>
     </div>
-    @if (array_key_exists('error', $diagnoses))
+    @if (!array_key_exists('diagnoses', $examination_details))
     <div class="main-card mb-3 card">
       <div class="card-body">
         <h5 class="card-title">Hasil Diagnosa</h5>
@@ -108,8 +109,8 @@
             </div>
             <div data-parent="#accordion" id="collapseOne1" aria-labelledby="headingOne" class="collapse show">
               <div class="card-body">
-                <p>Penyakit yang diderita adalah <strong>{{ $diagnoses['diseaseName'] }}</strong></p>
-                <p>{{ $diagnoses['desc'] }}</p>
+                <p>Penyakit yang diderita adalah <strong>{{ $examination_details['diagnoses']['disease'] }}</strong></p>
+                <p>{{ $examination_details['diagnoses']['description'] }}</p>
               </div>
             </div>
           </div>
@@ -122,7 +123,7 @@
             </div>
             <div data-parent="#accordion" id="collapseOne2" class="collapse">
               <div class="card-body">
-                <h5>Rp. {{ $diagnoses['diagnoseCost'] }}</h5>
+                <h5>Rp. {{ $examination_details['diagnoses']['cost'] }}</h5>
               </div>
             </div>
           </div>
@@ -145,12 +146,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($diagnoses['recipes'] as $i => $r)
+                    @foreach ($examination_details['diagnoses']['recipes'] as $i => $r)
                     <tr>
                       <th scope="row">{{ $i+1 }}</th>
-                      <td>{{ $r['medicineName'] }}</td>
-                      <td>{{ $r['usageRule'] }}</td>
-                      <td>{{ $r['recipeDesc'] }}</td>
+                      <td>{{ $r['medicine'] }}</td>
+                      <td>{{ $r['usage'] }}</td>
+                      <td>{{ $r['description'] }}</td>
                     </tr>
                     @endforeach
                   </tbody>

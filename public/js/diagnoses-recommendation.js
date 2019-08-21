@@ -37,8 +37,8 @@ $("#examination-image").change(function() {
         automatedDiagnoseResult = Array.from(predictions)
             .map(function(p, i) {
                 return {
-                    probability: p,
-                    className: SKIN_CLASSES[i]
+                    probability: Math.round(p * 1000) / 1000,
+                    class: SKIN_CLASSES[i]
                 };
             })
             .sort(function(a, b) {
@@ -54,7 +54,7 @@ $("#examination-image").change(function() {
                     '<a href="javascript:void(0);" class="nav-link disabled">' +
                     '<i class="nav-link-icon lnr-checkmark-circle"></i>' +
                     "<span>" +
-                    t.className +
+                    t.class +
                     "</span>" +
                     '<div class="ml-auto badge badge-pill badge-secondary">' +
                     t.probability +

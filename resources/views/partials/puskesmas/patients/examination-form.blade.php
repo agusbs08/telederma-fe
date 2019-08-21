@@ -59,8 +59,9 @@
                 <div class="card-body">
                   <div class="position-relative form-group"><label for="exampleFile" class="">Gambar</label>
                     <input name="file" id="examination-image" type="file" class="form-control-file" multiple="multiple">
-                    <img id="examination-image-preview" src="#" alt="your image" style="display: none; margin: 20px;" />
-                    <small class="form-text text-muted">Anda dapat mengupload maksimal x gambar.</small>
+                    <img id="examination-image-preview" src="#" alt="skin image"
+                      style="display: none; margin: 5px; width:100%; max-width:400px;" class="img-responsive" />
+                    <small class="form-text text-muted">Anda dapat mengupload maksimal 5 gambar.</small>
                     <div class="loader-wrapper justify-content-center align-items-center" style="margin: 10px auto;">
                       <div id="loading-spinner" class="loader" style="display: none;">
                         <div class="line-scale">

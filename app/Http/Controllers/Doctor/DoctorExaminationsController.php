@@ -15,7 +15,7 @@ class DoctorExaminationsController extends Controller
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
         $client = new Client($guzzle_params);
         $response = $client->request('GET', 'examinations/', [
-            'query' => ['doctor' => Session::get('username')]
+            'query' => ['hospital' => Session::get('hospital')]
         ]);
         return view('partials.doctor.examinations.examinations-list')
             ->with('pagename', 'doctor-get-examination-list')
@@ -28,7 +28,6 @@ class DoctorExaminationsController extends Controller
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
         $client = new Client($guzzle_params);
         $examinationDetailResponse = $client->request('GET', 'examinations/' . $examination_id);
-        // dd(json_decode($examinationDetailResponse->getBody(), true));
         return view('partials.doctor.examinations.examination-details')
             ->with('pagename', 'get-doctor-examination-detail-view')
             ->with('examination_id', $examination_id)

@@ -15,3 +15,9 @@ $pagename = Request::segment(2);
         </i>Pasien
     </a>
 </li>
+<li>
+    <a href="#" @php echo $pagename=="petugas" ? $class : null @endphp>
+        <i class="metismenu-icon pe-7s-user-female">
+        </i>Petugas
+    </a>
+</li>

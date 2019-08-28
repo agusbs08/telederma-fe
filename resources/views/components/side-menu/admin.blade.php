@@ -13,7 +13,11 @@ $pagename = Request::segment(2);
     </i>Dokter
   </a>
   <a href="{{ route('admin.puskesmas') }}" @php echo $pagename=="puskesmas" ? $class : null @endphp>
-    <i class="metismenu-icon pe-7s-culture">
+    <i class="metismenu-icon pe-7s-home">
     </i>Puskesmas
+  </a>
+  <a href="#" @php echo $pagename=="hospital" ? $class : null @endphp>
+    <i class="metismenu-icon pe-7s-culture">
+    </i>Rumah Sakit
   </a>
 </li>

@@ -40,7 +40,7 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 data: {
-                    doctorUsername: $('#doctor').val(),
+                    hospital: $('#hospital').val(),
                     type: 'store',
                     patientId: '{{ $patientId }}',
                     automatedDiagnoseResult: automatedDiagnoseResult,
@@ -65,7 +65,6 @@
                         processData: false,
                         contentType: false,
                         success: (data) => {
-                            // console.log(data)
                             window.location = '/puskesmas/patients/{{$patientId}}/details'
                         },
                         error: (error) => {
@@ -78,86 +77,23 @@
                 }
             })
         }
-        // function submitExamination() {
-        //     console.log(automatedDiagnoseResult)
-        //     $.ajax({
-        //         type: "POST",
-        //         url: '{{ route("puskesmas.submit-examination") }}',
-        //         headers: {
-        //             'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        //         },
-        //         data: {
-        //             doctorId: $('#doctor').val(),
-        //             hospitalId: 'rsua',
-        //             patientId: '{{ $patientId }}'
-        //         },
-        //         success: (res) => {
-        //             console.log("1")
-        //             console.log(res)
-        //             $.ajax({
-        //                 type: "POST",
-        //                 url: '{{ route("puskesmas.submit-examination-result") }}',
-        //                 headers: {
-        //                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        //                 },
-        //                 data: {
-        //                     examinationId: res.examinationId,
-        //                     description: $('#description').val(),
-        //                     automatedDiagnoseResult: automatedDiagnoseResult
-        //                 },
-        //                 success: (data) => {
-        //                     console.log("2")
-        //                     console.log(data)
-        //                     let formData = new FormData()
-        //                     formData.append('examinationId', data.examinationId)
-        //                     formData.append('images', $('input[type=file]')[0].files[0])
-        //                     $.ajax({
-        //                         type: "POST",
-        //                         url: '{{ route("puskesmas.submit-examination-image") }}',
-        //                         headers: {
-        //                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        //                         },
-        //                         data: formData,
-        //                         processData: false,
-        //                         contentType: false,
-        //                         success: (data) => {
-        //                             console.log(data)
-        //                             console.log("3")
-        //                             window.location = '/puskesmas/patients/{{$patientId}}/details'
-        //                         },
-        //                         error: (error) => {
-        //                             console.log(error)
-        //                         }
-        //                     });
-        //                 },
-        //                 error: (error) => {
-        //                     console.log(error)
-        //                 }
-        //             });
-        //         },
-        //         error: (error) => {
-        //             console.log(error)
-        //         }
-        //     });
-        // }
     </script>
     @endif
     @if($pagename == 'puskesmas.get-patient-list-view')
     <script>
         function submitPatient(){
             const data = {
-                nik: $('#nik').val(),
+                phone: $('#phone').val(),
                 name: $('#name').val(),
-                birthDate: $('#birth-date').val(),
-                address: $('#address').val(),
-                username: $('#username').val(),
-                email: $('#email').val()
+                dob: $('#birth-date').val(),
+                nik: $('#nik').val(),
+                address: $('#address').val()
             }
             $.ajax({
                 type: "POST",
-                url: '{{ route("auth.signupPatient") }}',
+                url: "{{ route('clinic.registerPatient') }}",
                 headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
                 },
                 data: data,
                 success: (res) => {
@@ -238,10 +174,13 @@
                         'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
                     },
                     success: (res) => {
-                        console.log(res)
                         $('.examination-desc').text(res.results.manual)
-                        $('.examination-doctor-name').text(res.doctor.name)
+                        if (res.doctor.hasOwnProperty('name'))
+                            $('.examination-doctor-name').text(res.doctor.name)
+                        else 
+                            $('.examination-doctor-name').text("Belum tersedia.")
                         $('.examination-officer-name').text(res.clinic.officer)
+                        $('.examination-hospital-name').text(res.doctor.hospital)
                         $('.examination-image-wrapper').empty()
                         res.images.microscopic.forEach(i => {
                             $('.examination-image-wrapper').prepend("<img style='width:100%;max-width:300px;margin:5px;' src='{{ config('app.server_url') }}" + i.url + "'/>")
@@ -262,24 +201,25 @@
                         'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
                     },
                     success: (res, textStatus, xhr) => {
+                        console.log(res)
                         $('.diagnoses-result-wrapper').show()
                         $('.examination-check-status-label').show()
                         if (xhr.status == 200 && !res.hasOwnProperty('diagnoses')) {
                             $('.diagnoses-result-wrapper').hide()
                         } else {
                             $('.examination-check-status-label').hide()
-                            $('.disease-name').text(res.diseaseName)
-                            $('.diagnoses-desc').text(res.desc)
+                            $('.disease-name').text(res.diagnoses.disease)
+                            $('.diagnoses-desc').text(res.diagnoses.description)
                             $('.diagnose-doctor-name').text(res.doctorId)
-                            $('.diagnose-cost').text("Rp. " + res.diagnoseCost)
+                            $('.diagnose-cost').text("Rp. " + res.diagnoses.cost)
                             $('.recipe-table > tbody:last-child').empty()
-                            res.recipes.forEach((recipe, i) => {
+                            res.diagnoses.recipes.forEach((recipe, i) => {
                                 const row = 
                                     "<tr>" + 
                                     "<th scope='row'>" + (parseInt(i)+parseInt(1)) + "</th>" +
-                                    "<td>" + recipe.medicineName + "</td>" +
-                                    "<td>" + recipe.usageRule + "</td>" +
-                                    "<td>" + recipe.recipeDesc + "</td>" +
+                                    "<td>" + recipe.medicine + "</td>" +
+                                    "<td>" + recipe.usage + "</td>" +
+                                    "<td>" + recipe.description + "</td>" +
                                     "</tr>"
                                 $('.recipe-table > tbody:last-child').append(row);
                             })

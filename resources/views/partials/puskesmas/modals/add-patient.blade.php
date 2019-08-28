@@ -11,13 +11,11 @@
       </div>
       <div class="modal-body">
         <form class="">
-          <div class="position-relative form-group"><label for="email" class="">Email</label><input name="email"
-              id="email" placeholder="contoh: user@email.com" type="email" class="form-control"></div>
           <div class="position-relative form-group"><label for="nik" class="">NIK</label><input name="nik" id="nik"
               placeholder="contoh: 1111222233334444" type="number" class="form-control"></div>
           <div class="position-relative form-group"><label for="name" class="">Nama</label><input name="name" id="name"
               placeholder="contoh: Joko Widodo" type="text" class="form-control"></div>
-          <div class="position-relative form-group"><label for="exampleAddress" class="">Tanggal Lahir</label>
+          <div class="position-relative form-group"><label for="" class="">Tanggal Lahir</label>
             <input name="birth-date" id="birth-date" type="text" placeholder="contoh: 12/07/2019" class="form-control"
               data-toggle="datepicker" />
           </div>
@@ -26,8 +24,8 @@
             <textarea name="address" id="address" class="form-control" name="address" id="address"
               placeholder="contoh: Jalan Kebayoran Barat"></textarea>
           </div>
-          <div class="position-relative form-group"><label for="username" class="">Username</label><input
-              name="username" id="username" placeholder="contoh: jokowi" type="text" class="form-control"></div>
+          <div class="position-relative form-group"><label for="username" class="">No. Telepon</label><input
+              name="phone" id="phone" placeholder="contoh: 081244445555" type="text" class="form-control"></div>
         </form>
       </div>
       <div class="modal-footer">

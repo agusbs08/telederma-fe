@@ -27,7 +27,7 @@
         <tr>
           <th>No</th>
           <th>Nama-</th>
-          <th>Username</th>
+          <th>No. Reg</th>
           <th>Email</th>
           <th>Tindakan</th>
         </tr>
@@ -37,7 +37,7 @@
         <tr>
           <td>{{ $i+1 }}</td>
           <td>{{ $p['name'] }}</td>
-          <td>{{ '@' . $p['username'] }}</td>
+          <td>{{ $p['identityNumber'] }}</td>
           <td>{{ $p['email'] }}</td>
           <td style="text-align: center; vertical-align: middle;">
             <a href="{{ route('admin.puskesmas-details', ['puskesmas_username' => $p['username']]) }}">

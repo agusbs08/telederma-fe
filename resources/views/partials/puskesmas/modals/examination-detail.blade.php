@@ -24,6 +24,10 @@
                 <strong>
                   <p class="examination-doctor-name">loading ...</p>
                 </strong>
+                <p>Rumah Sakit Pemeriksa: </p>
+                <strong>
+                  <p class="examination-hospital-name">loading ...</p>
+                </strong>
                 <p>Petugas Penerima: </p>
                 <strong>
                   <p class="examination-officer-name">loading ...</p>
@@ -91,7 +95,7 @@
                 <strong>
                   <p class="disease-name">loading ...</p>
                 </strong>
-                <p>Keterangan: </p>
+                <p>Keterangan diagnosa: </p>
                 <strong>
                   <p class="diagnoses-desc">loading ...</p>
                 </strong>

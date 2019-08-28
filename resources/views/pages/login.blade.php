@@ -80,16 +80,17 @@
                 </div>
               </div>
             </div>
+            <p></p>
             <div class="position-relative form-check"><input name="check" id="exampleCheck" type="checkbox"
                 class="form-check-input"><label for="exampleCheck" class="form-check-label">Ingat saya</label>
             </div>
             <div class="divider row"></div>
+            {!! app('captcha')->display() !!}
             <div class="alert alert-danger alert-dismissible fade show login-message" role="alert"
               style="display: none;">
             </div>
             <div class="d-flex align-items-center">
               <div class="ml-auto">
-                {{-- <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa Password</a> --}}
                 <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa password ?</a>
                 <button class="ladda-button mb-2 mr-2 btn btn-primary" data-style="zoom-in" onclick="login()">
                   <span class="ladda-label">Login

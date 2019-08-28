@@ -99,19 +99,19 @@
               <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
               <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
             </div>
-            <div class="results-title">Pilih dokter yang akan menangani dan SUBMIT !</div>
+            <div class="results-title">Pilih Rumah Sakit yang akan dituju dan SUBMIT !</div>
             <div class="mt-3 mb-3"></div>
             <div class="mt-3 mb-3"></div>
-            <select class="multiselect-dropdown form-control" id="doctor">
-              <optgroup label="Nama Dokter - Asal RS">
-                @foreach ($doctors as $doc)
-                <option value="{{ $doc['username'] }}">{{ $doc['name']  . ' - ' . $doc['hospital'] }} </option>
+            <select class="multiselect-dropdown form-control" id="hospital">
+              <optgroup label="Nama Rumah Sakit">
+                @foreach ($hospitals as $hospital)
+                <option value="{{ $hospital['name'] }}">{{ $hospital['name'] }} </option>
                 @endforeach
               </optgroup>
             </select>
             <div class="mt-3 mb-3"></div>
             <div class="text-center">
-              <button class="btn-shadow btn-wide btn btn-success btn-lg mr-2 mb-2 block-page-btn-example-3"
+              <button class="btn-shadow btn-block btn-wide btn btn-success btn-lg mr-2 mb-2 block-page-btn-example-3"
                 onclick="submitExamination()">SUBMIT</button>
             </div>
           </div>

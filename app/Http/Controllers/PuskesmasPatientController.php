@@ -40,13 +40,11 @@ class PuskesmasPatientController extends Controller
       $guzzle_params = config('app.guzzle_params');
       $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
       $client = new Client($guzzle_params);
-      $doctors = $client->request('GET', 'users', [
-        'query' => ['role' => 'doctor']
-      ]);
+      $doctors = $client->request('GET', 'hospitals');
       return view('partials.puskesmas.patients.examination-form')
         ->with('pagename', 'puskesmas.examination-form')
         ->with('patientId', $patient_username)
-        ->with('doctors', json_decode($doctors->getBody(), true));
+        ->with('hospitals', json_decode($doctors->getBody(), true));
     }
 
     public function submitExamination(Request $request)
@@ -55,15 +53,12 @@ class PuskesmasPatientController extends Controller
       $guzzle_params = config('app.guzzle_params');
       $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
       $client = new Client($guzzle_params);
-      $getDoctorResponse = json_decode($client->request('GET', 'users/' . $request->input('doctorUsername'))->getBody(), true);
       $getPatientResponse = json_decode($client->request('GET', 'clinics/' . $clinicUsername . '/patients/' . $request->input('patientId'))->getBody(), true);
       $getClinicResponse = json_decode($client->request('GET', 'users/' . $clinicUsername)->getBody(), true);
       $submitExaminationResponse = $client->request('POST', 'examinations', [
         'form_params' => [
           'doctor' => [
-            'name' => $getDoctorResponse['name'],
-            'username' => $getDoctorResponse['username'],
-            'hospital' => $getDoctorResponse['hospital']
+            'hospital' => $request->input('hospital')
           ],
           'patient' => [
             'name' => $getPatientResponse['name'],

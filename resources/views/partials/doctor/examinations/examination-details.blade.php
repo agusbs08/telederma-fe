@@ -9,6 +9,8 @@
               Pemeriksaan</a></li>
           <li class="nav-item"><a data-toggle="tab" href="#tab-eg115-1" class="nav-link show">Foto-foto Pemeriksaan</a>
           </li>
+          <li class="nav-item"><a data-toggle="tab" href="#tab-eg115-2" class="nav-link show">Hasil Diagnosa Sistem</a>
+          </li>
         </ul>
       </div>
       <div class="card-body">
@@ -22,25 +24,20 @@
               id="skin-image">
             @endforeach
           </div>
+          <div class="tab-pane show" id="tab-eg115-2" role="tabpanel">
+            <ul class="nav flex-column">
+              @foreach ($examination_details['results']['automatic'] as $adr)
+              <li class="nav-item">
+                <a href="javascript:void(0);" class="nav-link disabled">
+                  <i class="nav-link-icon lnr-checkmark-circle"></i>
+                  <span>{{ $adr['class'] }}</span>
+                  <div class="ml-auto badge badge-pill badge-secondary">{{ $adr['probability'] }} %</div>
+                </a>
+              </li>
+              @endforeach
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="main-card mb-3 card">
-      <div class="card-header"><i class="header-icon lnr-screen icon-gradient bg-warm-flame"> </i>Hasil Diagnosa
-        Otomatis Sistem
-      </div>
-      <div class="card-body">
-        <ul class="nav flex-column">
-          @foreach ($examination_details['results']['automatic'] as $adr)
-          <li class="nav-item">
-            <a href="javascript:void(0);" class="nav-link disabled">
-              <i class="nav-link-icon lnr-checkmark-circle"></i>
-              <span>{{ $adr['class'] }}</span>
-              <div class="ml-auto badge badge-pill badge-secondary">{{ $adr['probability'] }} %</div>
-            </a>
-          </li>
-          @endforeach
-        </ul>
       </div>
     </div>
     @if (!array_key_exists('diagnoses', $examination_details))

@@ -73,13 +73,17 @@ Route::prefix('auth')->group(function(){
         Route::get('/', 'AuthController@getLoginView')->name('auth.getLoginView');
         Route::post('/', 'AuthController@login')->name('auth.login');
     });
-    Route::post('/signup', 'AuthController@signUpPatient')->name('auth.signupPatient');
+    Route::post('/signup', 'AuthController@registerPatient')->name('clinic.registerPatient');
     Route::get('/logout', 'AuthController@logout')->name('auth.logout');
 });
 
 //video call
-Route::get('/lala/{id}', function($id){
-    return view('webrtc.video-call')->with(['id' => $id]);
+Route::get('/videocall/doctor/{id}', function($id){
+    return view('webrtc.video-call-doctor')->with(['id' => $id]);
 });
 
-Route::post('/pusher/auth/{id}', 'VideoCallController@callToUser')->name('pusher.callToUser');
+Route::get('/videocall/patient/{id}', function($id){
+    return view('webrtc.video-call-patient')->with(['id' => $id]);
+});
+
+Route::post('/pusher/auth/{id}/{name}', 'VideoCallController@callToUser')->name('pusher.callToUser');

@@ -29,18 +29,7 @@ class AuthController extends Controller
       $loginResponseCode = $loginResponse->getStatusCode();
       if ($loginResponseCode == 200){
         $token = json_decode($loginResponse->getBody(), true)['token'];
-        $guzzle_params = config('app.guzzle_params');
-        $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . $token];
-        $client = new Client($guzzle_params);
-        $getUserDetailResponse = $client->request('GET', 'users/' . $request->input('username'));
-        $userDetails = json_decode($getUserDetailResponse->getBody(), true);
-        session([
-          'name' => $userDetails['name'],
-          'auth-key' => $token,
-          'authenticated' => "true",
-          'username' => $userDetails['username'],
-          'role' => $userDetails['role']
-        ]);
+        $userDetails = $this->setLoginSession($request->input('username'), $token);
         if ($userDetails['role'] == 'clinic')
           return route('puskesmas.patients', [], false);
         elseif ($userDetails['role'] == 'doctor')
@@ -56,6 +45,27 @@ class AuthController extends Controller
       }
     }
 
+    function setLoginSession($username, $token)
+    {
+      $guzzle_params = config('app.guzzle_params');
+      $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . $token];
+      $client = new Client($guzzle_params);
+      $getUserDetailResponse = $client->request('GET', 'users/' . $username);
+      $userDetails = json_decode($getUserDetailResponse->getBody(), true);
+      $userData = [
+        'name' => $userDetails['name'],
+        'auth-key' => $token,
+        'authenticated' => "true",
+        'username' => $userDetails['username'],
+        'role' => $userDetails['role']
+      ];
+      if ($userDetails['role'] == 'doctor') {
+        $userData['hospital'] = $userDetails['hospital'];
+      }
+      session($userData);
+      return $userDetails;
+    }
+
     public function logout(Request $request)
     {
       $guzzle_params = config('app.guzzle_params');
@@ -66,21 +76,18 @@ class AuthController extends Controller
       return redirect()->route('auth.getLoginView');
     }
 
-    public function signUpPatient(Request $request)
+    public function registerPatient(Request $request)
     {
       $guzzle_params = config('app.guzzle_params');
+      $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
       $client = new Client($guzzle_params);
-      $submitPatientResponse = $client->request('POST', 'signup', [
+      $submitPatientResponse = $client->request('POST', 'clinics/' . Session::get('username') . '/patients', [
         'form_params' => [
-          'email' => $request->input("email"),
-          'username' => $request->input("username"),
-          'password' => 'password',
-          'confirmPassword' => 'password',
-          'role' => "patient",
-          'name' => $request->input("name"),
-          'birthdate' => $request->input("birthDate"),
-          'nik' => $request->input("nik"),
-          'puskesmasId' => Session::get('username')
+          'phone' => $request->input('phone'),
+          'name' => $request->input('name'),
+          'dob' => $request->input('dob'),
+          'nik' => $request->input('nik'),
+          'address' => $request->input('address')
         ]
       ]);
       return json_decode($submitPatientResponse->getBody(), true);

@@ -18,6 +18,8 @@
             <h6 class="menu-header-subtitle">NIK : {{ $user_details['nik'] }}</h6>
             <h6 class="menu-header-subtitle">Tanggal lahir : {{ date("d M, Y", strtotime(date($user_details['dob']))) }}
             </h6>
+            <h6 class="menu-header-subtitle">Alamat : {{ $user_details['address'] }}</h6>
+            </h6>
           </div>
         </div>
       </div>
@@ -48,7 +50,7 @@
                 <div class="widget-content-right widget-content-actions">
                   <button class="mr-1 btn-icon btn-icon-only btn btn-primary btn-sm examinationDetailsModalBtn"
                     data-toggle="modal" data-target="#examinationDetailsModal" data-id="{{ $item['_id'] }}"
-                    data-doctor-name="{{ $item['doctor']['username'] }}">
+                    data-doctor-name="{{ $item['doctor']['hospital'] }}">
                     <i class="pe-7s-look btn-icon-wrapper"> </i>
                     Detail</button>
                   <button class="mr-1 btn-icon btn-icon-only btn btn-warning btn-sm examinationResultModalBtn"

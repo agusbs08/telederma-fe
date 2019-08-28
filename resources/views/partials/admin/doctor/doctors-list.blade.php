@@ -27,7 +27,7 @@
         <tr>
           <th>No</th>
           <th>Nama-</th>
-          <th>Username</th>
+          <th>NIP</th>
           <th>Dinas Rumah Sakit</th>
           <th>Tindakan</th>
         </tr>
@@ -37,7 +37,7 @@
         <tr>
           <td>{{ $i+1 }}</td>
           <td>{{ $d['name'] }}</td>
-          <td>{{ '@' . $d['username'] }}</td>
+          <td>{{ $d['identityNumber'] }}</td>
           <td>{{ $d['hospital'] }}</td>
           <td style="text-align: center; vertical-align: middle;">
             <a href="{{ route('admin.doctor-details', ['doctor_username' => $d['username']]) }}">

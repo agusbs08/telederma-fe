@@ -97,6 +97,7 @@
                 },
                 data: data,
                 success: (res) => {
+                    console.log(res)
                     location.reload();
                 },
                 error: (error) => {
@@ -210,7 +211,7 @@
                             $('.examination-check-status-label').hide()
                             $('.disease-name').text(res.diagnoses.disease)
                             $('.diagnoses-desc').text(res.diagnoses.description)
-                            $('.diagnose-doctor-name').text(res.doctorId)
+                            $('.diagnose-doctor-name').text(res.doctor.name + " - " + res.doctor.hospital)
                             $('.diagnose-cost').text("Rp. " + res.diagnoses.cost)
                             $('.recipe-table > tbody:last-child').empty()
                             res.diagnoses.recipes.forEach((recipe, i) => {

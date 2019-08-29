@@ -96,6 +96,9 @@
       <div class="card-header"><i class="header-icon lnr-screen icon-gradient bg-warm-flame"> </i>Hasil Diagnosa Dokter
       </div>
       <div class="card-body">
+        <p class="col-md-12">Diperiksa oleh
+          {{ $examination_details['doctor']['name'] . ' dari ' . $examination_details['doctor']['hospital'] . ' pada ' . date('d-M-Y', strtotime($examination_details['createdAt'])) . ', pukul: ' . date('H:i', strtotime($examination_details['createdAt'])) . ' WIB'}}
+        </p>
         <div id="accordion" class="accordion-wrapper">
           <div class="card">
             <div id="headingOne" class="card-header">

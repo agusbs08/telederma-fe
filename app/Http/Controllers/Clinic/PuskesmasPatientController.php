@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Clinic;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,6 +9,23 @@ use Session;
 
 class PuskesmasPatientController extends Controller
 {
+    public function registerPatient(Request $request)
+    {
+      $guzzle_params = config('app.guzzle_params');
+      $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
+      $client = new Client($guzzle_params);
+      $submitPatientResponse = $client->request('POST', 'clinics/' . Session::get('username') . '/patients', [
+        'form_params' => [
+          'phone' => $request->input('phone'),
+          'name' => $request->input('name'),
+          'dob' => $request->input('dob'),
+          'nik' => $request->input('nik'),
+          'address' => $request->input('address')
+        ]
+      ]);
+      return json_decode($submitPatientResponse->getBody(), true);
+    }
+
     public function getPatientsListView()
     {
       $guzzle_params = config('app.guzzle_params');
@@ -110,5 +127,3 @@ class PuskesmasPatientController extends Controller
       return json_decode($response->getBody(), true);
     }
 }
-
-?>

@@ -8,7 +8,8 @@
         </i>
       </div>
       <div>Daftar Pemeriksaan
-        <div class="page-title-subheading">Daftar pemeriksaan pasien yang diajukan ke Anda
+        <div class="page-title-subheading">Daftar pemeriksaan pasien yang diajukan ke Rumah Sakit :
+          <strong>{{ Session::get('hospital') }}</strong>
         </div>
       </div>
     </div>
@@ -23,7 +24,7 @@
           <th>Dari-</th>
           <th>Dikirim</th>
           <th>Status</th>
-          <th>Tindakan</th>
+          <th>Detail</th>
         </tr>
       </thead>
       <tbody>
@@ -56,7 +57,7 @@
           <th>Dari-</th>
           <th>Dikirim</th>
           <th>Status</th>
-          <th>Tindakan</th>
+          <th>Detail</th>
         </tr>
       </tfoot>
     </table>

@@ -1,365 +1,169 @@
 @extends('base')
 @section('content')
-<ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
-  <li class="nav-item">
-    <a role="tab" class="nav-link active" id="tab-0" data-toggle="tab" href="#tab-content-0">
-      <span>Detail Pemeriksaan Puskesmas</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a role="tab" class="nav-link" id="tab-1" data-toggle="tab" href="#tab-content-1">
-      <span>Hasil Diagnosa Dokter</span>
-    </a>
-  </li>
-</ul>
-<div class="tab-content">
-  <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="main-card mb-3 card">
-          <div class="card-header"><i class="header-icon lnr-text-align-left icon-gradient bg-plum-plate"> </i>Deskripsi
-            Pemeriksaan
-          </div>
-          <div class="card-body">
-            <p>With supporting text below as a natural lead-in to additional content.</p>
-            <p class="mb-0">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-              unknown printer took a galley of type and scrambled.</p>
-          </div>
-        </div>
-        <div class="main-card mb-3 card">
-          <div class="card-header"><i class="header-icon lnr-camera-video icon-gradient bg-plum-plate"> </i>Foto
-            Pemeriksaan
-          </div>
-          <div class="card-body">
-            <p>With supporting text below as a natural lead-in to additional content.</p>
-            <p class="mb-0">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-              unknown printer took a galley of type and scrambled.</p>
-          </div>
-        </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="mb-3 card">
+      <div class="card-header card-header-tab-animation">
+        <ul class="nav nav-justified">
+          <li class="nav-item"><a data-toggle="tab" href="#tab-eg115-0" class="nav-link show active">Deskripsi
+              Pemeriksaan</a></li>
+          <li class="nav-item"><a data-toggle="tab" href="#tab-eg115-1" class="nav-link show">Foto-foto Pemeriksaan</a>
+          </li>
+          <li class="nav-item"><a data-toggle="tab" href="#tab-eg115-2" class="nav-link show">Hasil Diagnosa Sistem</a>
+          </li>
+        </ul>
       </div>
-    </div>
-  </div>
-  <div class="tab-pane tabs-animation fade" id="tab-content-1" role="tabpanel">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="main-card mb-3 card">
-          <div class="card-header"><i class="header-icon lnr-text-align-left icon-gradient bg-plum-plate"> </i>Deskripsi
-            Diagnosa
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane show active" id="tab-eg115-0" role="tabpanel">
+            <p>{{ $examination_details['results']['manual'] }}</p>
           </div>
-          <div class="card-body">
-            <p>With supporting text below as a natural lead-in to additional content.</p>
-            <p class="mb-0">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-              unknown printer took a galley of type and scrambled.</p>
+          <div class="tab-pane show" id="tab-eg115-1" role="tabpanel">
+            @foreach ($examination_details['images']['microscopic'] as $i)
+            <img style="width:100%;max-width:300px;margin:5px;" src="{{ config('app.server_url') . $i['url'] }}" alt=""
+              id="skin-image">
+            @endforeach
           </div>
-        </div>
-        <div class="main-card mb-3 card">
-          <div class="card-header"><i class="header-icon lnr-tag icon-gradient bg-plum-plate"> </i>Biaya
-            Diagnosa
-          </div>
-          <div class="card-body">
-            <h3><strong>Rp. 50.000</strong></h3>
-          </div>
-        </div>
-        <div class="main-card mb-3 card">
-          <div class="card-header"><i class="header-icon lnr-heart-pulse icon-gradient bg-plum-plate"> </i>Resep dari
-            Dokter
-          </div>
-          <div class="card-body">
-            <table class="mb-0 table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Obat</th>
-                  <th>Aturan Pakai</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Paracetamol</td>
-                  <td>2x3</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Paracetamol</td>
-                  <td>2x3</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Paracetamol</td>
-                  <td>2x3</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="mb-3 card">
-          <div class="tabs-lg-alternate card-header">
-            <ul class="nav nav-justified">
+          <div class="tab-pane show" id="tab-eg115-2" role="tabpanel">
+            <ul class="nav flex-column">
+              @foreach ($examination_details['results']['automatic'] as $adr)
               <li class="nav-item">
-                <a data-toggle="tab" href="#tab-eg9-0" class="active nav-link">
-                  <div class="widget-number">Tab 1</div>
-                  <div class="tab-subheading">
-                    <span class="pr-2 opactiy-6">
-                      <i class="fa fa-comment-dots"></i>
-                    </span>
-                    Totals
-                  </div>
-                </a></li>
-              <li class="nav-item">
-                <a data-toggle="tab" href="#tab-eg9-1" class="nav-link">
-                  <div class="widget-number">Tab 2</div>
-                  <div class="tab-subheading">Products</div>
+                <a href="javascript:void(0);" class="nav-link disabled">
+                  <i class="nav-link-icon lnr-checkmark-circle"></i>
+                  <span>{{ $adr['class'] }}</span>
+                  <div class="ml-auto badge badge-pill badge-secondary">{{ $adr['probability'] }} %</div>
                 </a>
               </li>
-              <li class="nav-item">
-                <a data-toggle="tab" href="#tab-eg9-2" class="nav-link">
-                  <div class="widget-number text-danger">Tab 3</div>
-                  <div class="tab-subheading">
-                    <span class="pr-2 opactiy-6">
-                      <i class="fa fa-bullhorn"></i>
-                    </span>
-                    Income
-                  </div>
-                </a>
-              </li>
+              @endforeach
             </ul>
-          </div>
-          <div class="tab-content">
-            <div class="tab-pane active" id="tab-eg9-0" role="tabpanel">
-              <div class="card-body">
-                <p class="mb-0">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                  unknown printer took a galley of type and scrambled it to make a type specimen book.
-                  It has survived not only five centuries, but also the leap into electronic typesetting, remaining
-                  essentially unchanged. </p>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab-eg9-1" role="tabpanel">
-              <div class="card-body">
-                <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                  has been the industry's standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
-                  five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab-eg9-2" role="tabpanel">
-              <div class="card-body">
-                <p class="mb-0">It was popularised in the 1960s with the release of Letraset sheets containing Lorem
-                  Ipsum passages, and more recently with desktop publishing software like Aldus
-                  PageMaker including versions of Lorem Ipsum.</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="main-card mb-3 card">
-          <div class="card-body">
-            <h5 class="card-title">Basic</h5>
-            <ul class="nav nav-tabs">
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg10-0" class="active nav-link">Tab 1</a></li>
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg10-1" class="nav-link">Tab 2</a></li>
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg10-2" class="nav-link">Tab 3</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab-eg10-0" role="tabpanel">
-                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                  and more recently with desktop publishing
-                  software like Aldus PageMaker
-                  including versions of Lorem Ipsum.</p>
-              </div>
-              <div class="tab-pane" id="tab-eg10-1" role="tabpanel">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a
-                  galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                  but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-              </div>
-              <div class="tab-pane" id="tab-eg10-2" role="tabpanel">
-                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                  took a galley of type and scrambled it to make a
-                  type specimen book. It has
-                  survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                  unchanged. </p>
-              </div>
+    </div>
+    @if (!array_key_exists('diagnoses', $examination_details))
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <h5 class="card-title">Hasil Diagnosa</h5>
+        <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Deskripsi</label>
+          <div class="col-sm-10">
+            <textarea rows="3" class="form-control autosize-input" style="height: 35px;" id="description"
+              placeholder="tuliskan hasil diagnosa"></textarea>
+          </div>
+        </div>
+        <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Biaya
+            Pemeriksaan</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <div class="input-group-prepend"><span class="input-group-text">Rp </span></div>
+              <input placeholder="tuliskan biaya pemeriksaan" step="1" type="number" class="form-control"
+                id="diagnose-cost">
+              <div class="input-group-append"><span class="input-group-text">.00</span></div>
             </div>
           </div>
         </div>
-        <div class="main-card mb-3 card">
-          <div class="card-body">
-            <h5 class="card-title">Justified Alignment</h5>
-            <ul class="nav nav-tabs nav-justified">
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg11-0" class="active nav-link">Tab 1</a></li>
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg11-1" class="nav-link">Tab 2</a></li>
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg11-2" class="nav-link">Tab 3</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab-eg11-0" role="tabpanel">
-                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                  and more recently with desktop publishing
-                  software like Aldus PageMaker
-                  including versions of Lorem Ipsum.</p>
-              </div>
-              <div class="tab-pane" id="tab-eg11-1" role="tabpanel">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a
-                  galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                  but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-              </div>
-              <div class="tab-pane" id="tab-eg11-2" role="tabpanel">
-                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                  took a galley of type and scrambled it to make a
-                  type specimen book. It has
-                  survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                  unchanged. </p>
+        <div class="position-relative row form-group"><label for="\" class="col-sm-2 col-form-label">Penyakit</label>
+          <div class="col-sm-10">
+            <input name="password" id="disease-name" placeholder="tuliskan nama penyakit kulit yang diderita"
+              type="text" class="form-control">
+          </div>
+        </div>
+        <fieldset id="recipe-field">
+          <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Resep</label>
+            <div class="col-sm-10">
+              <div class="form-inline">
+                <div class="position-relative form-group">
+                  <input name="medicine-name" placeholder="nama obat" type="text" class="mr-2 form-control">
+                </div>
+                <div class="position-relative form-group ">
+                  <input name="usage-rule" placeholder="aturan pakai" type="text" class="mr-2 form-control">
+                </div>
+                <div class="position-relative form-group ">
+                  <input name="recipe-desc" placeholder="keterangan" type="text" class="mr-2 form-control">
+                </div>
+                <button class="btn btn-primary" id="add-recipe-form" type="button">Tambah Obat</button>
               </div>
             </div>
           </div>
-        </div>
-        <div class="main-card mb-3 card">
-          <div class="card-body">
-            <h5 class="card-title">Tabs Variations</h5>
-            <div class="mb-3">
-              <div role="group" class="btn-group-sm nav btn-group">
-                <a data-toggle="tab" href="#tab-eg12-0" class="btn-pill pl-3 active btn btn-warning">Tab 1</a>
-                <a data-toggle="tab" href="#tab-eg12-1" class="btn btn-warning">Tab 2</a>
-                <a data-toggle="tab" href="#tab-eg12-2" class="btn-pill pr-3  btn btn-warning">Tab 3</a>
-              </div>
-            </div>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab-eg12-0" role="tabpanel">
-                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                  and more recently with desktop publishing
-                  software like Aldus PageMaker
-                  including versions of Lorem Ipsum.</p>
-              </div>
-              <div class="tab-pane" id="tab-eg12-1" role="tabpanel">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a
-                  galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                  but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-              </div>
-              <div class="tab-pane" id="tab-eg12-2" role="tabpanel">
-                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                  took a galley of type and scrambled it to make a
-                  type specimen book. It has
-                  survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                  unchanged. </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        </fieldset>
       </div>
-      <div class="col-md-6">
-        <div class="main-card mb-3 card">
-          <div class="card-body">
-            <h5 class="card-title">Pills</h5>
-            <ul class="nav nav-pills">
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg13-0" class="active nav-link">Pill 1</a></li>
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg13-1" class="nav-link">Pill 2</a></li>
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg13-2" class="nav-link">Pill 3</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab-eg13-0" role="tabpanel">
-                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                  and more recently with desktop publishing
-                  software like Aldus PageMaker
-                  including versions of Lorem Ipsum.</p>
-              </div>
-              <div class="tab-pane" id="tab-eg13-1" role="tabpanel">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a
-                  galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                  but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-              </div>
-              <div class="tab-pane" id="tab-eg13-2" role="tabpanel">
-                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                  took a galley of type and scrambled it to make a
-                  type specimen book. It has
-                  survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                  unchanged. </p>
+      <div class="d-block text-center card-footer">
+        <button href="" class="btn-wide btn-shadow btn btn-block btn-primary" onclick="submitDiagnose()">Submit Hasil
+          Diagnosa</button>
+      </div>
+    </div>
+    @else
+    <div class="main-card mb-3 card">
+      <div class="card-header"><i class="header-icon lnr-screen icon-gradient bg-warm-flame"> </i>Hasil Diagnosa Dokter
+      </div>
+      <div class="card-body">
+        <p class="col-md-12">Diperiksa oleh
+          {{ $examination_details['doctor']['name'] . ' dari ' . $examination_details['doctor']['hospital'] . ' pada ' . date('d-M-Y', strtotime($examination_details['createdAt'])) . ', pukul: ' . date('H:i', strtotime($examination_details['createdAt'])) . ' WIB'}}
+        </p>
+        <div id="accordion" class="accordion-wrapper">
+          <div class="card">
+            <div id="headingOne" class="card-header">
+              <button type="button" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true"
+                aria-controls="collapseOne" class="text-left m-0 p-0 btn btn-link btn-block">
+                <h5 class="m-0 p-0">Penyakit & Deskripsi Diagnosa</h5>
+              </button>
+            </div>
+            <div data-parent="#accordion" id="collapseOne1" aria-labelledby="headingOne" class="collapse show">
+              <div class="card-body">
+                <p>Penyakit yang diderita adalah <strong>{{ $examination_details['diagnoses']['disease'] }}</strong></p>
+                <p>{{ $examination_details['diagnoses']['description'] }}</p>
               </div>
             </div>
           </div>
-        </div>
-        <div class="main-card mb-3 card">
-          <div class="card-body">
-            <h5 class="card-title">Pills</h5>
-            <ul class="nav nav-pills nav-fill">
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg14-0" class="active nav-link">Pill 1</a></li>
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg14-1" class="nav-link">Pill 2</a></li>
-              <li class="nav-item"><a data-toggle="tab" href="#tab-eg14-2" class="nav-link">Pill 3</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab-eg14-0" role="tabpanel">
-                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                  and more recently with desktop publishing
-                  software like Aldus PageMaker
-                  including versions of Lorem Ipsum.</p>
-              </div>
-              <div class="tab-pane" id="tab-eg14-1" role="tabpanel">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a
-                  galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                  but also the leap into electronic typesetting, remaining essentially unchanged. </p>
-              </div>
-              <div class="tab-pane" id="tab-eg14-2" role="tabpanel">
-                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                  took a galley of type and scrambled it to make a
-                  type specimen book. It has
-                  survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                  unchanged. </p>
+          <div class="card">
+            <div id="headingTwo" class="b-radius-0 card-header">
+              <button type="button" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="false"
+                aria-controls="collapseTwo" class="text-left m-0 p-0 btn btn-link btn-block">
+                <h5 class="m-0 p-0">Biaya Diagnosa</h5>
+              </button>
+            </div>
+            <div data-parent="#accordion" id="collapseOne2" class="collapse">
+              <div class="card-body">
+                <h5>Rp. {{ $examination_details['diagnoses']['cost'] }}</h5>
               </div>
             </div>
           </div>
-        </div>
-        <div class="main-card mb-3 card">
-          <div class="card-body">
-            <h5 class="card-title">Button Group Tabs</h5>
-            <div class="mb-3 text-center">
-              <div role="group" class="btn-group-sm nav btn-group">
-                <a data-toggle="tab" href="#tab-eg15-0" class="btn-shadow active btn btn-primary">Tab 1</a>
-                <a data-toggle="tab" href="#tab-eg15-1" class="btn-shadow  btn btn-primary">Tab 2</a>
-                <a data-toggle="tab" href="#tab-eg15-2" class="btn-shadow  btn btn-primary">Tab 3</a>
-              </div>
+          <div class="card">
+            <div id="headingThree" class="card-header">
+              <button type="button" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="false"
+                aria-controls="collapseThree" class="text-left m-0 p-0 btn btn-link btn-block">
+                <h5 class="m-0 p-0">Resep</h5>
+              </button>
             </div>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab-eg15-0" role="tabpanel">
-                <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                  and more recently with desktop publishing
-                  software like Aldus PageMaker
-                  including versions of Lorem Ipsum.</p>
-              </div>
-              <div class="tab-pane" id="tab-eg15-1" role="tabpanel">
-                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                  took a galley of type and scrambled it to make a
-                  type specimen book. It has
-                  survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                  unchanged. </p>
-              </div>
-              <div class="tab-pane" id="tab-eg15-2" role="tabpanel">
-                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                  took a galley of type and scrambled it to make a
-                  type specimen book. It has not only five centuries, but also the leap into not only five centuries,
-                  but also the leap into
-                  survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                  unchanged. </p>
+            <div data-parent="#accordion" id="collapseOne3" class="collapse">
+              <div class="card-body">
+                <table class="mb-0 table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nama Obat</th>
+                      <th>Aturan Pakai</th>
+                      <th>Keterangan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($examination_details['diagnoses']['recipes'] as $i => $r)
+                    <tr>
+                      <th scope="row">{{ $i+1 }}</th>
+                      <td>{{ $r['medicine'] }}</td>
+                      <td>{{ $r['usage'] }}</td>
+                      <td>{{ $r['description'] }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    @endif
+
   </div>
 </div>
 @endsection

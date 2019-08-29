@@ -87,7 +87,7 @@
             </div>
             <div data-parent="#accordion" id="collapseOne1" aria-labelledby="headingOne" class="collapse show">
               <div class="card-body">
-                <p>Dokter pemeriksa: </p>
+                <p>Dokter dan RS pemeriksa: </p>
                 <strong>
                   <p class="diagnose-doctor-name">loading ...</p>
                 </strong>

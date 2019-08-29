@@ -32,7 +32,7 @@
             <p>Pasien belum melakukan pemeriksaan</p>
           </strong>
           <hr>
-          <p class="mb-0">Tekan tombol "Tambah Pemeriksaan" di Bawah untuk Menambah Pemeriksaan.</p>
+          <p class="mb-0">Tekan tombol "Tambah Pemeriksaan" di bawah untuk menambah pemeriksaan.</p>
         </div>
         @endif
         <ul class="list-group list-group-flush">
@@ -58,6 +58,12 @@
                     <i class=" pe-7s-glasses btn-icon-wrapper"> </i>
                     Hasil
                   </button>
+                  <a href="">
+                    <button class="mr-1 btn-icon btn-icon-only btn btn-success btn-sm examinationResultModalBtn">
+                      <i class=" pe-7s-glasses btn-icon-wrapper"> </i>
+                      Detail
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

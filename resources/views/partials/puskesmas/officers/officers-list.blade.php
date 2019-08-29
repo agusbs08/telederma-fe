@@ -7,14 +7,14 @@
         <i class="pe-7s-users icon-gradient bg-tempting-azure">
         </i>
       </div>
-      <div>Daftar Pasien
-        <div class="page-title-subheading">Daftar pasien yang pernah berobat di {{ Session::get('name') }}
+      <div>Daftar Petugas Puskesmas
+        <div class="page-title-subheading">Daftar petugas di {{ Session::get('name') }}
         </div>
       </div>
     </div>
     <div class="page-title-actions">
       <button type="button" class="btn-shadow mr-3 btn btn-dark" data-toggle="modal" data-target="#addPatientFormModal">
-        <i class="fa fa-plus"></i> Daftarkan Pasien
+        <i class="fa fa-plus"></i> Daftarkan Petugas Baru
       </button>
     </div>
   </div>
@@ -26,9 +26,10 @@
         <tr>
           <th>No</th>
           <th>Nama</th>
+          <th>Gender</th>
           <th>Tanggal Lahir</th>
-          <th>NIK</th>
-          <th>Detail Pasien</th>
+          <th>No. Identitas</th>
+          <th>Detail Petugas</th>
         </tr>
       </thead>
       <tbody>
@@ -38,10 +39,10 @@
           <td>{{ $i+1 }}</td>
           <td>{{ $d['name'] }}</td>
           <td>{{ date("d M, Y", strtotime(date($d['dob']))) }}</td>
-          <td>{{ $d['nik'] }}</td>
+          <td>{{ $d['gender'] }}</td>
+          <td>{{ $d['identityNumber'] }}</td>
           <td style="text-align: center; vertical-align: middle;">
-            <a href="{{ route('puskesmas.patient-details', ['id' => $d['_id']]) }}"><button
-                class="mb-2 mr-2 btn-icon btn-pill btn btn-info">
+            <a href=""><button class="mb-2 mr-2 btn-icon btn-pill btn btn-info">
                 <i class="lnr-arrow-right-circle btn-icon-wrapper">
                 </i>Detail</button></a>
           </td>
@@ -54,9 +55,10 @@
         <tr>
           <th>No</th>
           <th>Nama</th>
+          <th>Gender</th>
           <th>Tanggal Lahir</th>
-          <th>NIK</th>
-          <th>Detail Pasien</th>
+          <th>No. Identitas</th>
+          <th>Detail Petugas</th>
         </tr>
       </tfoot>
     </table>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Clinic;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,5 +15,3 @@ class PuskesmasExaminationController extends Controller
       ->with('pagename', 'puskesmas.get-examination-list');
   }
 }
-
-?>

@@ -4,18 +4,18 @@
   <div class="page-title-wrapper">
     <div class="page-title-heading">
       <div class="page-title-icon">
-        <i class="pe-7s-home icon-gradient bg-tempting-azure">
+        <i class="pe-7s-culture icon-gradient bg-tempting-azure">
         </i>
       </div>
-      <div>List Puskesmas
-        <div class="page-title-subheading">Daftar Puskesmas yang Telah Terdaftar dalam Sistem
+      <div>Rumah Sakit
+        <div class="page-title-subheading">Daftar Rumah Sakit yang Telah Terdaftar dalam Sistem
         </div>
       </div>
     </div>
     <div class="page-title-actions">
       <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal"
-        data-target="#addPuskesmasFormModal">
-        <i class="fa fa-plus"></i> Tambah Puskesmas
+        data-target="#addDoctorFormModal" onclick="openAddDoctorFormModal()">
+        <i class="fa fa-plus"></i> Daftarkan RS
       </button>
     </div>
   </div>
@@ -27,23 +27,24 @@
         <tr>
           <th>No</th>
           <th>Nama-</th>
-          <th>No. Reg</th>
-          <th>Email</th>
-          <th>Tindakan</th>
+          <th>Telepon</th>
+          <th>Alamat</th>
+          <th>Website</th>
+          <th>Detail</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($puskesmas as $i => $p)
+        @foreach ($hospitals as $i => $h)
         <tr>
           <td>{{ $i+1 }}</td>
-          <td>{{ $p['name'] }}</td>
-          <td>{{ $p['identityNumber'] }}</td>
-          <td>{{ $p['email'] }}</td>
+          <td>{{ $h['name'] }}</td>
+          <td>{{ $h['phone'] }}</td>
+          <td>{{ $h['address'] }}</td>
+          <td><a href="{{ $h['website'] }}">{{ $h['website'] }}</a></td>
           <td style="text-align: center; vertical-align: middle;">
-            <a href="{{ route('admin.puskesmas-details', ['puskesmas_username' => $p['username']]) }}">
-              <button class="mb-2 mr-2 btn-icon btn-pill btn btn-primary"><i
-                  class="lnr-arrow-right-circle btn-icon-wrapper">
-                </i>Detail
+            <a href="{{ route('admin.hospital-details', ['hospital_id' => $h['_id']]) }}">
+              <button class="btn-icon btn-pill btn btn-primary"><i class="lnr-arrow-right-circle btn-icon-wrapper">
+                </i>
               </button>
             </a>
           </td>
@@ -54,9 +55,10 @@
         <tr>
           <th>No</th>
           <th>Nama-</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Tindakan</th>
+          <th>Telepon</th>
+          <th>Alamat</th>
+          <th>Website</th>
+          <th>Detail</th>
         </tr>
       </tfoot>
     </table>

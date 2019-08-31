@@ -60,6 +60,8 @@ Route::middleware(['role:admin'])->group(function(){
         Route::get('puskesmas', 'Admin\AdminPuskesmasController@getAdminPuskesmasListView')->name('admin.puskesmas');
         Route::post('puskesmas', 'Admin\AdminPuskesmasController@submitClinic')->name('admin.submit-clinic');
         Route::get('puskesmas/{puskesmas_id}', 'Admin\AdminPuskesmasController@getAdminPuskesmasDetailView')->name('admin.puskesmas-details');
+        Route::get('hospitals', 'Admin\AdminHospitalController@getAdminHospitalListView')->name('admin.hospitals');
+        Route::get('hospitals/{hospital_id}', 'Admin\AdminHospitalController@getAdminHospitalDetailView')->name('admin.hospital-details');
     });
 });
 

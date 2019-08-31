@@ -40,30 +40,26 @@
           <li class="list-group-item">
             <div class="widget-content p-0">
               <div class="widget-content-wrapper">
-                <div class="widget-content-left center-elem mr-2"><i class="pe-7s-pin text-muted fsize-2"></i>
+                <div class="widget-content-left center-elem mr-2"><i class="pe-7s-eyedropper text-muted fsize-2"></i>
                 </div>
                 <div class="widget-content-left">
-                  <div class="widget-heading">Pemeriksaan tanggal {{ date('d-m-Y', strtotime($item['createdAt'])) }},
-                    pukul {{ date('H:i', strtotime($item['createdAt'])) }}
-                  </div>
-                </div>
-                <div class="widget-content-right widget-content-actions">
-                  <button class="mr-1 btn-icon btn-icon-only btn btn-primary btn-sm examinationDetailsModalBtn"
-                    data-toggle="modal" data-target="#examinationDetailsModal" data-id="{{ $item['_id'] }}"
-                    data-doctor-name="{{ $item['doctor']['hospital'] }}">
-                    <i class="pe-7s-look btn-icon-wrapper"> </i>
-                    Detail</button>
-                  <button class="mr-1 btn-icon btn-icon-only btn btn-warning btn-sm examinationResultModalBtn"
-                    data-toggle="modal" data-target="#examinationResultModal" data-id="{{ $item['_id'] }}">
-                    <i class=" pe-7s-glasses btn-icon-wrapper"> </i>
-                    Hasil
-                  </button>
-                  <a href="">
-                    <button class="mr-1 btn-icon btn-icon-only btn btn-success btn-sm examinationResultModalBtn">
-                      <i class=" pe-7s-glasses btn-icon-wrapper"> </i>
-                      Detail
-                    </button>
+                  <a href="{{ route('puskesmas.get-examination-details', ['examination_id' => $item['_id']]) }}"
+                    title="Klik untuk melihat detail">
+                    <div class="widget-heading">Pemeriksaan tanggal {{ date('d-m-Y', strtotime($item['createdAt'])) }},
+                      pukul {{ date('H:i', strtotime($item['createdAt'])) }}
+                    </div>
                   </a>
+                </div>
+                <div class="widget-content-right">
+                  @if ($item['checked'])
+                  <div class="badge badge-pill badge-success">
+                    Status: Sudah Diperiksa
+                  </div>
+                  @else
+                  <div class="badge badge-pill badge-danger">
+                    Status: Belum Diperiksa
+                  </div>
+                  @endif
                 </div>
               </div>
             </div>

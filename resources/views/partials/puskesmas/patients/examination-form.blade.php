@@ -90,6 +90,30 @@
           </div>
         </div>
         <div id="step-322">
+          <div class="position-relative form-group"><label for="exampleEmail5">Pilih Rumah Sakit yang Akan
+              Menangani.</label>
+            <select class="multiselect-dropdown form-control" id="hospital">
+              <optgroup label="Nama Rumah Sakit">
+                @foreach ($hospitals as $hospital)
+                <option value="{{ $hospital['name'] }}">{{ $hospital['name'] }} </option>
+                @endforeach
+              </optgroup>
+            </select>
+          </div>
+          <div class="position-relative form-group"><label for="exampleEmail5">Petugas puskesmas/klinik yang
+              menerima:</label>
+            <select class="multiselect-dropdown form-control" id="officer">
+              <optgroup label="Nama Rumah Sakit">
+                @foreach ($officers as $officer)
+                <option value="{{ $officer['name'] }}">{{ $officer['name'] }} </option>
+                @endforeach
+              </optgroup>
+            </select>
+          </div>
+          <div class="text-center">
+            <button class="btn-shadow btn-block btn-wide btn btn-success btn-lg mr-2 mb-2 block-page-btn-example-3"
+              onclick="submitExamination()">SUBMIT</button>
+          </div>
           <div class="no-results">
             <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: none;">
               <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
@@ -98,21 +122,6 @@
               <div class="swal2-success-ring"></div>
               <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
               <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
-            </div>
-            <div class="results-title">Pilih Rumah Sakit yang akan dituju dan SUBMIT !</div>
-            <div class="mt-3 mb-3"></div>
-            <div class="mt-3 mb-3"></div>
-            <select class="multiselect-dropdown form-control" id="hospital">
-              <optgroup label="Nama Rumah Sakit">
-                @foreach ($hospitals as $hospital)
-                <option value="{{ $hospital['name'] }}">{{ $hospital['name'] }} </option>
-                @endforeach
-              </optgroup>
-            </select>
-            <div class="mt-3 mb-3"></div>
-            <div class="text-center">
-              <button class="btn-shadow btn-block btn-wide btn btn-success btn-lg mr-2 mb-2 block-page-btn-example-3"
-                onclick="submitExamination()">SUBMIT</button>
             </div>
           </div>
         </div>

@@ -1,5 +1,37 @@
 @extends('base')
 @section('content')
+<div class="app-page-title">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div class="page-title-icon">
+        <i class="pe-7s-eyedropper icon-gradient bg-plum-plate">
+        </i>
+      </div>
+      <div>Detail Pemeriksaan
+        <div class="page-title-subheading">Diajukan pada
+          {{ date('d-m-Y', strtotime($examination_details['createdAt'])) }},
+          pukul {{ date('H:i', strtotime($examination_details['createdAt'])) }} WIB oleh
+          {{ $examination_details['clinic']['name'] }} ke {{ $examination_details['doctor']['hospital'] }}.
+        </div>
+        <div class="page-title-subheading">
+          Tipe pemeriksaan: {{ $examination_details['type'] }}
+        </div>
+        <div class="page-title-subheading">
+          Status:
+          @if ($examination_details['checked'])
+          <div class="badge badge-success"><i class="pe-7s-check btn-icon-wrapper"></i>
+            Sudah Diperiksa
+          </div>
+          @else
+          <div class="badge badge-danger"><i class="pe-7s-close btn-icon-wrapper"></i>
+            Belum Diperiksa
+          </div>
+          @endif
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-12">
     <div class="mb-3 card">
@@ -41,129 +73,76 @@
       </div>
     </div>
     @if (!array_key_exists('diagnoses', $examination_details))
-    <div class="main-card mb-3 card">
-      <div class="card-body">
-        <h5 class="card-title">Hasil Diagnosa</h5>
-        <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Deskripsi</label>
-          <div class="col-sm-10">
-            <textarea rows="3" class="form-control autosize-input" style="height: 35px;" id="description"
-              placeholder="tuliskan hasil diagnosa"></textarea>
-          </div>
-        </div>
-        <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Biaya
-            Pemeriksaan</label>
-          <div class="col-sm-10">
-            <div class="input-group">
-              <div class="input-group-prepend"><span class="input-group-text">Rp </span></div>
-              <input placeholder="tuliskan biaya pemeriksaan" step="1" type="number" class="form-control"
-                id="diagnose-cost">
-              <div class="input-group-append"><span class="input-group-text">.00</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="position-relative row form-group"><label for="\" class="col-sm-2 col-form-label">Penyakit</label>
-          <div class="col-sm-10">
-            <input name="password" id="disease-name" placeholder="tuliskan nama penyakit kulit yang diderita"
-              type="text" class="form-control">
-          </div>
-        </div>
-        <fieldset id="recipe-field">
-          <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Resep</label>
-            <div class="col-sm-10">
-              <div class="form-inline">
-                <div class="position-relative form-group">
-                  <input name="medicine-name" placeholder="nama obat" type="text" class="mr-2 form-control">
-                </div>
-                <div class="position-relative form-group ">
-                  <input name="usage-rule" placeholder="aturan pakai" type="text" class="mr-2 form-control">
-                </div>
-                <div class="position-relative form-group ">
-                  <input name="recipe-desc" placeholder="keterangan" type="text" class="mr-2 form-control">
-                </div>
-                <button class="btn btn-primary" id="add-recipe-form" type="button">Tambah Obat</button>
-              </div>
-            </div>
-          </div>
-        </fieldset>
-      </div>
-      <div class="d-block text-center card-footer">
-        <button href="" class="btn-wide btn-shadow btn btn-block btn-primary" onclick="submitDiagnose()">Submit Hasil
-          Diagnosa</button>
-      </div>
-    </div>
+    <div class="alert alert-warning fade show" role="alert">Belum ada dokter yang melakukan pemeriksaan, mohon
+      ditunggu.</div>
     @else
     <div class="main-card mb-3 card">
       <div class="card-header"><i class="header-icon lnr-screen icon-gradient bg-warm-flame"> </i>Hasil Diagnosa Dokter
       </div>
       <div class="card-body">
-        <p class="col-md-12">Diperiksa oleh
-          {{ $examination_details['doctor']['name'] . ' dari ' . $examination_details['doctor']['hospital'] . ' pada ' . date('d-M-Y', strtotime($examination_details['createdAt'])) . ', pukul: ' . date('H:i', strtotime($examination_details['createdAt'])) . ' WIB'}}
-        </p>
-        <div id="accordion" class="accordion-wrapper">
-          <div class="card">
-            <div id="headingOne" class="card-header">
-              <button type="button" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true"
-                aria-controls="collapseOne" class="text-left m-0 p-0 btn btn-link btn-block">
-                <h5 class="m-0 p-0">Penyakit & Deskripsi Diagnosa</h5>
-              </button>
-            </div>
-            <div data-parent="#accordion" id="collapseOne1" aria-labelledby="headingOne" class="collapse show">
-              <div class="card-body">
-                <p>Penyakit yang diderita adalah <strong>{{ $examination_details['diagnoses']['disease'] }}</strong></p>
-                <p>{{ $examination_details['diagnoses']['description'] }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div id="headingTwo" class="b-radius-0 card-header">
-              <button type="button" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="false"
-                aria-controls="collapseTwo" class="text-left m-0 p-0 btn btn-link btn-block">
-                <h5 class="m-0 p-0">Biaya Diagnosa</h5>
-              </button>
-            </div>
-            <div data-parent="#accordion" id="collapseOne2" class="collapse">
-              <div class="card-body">
-                <h5>Rp. {{ $examination_details['diagnoses']['cost'] }}</h5>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div id="headingThree" class="card-header">
-              <button type="button" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="false"
-                aria-controls="collapseThree" class="text-left m-0 p-0 btn btn-link btn-block">
-                <h5 class="m-0 p-0">Resep</h5>
-              </button>
-            </div>
-            <div data-parent="#accordion" id="collapseOne3" class="collapse">
-              <div class="card-body">
-                <table class="mb-0 table table-striped">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Nama Obat</th>
-                      <th>Aturan Pakai</th>
-                      <th>Keterangan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($examination_details['diagnoses']['recipes'] as $i => $r)
-                    <tr>
-                      <th scope="row">{{ $i+1 }}</th>
-                      <td>{{ $r['medicine'] }}</td>
-                      <td>{{ $r['usage'] }}</td>
-                      <td>{{ $r['description'] }}</td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
-            </div>
+        <div class="mb-3 text-center">
+          <div role="group" class="btn-group-sm nav btn-group">
+            <a data-toggle="tab" href="#tab-eg15-0" class="btn-shadow active btn btn-primary">Hasil Diagnosa</a>
+            <a data-toggle="tab" href="#tab-eg15-1" class="btn-shadow  btn btn-primary">Biaya Pemeriksaan</a>
+            <a data-toggle="tab" href="#tab-eg15-2" class="btn-shadow  btn btn-primary">Resep</a>
           </div>
         </div>
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab-eg15-0" role="tabpanel">
+            <p><strong>Nama Penyakit:</strong>
+              <br>
+              {{ $examination_details['diagnoses']['disease'] }}
+            </p>
+            <p><strong>Deskripsi:</strong>
+              <br>
+              {{ $examination_details['diagnoses']['description'] }}
+            </p>
+          </div>
+          <div class="tab-pane" id="tab-eg15-1" role="tabpanel">
+            <div class="card-shadow-info border mb-3 card card-body border-info">
+              <p>Biaya pemeriksaan yang ditetapkan adalah sebesar:</p>
+              <strong>
+                <h3>Rp. {{ $examination_details['diagnoses']['cost'] }}</h3>
+              </strong>
+              <p>Silakan untuk membayar melalui transfer bank ke rekening-rekening berikut ini:</p>
+              <ol>
+                <li>1111111111111111 a.n Teledermatology (MANDIRI)</li>
+                <li>2222222222222222 a.n Teledermatology (BCA)</li>
+                <li>3333333333333333 a.n Teledermatology (BRI)</li>
+                <li>4444444444444444 a.n Teledermatology (BNI)</li>
+              </ol>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab-eg15-2" role="tabpanel">
+            <table class="mb-0 table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nama Obat</th>
+                  <th>Aturan Pakai</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($examination_details['diagnoses']['recipes'] as $i => $r)
+                <tr>
+                  <th scope="row">{{ $i+1 }}</th>
+                  <td>{{ $r['medicine'] }}</td>
+                  <td>{{ $r['usage'] }}</td>
+                  <td>{{ $r['description'] }}</td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <hr>
+        <p>Diperiksa oleh
+          {{ $examination_details['doctor']['name'] . ' dari ' . $examination_details['doctor']['hospital'] . ' pada ' . date('d-M-Y', strtotime($examination_details['createdAt'])) . ', pukul: ' . date('H:i', strtotime($examination_details['createdAt'])) . ' WIB'}}
+        </p>
       </div>
     </div>
     @endif
-
   </div>
 </div>
 @endsection

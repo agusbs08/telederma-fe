@@ -41,11 +41,11 @@
                 },
                 data: {
                     hospital: $('#hospital').val(),
-                    type: 'store',
+                    type: 'Store and Forward',
                     patientId: '{{ $patientId }}',
                     automatedDiagnoseResult: automatedDiagnoseResult,
                     description: $('#description').val(),
-                    officer: 'Indriyani'
+                    officer: $('#officer').val(),
                 },
                 success: (res) => {
                     console.log(res)
@@ -113,16 +113,19 @@
             let fieldWrapper = $("<div class=\"position-relative row form-group\"></div>");
             let element = "<label class=\"col-sm-2 col-form-label\"></label>"
             element += "<div class=\"col-sm-10\">"
-            element += "<div class=\"form-inline\">"
-            element += "<div class=\"position-relative form-group\">"
+            element += "<div class=\"form-row\">"
+            element += "<div class=\"col-md-4 position-relative form-group\">"
             element += "<input name=\"medicine-name\" placeholder=\"nama obat\" type=\"text\" class=\"medicine-name mr-2 form-control\">"
             element += "</div>"
-            element += "<div class=\"position-relative form-group \">"
+            element += "<div class=\"col-md-2 position-relative form-group \">"
             element += "<input name=\"usage-rule\" placeholder=\"aturan pakai\" type=\"text\" class=\"usage-rule mr-2 form-control\">"
             element += "</div>"
-            element += "<div class=\"position-relative form-group \">"
+            element += "<div class=\"col-md-4 position-relative form-group \">"
             element += "<input name=\"recipe-desc\" placeholder=\"keterangan\" type=\"text\" class=\"recipe-desc mr-2 form-control\">"
-            element += "<button class=\"btn btn-danger btn-remove-field\" type=\"button\">Hapus Resep</button></div></div></div>";
+            element += "</div>"
+            element += "<div class=\"col-md-2 position-relative form-group \">"
+            element += "<button class=\"btn btn-danger btn-block btn-remove-field\" type=\"button\">Hapus Resep</button></div></div></div>";
+            element += "</div></div></div></div>"
             $(document).on("click", ".btn-remove-field", function(){
                 $(this).closest('.row').remove()
             });

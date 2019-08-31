@@ -15,22 +15,18 @@ Route::middleware(['role:clinic'])->group(function(){
             Route::get('/', 'Clinic\PuskesmasPatientController@getPatientsListView')->name('puskesmas.patients');
             Route::get('{patient_username}/details', 'Clinic\PuskesmasPatientController@getPatientDetailsView')
                 ->name('puskesmas.patient-details');
-            Route::get('{patient_id}/examinations', 'Clinic\PuskesmasPatientController@getPatientAddExaminationForm')->name('puskesmas.examination-form');
+            Route::get('{patient_id}/examinations', 'Clinic\PuskesmasExaminationController@getPatientAddExaminationForm')->name('puskesmas.examination-form');
             Route::prefix('examinations')->group(function(){
-                Route::post('/', 'Clinic\PuskesmasPatientController@submitExamination')->name('puskesmas.submit-examination');
-                Route::post('result', 'Clinic\PuskesmasPatientController@submitExaminationResult')->name('puskesmas.submit-examination-result');
-                Route::post('image', 'Clinic\PuskesmasPatientController@submitExaminationImage')->name('puskesmas.submit-examination-image');
+                Route::post('/', 'Clinic\PuskesmasExaminationController@submitExamination')->name('puskesmas.submit-examination');
+                Route::post('result', 'Clinic\PuskesmasExaminationController@submitExaminationResult')->name('puskesmas.submit-examination-result');
+                Route::post('image', 'Clinic\PuskesmasExaminationController@submitExaminationImage')->name('puskesmas.submit-examination-image');
             });
         });
         Route::prefix('officers')->group(function(){
             Route::get('/', 'Clinic\PuskesmasOfficerController@getOfficersListView')->name('puskesmas.get-officers-list');
-            // Route::post('/', 'Clinic\PuskesmasOfficerController@getOfficersListView')->name('puskesmas.get-officers-list');
         });
         Route::prefix('examinations')->group(function(){
-            Route::get('/', 'PuskesmasExaminationController@getExaminationsListView')->name('puskesmas.examinations');
-            Route::get('{examination_id}', function () {
-                return view('partials.puskesmas.examinations.examination-details');
-            })->name('puskesmas.examination-details');
+            Route::get('/{examination_id}', 'Clinic\PuskesmasExaminationController@getExaminationDetailsView')->name('puskesmas.get-examination-details');
         });
     });
 });

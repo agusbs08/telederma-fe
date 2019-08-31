@@ -9,4 +9,5 @@
   <meta name="description" content="T">
   <meta name="msapplication-tap-highlight" content="no">
   <link href="{{asset('css/main.cba69814a806ecc7945a.css')}}" rel="stylesheet">
+  <link href="{{asset('css/custom.css')}}" rel="stylesheet">
 </head>

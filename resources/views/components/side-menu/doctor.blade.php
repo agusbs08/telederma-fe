@@ -12,4 +12,8 @@ $pagename = Request::segment(2);
     <i class="metismenu-icon pe-7s-eyedropper">
     </i>Pemeriksaan
   </a>
+  <a href="{{ route('doctor.get-live-interactive') }}" @php echo $pagename=="live-interactive" ? $class : null @endphp>
+    <i class="metismenu-icon pe-7s-video">
+    </i>Live Interactive
+  </a>
 </li>

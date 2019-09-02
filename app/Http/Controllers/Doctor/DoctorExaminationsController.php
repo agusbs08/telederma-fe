@@ -9,6 +9,12 @@ use Session;
 
 class DoctorExaminationsController extends Controller
 {
+    public function getLiveInteractive()
+    {
+        return view('partials.doctor.live-interactive.live-interactive')
+            ->with('pagename', 'get-doctor-live-interactive-view');
+    }
+
     public function getDoctorExaminationListView()
     {
         $guzzle_params = config('app.guzzle_params');

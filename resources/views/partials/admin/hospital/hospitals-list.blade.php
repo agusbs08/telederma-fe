@@ -1,5 +1,6 @@
 @extends('base')
 @section('content')
+
 <div class="app-page-title">
   <div class="page-title-wrapper">
     <div class="page-title-heading">
@@ -14,7 +15,7 @@
     </div>
     <div class="page-title-actions">
       <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal"
-        data-target="#addDoctorFormModal" onclick="openAddDoctorFormModal()">
+        data-target="#addHospitalFormModal" onclick="openAddHospitalFormModal()">
         <i class="fa fa-plus"></i> Daftarkan RS
       </button>
     </div>

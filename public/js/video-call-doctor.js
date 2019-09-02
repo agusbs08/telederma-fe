@@ -18,6 +18,7 @@ video.addEventListener(
 );
 
 function snap() {
+    console.log("snap");
     context.fillRect(0, 0, w, h);
     context.drawImage(video, 0, 0, w, h);
 }
@@ -64,7 +65,7 @@ function start() {
         });
 }
 
-start();
+// start();
 
 const channel = pusher.subscribe("presence-videocall");
 
@@ -267,18 +268,44 @@ channel.bind("client-sdp", function(msg) {
         // if(!permission){
         //     return channel.trigger("client-reject", { room: msg.room, rejected: id });
         // }
-        room = msg.room;
-        var sessionDesc = new RTCSessionDescription(msg.sdp);
-        caller.addStream(localUserMedia);
-        caller.setRemoteDescription(sessionDesc);
+        navigator.mediaDevices
+            .getUserMedia({
+                video: true,
+                audio: true
+            })
+            .then(stream => {
+                try {
+                    document.getElementById("selfview").srcObject = stream;
+                    localUserMedia = stream;
+                } catch (err) {
+                    document.getElementById(
+                        "selfview"
+                    ).src = URL.createObjectURL(stream);
+                    localUserMedia = stream;
+                } finally {
+                    room = msg.room;
+                    var sessionDesc = new RTCSessionDescription(msg.sdp);
+                    caller.addStream(localUserMedia);
+                    caller.setRemoteDescription(sessionDesc);
 
-        caller.createAnswer().then(function(sdp) {
-            caller.setLocalDescription(new RTCSessionDescription(sdp));
-            channel.trigger("client-answer", {
-                sdp: sdp,
-                room: room
+                    caller.createAnswer().then(function(sdp) {
+                        caller.setLocalDescription(
+                            new RTCSessionDescription(sdp)
+                        );
+                        channel.trigger("client-answer", {
+                            sdp: sdp,
+                            room: room
+                        });
+                    });
+                }
+            })
+            .catch(err => {
+                return channel.trigger("client-reject", {
+                    room: msg.room,
+                    rejected: id
+                });
             });
-        });
+
         // getCam()
         //   .then(stream => {
         //     localUserMedia = stream;

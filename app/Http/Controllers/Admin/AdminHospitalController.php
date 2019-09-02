@@ -37,4 +37,20 @@ class AdminHospitalController extends Controller
             ->with('hospital_detail', json_decode($hospitalResponse->getBody(), true))
             ->with('doctors', json_decode($doctorResponse->getBody(), true));
     }
+
+    public function submitHospital(Request $request)
+    {
+        $guzzle_params = config('app.guzzle_params');
+        $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
+        $client = new Client($guzzle_params);
+        $response = $client->request('POST', 'hospitals', [
+            'form_params' => [
+                'phone' => $request->input('phone'),
+                'name' => $request->input('name'),
+                'address' => $request->input('address'),
+                'about' => $request->input('about'),
+                'website' => $request->input('website'),
+            ]
+        ]);
+    }
 }

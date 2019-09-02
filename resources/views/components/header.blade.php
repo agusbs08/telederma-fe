@@ -10,4 +10,11 @@
   <meta name="msapplication-tap-highlight" content="no">
   <link href="{{asset('css/main.cba69814a806ecc7945a.css')}}" rel="stylesheet">
   <link href="{{asset('css/custom.css')}}" rel="stylesheet">
+  @if ($pagename == 'get-doctor-live-interactive-view')
+  <link rel="stylesheet" href="{{ asset('css/video-call.css') }}">
+  <script>
+    window.csrfToken = "{{ csrf_token() }}";
+  </script>
+  @endif
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,900&display=swap" rel="stylesheet">
 </head>

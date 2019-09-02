@@ -31,6 +31,31 @@
         </span>
     </div>
     <div class="app-header__content">
+        <div class="app-header-left">
+            <ul class="header-megamenu nav">
+                <li class="nav-item">
+                    {{-- <a href="javascript:void(0);" data-placement="bottom" rel="popover-focus" data-offset="300"
+                        data-toggle="popover-custom" class="nav-link" data-original-title="" title="">
+                        TELEDERMATOLOGY
+                    </a> --}}
+                    <nav class="" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a>
+                                    <i aria-hidden="true" class="fa fa-home"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a>Dashboards</a>
+                            </li>
+                            <li class="active breadcrumb-item" aria-current="page">
+                                Minimal Dashboard Example
+                            </li>
+                        </ol>
+                    </nav>
+                </li>
+            </ul>
+        </div>
         <div class="app-header-right">
             @include('components.notification-banner')
             <div class="header-btn-lg pr-0">

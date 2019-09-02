@@ -43,6 +43,7 @@ Route::middleware(['role:doctor'])->group(function(){
             Route::get('{examination_id}', 'Doctor\DoctorExaminationsController@getDoctorExaminationDetailView')->name('doctor.examination-details');
         });
         Route::post('diagnose', 'Doctor\DoctorExaminationsController@postDiagnose')->name('doctor.post-diagnose');
+        Route::get('live-interactive', 'Doctor\DoctorExaminationsController@getLiveInteractive')->name('doctor.get-live-interactive');
     });
 });
 
@@ -62,6 +63,7 @@ Route::middleware(['role:admin'])->group(function(){
         Route::get('puskesmas/{puskesmas_id}', 'Admin\AdminPuskesmasController@getAdminPuskesmasDetailView')->name('admin.puskesmas-details');
         Route::get('hospitals', 'Admin\AdminHospitalController@getAdminHospitalListView')->name('admin.hospitals');
         Route::get('hospitals/{hospital_id}', 'Admin\AdminHospitalController@getAdminHospitalDetailView')->name('admin.hospital-details');
+        Route::post('hospitals', 'Admin\AdminHospitalController@submitHospital')->name('admin.submit-hospital');
     });
 });
 

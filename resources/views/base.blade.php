@@ -10,6 +10,23 @@
         <div class="app-main">
             @include('components.sidebar')
             <div class="app-main__outer">
+                {{-- <div class="page-title-subheading"> --}}
+                {{-- <nav class="" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a>
+                                <i aria-hidden="true" class="fa fa-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a>Dashboards</a>
+                        </li>
+                        <li class="active breadcrumb-item" aria-current="page">
+                            Minimal Dashboard Example
+                        </li>
+                    </ol>
+                </nav> --}}
+                {{-- </div> --}}
                 @if (session('errors'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin: 10px 5px;">
                     <button type="button" class="close" aria-label="Close"></button>
@@ -106,6 +123,10 @@
             });
         }
     </script>
+    @endif
+    @if ($pagename == 'get-doctor-live-interactive-view')
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script src="{{ asset('js/video-call-doctor.js') }}"></script>
     @endif
     @if ($pagename == 'get-doctor-examination-detail-view')
     <script>
@@ -237,6 +258,33 @@
         });
     </script>
     @endif
+    @if ($pagename == 'admin.hospitals-list-view')
+    <script>
+        function submitHospital(){
+            const data = {
+                phone: $('#phone').val(),
+                name: $('#name').val(),
+                address: $('#address').val(),
+                about: $('#about').val(),
+                website: $('#website').val(),
+            }
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.submit-hospital') }}",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: data,
+                success: () => {
+                    location.reload();
+                },
+                error: (error) => {
+                    console.log(error)
+                }
+            });
+        }
+    </script>
+    @endif
     @if ($pagename == 'admin.doctors-list-view')
     <script>
         function openAddDoctorFormModal(){
@@ -332,4 +380,6 @@
 @include('partials.admin.modals.add-doctor')
 @elseif (Request::segment(1) == "admin" && Request::segment(2) == "puskesmas")
 @include('partials.admin.modals.add-puskesmas')
+@elseif (Request::segment(1) == "admin" && Request::segment(2) == "hospitals")
+@include('partials.admin.modals.add-hospital')
 @endif

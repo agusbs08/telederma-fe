@@ -10,30 +10,13 @@
         <div class="app-main">
             @include('components.sidebar')
             <div class="app-main__outer">
-                {{-- <div class="page-title-subheading"> --}}
-                {{-- <nav class="" aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a>
-                                <i aria-hidden="true" class="fa fa-home"></i>
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a>Dashboards</a>
-                        </li>
-                        <li class="active breadcrumb-item" aria-current="page">
-                            Minimal Dashboard Example
-                        </li>
-                    </ol>
-                </nav> --}}
-                {{-- </div> --}}
                 @if (session('errors'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin: 10px 5px;">
                     <button type="button" class="close" aria-label="Close"></button>
                     <strong>{{ session('errors') }}</strong>
                 </div>
                 @endif
-                <div class="app-main__inner">
+                <div class="app-main__inner @if ($pagename == 'conversation-list') p-0 @endif">
                     @yield('content')
                 </div>
                 @include('components.footer')
@@ -41,7 +24,42 @@
         </div>
     </div>
     <script type="text/javascript" src="{{ asset('js/main.cba69814a806ecc7945a.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/combine.js') }}"></script> --}}
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    @if ($pagename == 'account-setting')
+    <script>
+        function toggleInput(){
+            $('.setting-input, .submit-btn').prop('disabled', function(i, v) { return !v; });
+        }
+        function profilePictureInput(){
+            event.preventDefault();
+            $('#profile-pic-upload').click()
+        }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.profile-picture-box').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#profile-pic-upload').change(function(){
+            readURL(this)
+            $('#save-profile-pic').show()
+        })
+        $('#account-setting').submit(function(event){
+            if(!confirm("Apakah Anda yakin?")){
+                event.preventDefault();
+            }
+        });
+        $('#profile-pic-setting').submit(function(event){
+            if(!confirm("Simpan foto profil baru?")){
+                event.preventDefault();
+            }
+        })
+    </script>
+    @endif
     @if ($pagename == 'puskesmas.examination-form')
     <script>
         let automatedDiagnoseResult = [];

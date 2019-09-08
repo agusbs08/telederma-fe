@@ -17,7 +17,8 @@ class Role
     public function handle($request, Closure $next, ... $roles)
     {
         if ($request->session()->get('authenticated', false) != false){
-            if (Session::get('role') != $roles[0]) {
+            if (!in_array(Session::get('role'), $roles)) {
+                dd($roles);
                 return back()->with('errors', 'Anda tidak diizinkan untuk melihat halaman tersebut!');
             }
         } else {

@@ -15,8 +15,10 @@
             <h6 class="menu-header-subtitle">{{ $puskesmas_detail['email'] }}</h6>
           </div>
           <div class="menu-header-btn-pane">
-            <button class="ladda-button btn btn-pill btn-dark" data-style="slide-right"><span
-                class="ladda-label">Pengaturan Akun</span><span class="ladda-spinner"></span></button>
+            <button class="ladda-button btn btn-pill btn-dark" data-style="slide-right">
+              <span class="ladda-label">Pengaturan Akun</span>
+              <span class="ladda-spinner"></span>
+            </button>
           </div>
         </div>
       </div>

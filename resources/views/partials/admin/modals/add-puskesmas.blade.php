@@ -11,11 +11,11 @@
       <div class="modal-body">
         <form class="">
           <div class="position-relative form-group"><label for="email" class="">Email</label><input name="email"
-              id="email" placeholder="contoh: user@email.com" type="email" class="form-control"></div>
+              id="email" placeholder="contoh: klinik@email.com" type="email" class="form-control"></div>
           <div class="position-relative form-group"><label for="name" class="">Nama Puskesmas</label><input name="name"
-              id="name" placeholder="contoh: Joko Widodo" type="text" class="form-control"></div>
+              id="name" placeholder="contoh: Puskesmas Kelurahan Kemang" type="text" class="form-control"></div>
           <div class="position-relative form-group"><label for="username" class="">Username</label><input
-              name="username" id="username" placeholder="contoh: jokowi" type="text" class="form-control"></div>
+              name="username" id="username" placeholder="contoh: puskemang" type="text" class="form-control"></div>
           <div class="position-relative form-group"><label for="phone" class="">Telepon</label><input name="username"
               id="phone" placeholder="contoh: 032332" type="text" class="form-control"></div>
           <div class="position-relative form-group"><label for="identity-number" class="">No. Klinik /

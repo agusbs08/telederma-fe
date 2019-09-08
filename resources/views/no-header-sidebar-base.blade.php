@@ -25,7 +25,6 @@
               password: $('#password').val()
           },
           success: (data) => {
-            console.log(data)
             $('#username,#password').removeClass('is-invalid')
             $('#username,#password').removeAttr('aria-describedby aria-invalid')
             $('.login-message').hide()

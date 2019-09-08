@@ -33,11 +33,11 @@
   <div class="scrollbar-sidebar">
     <div class="app-sidebar__inner">
       <ul class="vertical-nav-menu">
-        @if (Request::segment(1) == "puskesmas")
+        @if (Session::get('role') == 'clinic')
         @include('components.side-menu.puskesmas')
-        @elseif (Request::segment(1) == "doctor")
+        @elseif (Session::get('role') == 'doctor')
         @include('components.side-menu.doctor')
-        @elseif (Request::segment(1) == "admin")
+        @elseif (Session::get('role') == 'admin')
         @include('components.side-menu.admin')
         @endif
       </ul>

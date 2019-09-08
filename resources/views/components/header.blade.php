@@ -8,6 +8,7 @@
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
   <meta name="description" content="T">
   <meta name="msapplication-tap-highlight" content="no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link href="{{asset('css/main.cba69814a806ecc7945a.css')}}" rel="stylesheet">
   <link href="{{asset('css/custom.css')}}" rel="stylesheet">
   @if ($pagename == 'get-doctor-live-interactive-view')

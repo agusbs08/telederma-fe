@@ -15,7 +15,7 @@
             <div class="dropdown-menu-header mb-0">
                 <div class="dropdown-menu-header-inner bg-deep-blue">
                     <div class="menu-header-image opacity-1"
-                        style="background-image: url('{{ asset('images/dropdown-header/city3.jpg') }};">
+                        style="background-image: url('{{ asset('images/dropdown-header/city3.jpg') }}">
                     </div>
                     <div class="menu-header-content text-dark">
                         <h5 class="menu-header-title">Pemberitahuan</h5>

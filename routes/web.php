@@ -69,6 +69,30 @@ Route::middleware(['role:admin'])->group(function(){
 
 /*
 |--------------------------------------------------------------------------
+| Account & Settings Route
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['role:admin,doctor,clinic'])->group(function(){
+    Route::prefix('account')->group(function(){
+        Route::get('settings', 'Account\AccountController@getGeneralSettings')->name('account-settings');
+        Route::post('settings/general', 'Account\AccountController@updateAccount')->name('update-account-general');
+        Route::post('settings/profile-picture', 'Account\AccountController@updateProfilePicture')->name('update-account-profile-picture');
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Conversation Route
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/conversations', 'Conversation\ConversationController@getConversationListView')->name('conversation-list');
+// Route::get('/send-message', 'Conversation\ConversationController@sendMessage')->name('send-message');
+
+
+/*
+|--------------------------------------------------------------------------
 | Authentication Route
 |--------------------------------------------------------------------------
 */
@@ -85,9 +109,7 @@ Route::prefix('auth')->group(function(){
 Route::get('/videocall/doctor/{id}', function($id){
     return view('webrtc.video-call-doctor')->with(['id' => $id]);
 });
-
 Route::get('/videocall/patient/{id}', function($id){
     return view('webrtc.video-call-patient')->with(['id' => $id]);
 });
-
 Route::post('/pusher/auth/{id}/{name}', 'VideoCallController@callToUser')->name('pusher.callToUser');

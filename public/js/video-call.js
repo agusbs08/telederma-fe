@@ -24,7 +24,7 @@ function snap() {
 console.log(user_id);
 var user_id = Math.random(10000).toString();
 var name = "Jancok";
-var pusher = new Pusher("d39c0affa9d55257c0c1", {
+var pusher = new Pusher("ed6c4e67e5c5bf35c1ef", {
     cluster: "ap1",
     encrypted: true,
     authEndpoint: `/pusher/auth/${user_id}/${name}`,

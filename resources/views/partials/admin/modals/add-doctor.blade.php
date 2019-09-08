@@ -11,17 +11,17 @@
       <div class="modal-body">
         <form class="">
           <div class="position-relative form-group"><label for="email" class="">Email</label><input name="email"
-              id="email" placeholder="contoh: user@email.com" type="email" class="form-control"></div>
+              id="email" placeholder="contoh: doctor@email.com" type="email" class="form-control"></div>
           <div class="position-relative form-group"><label for="nik" class="">NIK</label><input name="nik" id="nik"
               placeholder="contoh: 1111222233334444" type="number" class="form-control"></div>
           <div class="position-relative form-group"><label for="name" class="">Nama</label><input name="name" id="name"
-              placeholder="contoh: Joko Widodo" type="text" class="form-control"></div>
+              placeholder="contoh: John Doe" type="text" class="form-control"></div>
           <div class="position-relative form-group"><label for="exampleAddress" class="">Tanggal Lahir</label>
             <input name="birth-date" id="birth-date" type="text" placeholder="contoh: 12/07/2019" class="form-control"
               data-toggle="datepicker" />
           </div>
           <div class="position-relative form-group"><label for="username" class="">Username</label><input
-              name="username" id="username" placeholder="contoh: jokowi" type="text" class="form-control"></div>
+              name="username" id="username" placeholder="contoh: johndoe" type="text" class="form-control"></div>
           <div class="position-relative form-group"><label for="phone" class="">Telepon/HP</label><input name="username"
               id="phone" placeholder="contoh: 0888888888888" type="text" class="form-control"></div>
           <div class="position-relative form-group"><label for="password" class="">Password</label><input

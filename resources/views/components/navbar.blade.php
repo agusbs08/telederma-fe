@@ -34,10 +34,6 @@
         <div class="app-header-left">
             <ul class="header-megamenu nav">
                 <li class="nav-item">
-                    {{-- <a href="javascript:void(0);" data-placement="bottom" rel="popover-focus" data-offset="300"
-                        data-toggle="popover-custom" class="nav-link" data-original-title="" title="">
-                        TELEDERMATOLOGY
-                    </a> --}}
                     <nav class="" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -46,10 +42,10 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a>Dashboards</a>
+                                <a>Menu</a>
                             </li>
-                            <li class="active breadcrumb-item" aria-current="page">
-                                Minimal Dashboard Example
+                            <li class="breadcrumb-item">
+                                <a>Menu 1</a>
                             </li>
                         </ol>
                     </nav>
@@ -104,25 +100,14 @@
                                     </div>
                                     <ul class="nav flex-column">
                                         <li class="nav-item-btn nav-item">
-                                            <button class="mb-2 mr-2 btn-icon btn-pill btn btn-focus btn-block"><i
-                                                    class="lnr-cog btn-icon-wrapper"> </i>Pengaturan Profil</button>
+                                            <a href="{{ route('account-settings') }}"
+                                                class="mb-2 mr-2 btn-icon btn-pill btn btn-focus btn-block"><i
+                                                    class="lnr-cog btn-icon-wrapper"> </i>Pengaturan
+                                                Profil</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="widget-content-left  ml-3 header-user-info">
-                            <div class="widget-heading">
-                                Teledermatology
-                            </div>
-                            <div class="widget-subheading">
-                                2019
-                            </div>
-                        </div>
-                        <div class="widget-content-right header-user-info ml-3">
-                            <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                            </button>
                         </div>
                     </div>
                 </div>

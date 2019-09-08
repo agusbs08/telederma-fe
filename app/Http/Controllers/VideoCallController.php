@@ -11,10 +11,14 @@ class VideoCallController extends Controller
         $socketId = $request->socket_id;
         $channelName = $request->channel_name;
 
-        $pusher = new Pusher('d39c0affa9d55257c0c1', '3b438ddcfd2dd64bbc22', '833788', [
+        $pusher = new Pusher('ed6c4e67e5c5bf35c1ef', '155cb4c7db49fc81cce0', '846318', [
             'cluster' => 'ap1',
             'encrypted' => true
         ]);
+        // $pusher = new Pusher('d39c0affa9d55257c0c1', '3b438ddcfd2dd64bbc22', '833788', [
+        //     'cluster' => 'ap1',
+        //     'encrypted' => true
+        // ]);
 
         $presence_data = ['name' => $name ];
         $key = $pusher->presence_auth($channelName, $socketId, $id, $presence_data);

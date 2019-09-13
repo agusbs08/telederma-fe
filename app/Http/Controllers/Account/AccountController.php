@@ -9,9 +9,6 @@ use GuzzleHttp\Client;
 
 class AccountController extends Controller
 {
-    public function getAccountDetail()
-    {}
-
     public function getGeneralSettings()
     {
         $guzzle_params = config('app.guzzle_params');
@@ -19,10 +16,15 @@ class AccountController extends Controller
         $client = new Client($guzzle_params);
         $response = $client->request('GET', 'users/' . Session::get('username'));
         $userData = json_decode($response->getBody(), true);
-        return view('partials.account.setting')
-            ->with('pagename', 'account-setting')
+        return view('partials.account.general-setting')
+            ->with('pagename', 'general-setting')
             ->with('user_data', json_decode($response->getBody(), true));
+    }
 
+    public function getCredentialSettings()
+    {
+        return view('partials.account.credential-setting')
+            ->with('pagename', 'credential-setting');
     }
 
     public function updateAccount(Request $request)
@@ -64,6 +66,26 @@ class AccountController extends Controller
         $response = $client->request('POST', 'users/settings/profile-picture');
         if ($response->getStatusCode() == 200){
             return redirect()->route('account-settings')->with('prof-pic-update-success', 'Foto profil berhasil diupdate!');
+        }
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $guzzle_params = config('app.guzzle_params');
+        $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
+        $client = new Client($guzzle_params);
+        $response = $client->request('POST', 'users/settings/password', [
+            'form_params' => [
+                'currentPassword' => $request->input('current-password'),
+                'newPassword' => $request->input('new-password'),
+                'reNewPassword' => $request->input('re-new-password'),
+            ]
+        ]);
+        // dd(json_decode($response->getBody(), true));
+        if ($response->getStatusCode() == 200){
+            return redirect()->route('credential-settings')->with('password-update-success', 'Password diupdate');
+        } else {
+            return redirect()->route('credential-settings')->with('password-update-failed', (json_decode($response->getBody(), true))['msg']);
         }
     }
 }

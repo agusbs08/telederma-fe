@@ -29,13 +29,7 @@
             $('#username,#password').removeAttr('aria-describedby aria-invalid')
             $('.login-message').hide()
             if (data.hasOwnProperty('msg')){
-              $('.login-message').show()
-              if (data.msg === "user not found"){
-                $('.login-message').text("User Tidak Ditemukan")
-              }
-              else if (data.msg === "wrong password"){
-                $('.login-message').text("Password Salah")
-              }
+              $('.login-message').show().text(data.msg)
             } else {
             window.location = data;
             }

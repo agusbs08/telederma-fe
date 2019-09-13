@@ -24,9 +24,8 @@
         </div>
     </div>
     <script type="text/javascript" src="{{ asset('js/main.cba69814a806ecc7945a.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{ asset('js/combine.js') }}"></script> --}}
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    @if ($pagename == 'account-setting')
+    @if ($pagename == 'general-setting')
     <script>
         function toggleInput(){
             $('.setting-input, .submit-btn').prop('disabled', function(i, v) { return !v; });
@@ -49,7 +48,7 @@
             $('#save-profile-pic').show()
         })
         $('#account-setting').submit(function(event){
-            if(!confirm("Apakah Anda yakin?")){
+            if(!confirm("Simpan data baru?")){
                 event.preventDefault();
             }
         });
@@ -58,6 +57,15 @@
                 event.preventDefault();
             }
         })
+    </script>
+    @endif
+    @if ($pagename == 'credential-setting')
+    <script>
+        $('#credential-setting').submit(function(event){
+            if(!confirm("Apakah Anda yakin?")){
+                event.preventDefault();
+            }
+        });
     </script>
     @endif
     @if ($pagename == 'puskesmas.examination-form')

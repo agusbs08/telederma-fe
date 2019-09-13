@@ -26,8 +26,7 @@ class AuthController extends Controller
           'password' => $request->input('password')
         ]
       ]);
-      $loginResponseCode = $loginResponse->getStatusCode();
-      if ($loginResponseCode == 200){
+      if ($loginResponse->getStatusCode() == 200){
         $token = json_decode($loginResponse->getBody(), true)['token'];
         $userDetails = $this->setLoginSession($request->input('username'), $token);
         if ($userDetails['role'] == 'clinic')
@@ -36,12 +35,8 @@ class AuthController extends Controller
           return route('doctor.examinations', [], false);
         elseif ($userDetails['role'] == 'admin')
           return route('admin.doctors', [], false);
-      } elseif ($loginResponseCode == 400) {
-        return response()->json(['msg' => 'wrong password']);
-      } elseif ($loginResponseCode == 404) {
-        return response()->json(['msg' => 'user not found', 'data' => json_decode($loginResponse->getBody(), true)]);
       } else {
-        return response()->json(['msg' => 'something went wrong']);
+        return response()->json(['msg' => json_decode($loginResponse->getBody(), true)["error"]]);
       }
     }
 

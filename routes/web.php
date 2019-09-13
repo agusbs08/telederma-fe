@@ -75,9 +75,13 @@ Route::middleware(['role:admin'])->group(function(){
 
 Route::middleware(['role:admin,doctor,clinic'])->group(function(){
     Route::prefix('account')->group(function(){
-        Route::get('settings', 'Account\AccountController@getGeneralSettings')->name('account-settings');
-        Route::post('settings/general', 'Account\AccountController@updateAccount')->name('update-account-general');
-        Route::post('settings/profile-picture', 'Account\AccountController@updateProfilePicture')->name('update-account-profile-picture');
+        Route::prefix('settings')->group(function(){
+            Route::get('general', 'Account\AccountController@getGeneralSettings')->name('account-settings');
+            Route::post('general', 'Account\AccountController@updateAccount')->name('update-account-general');
+            Route::post('profile-picture', 'Account\AccountController@updateProfilePicture')->name('update-account-profile-picture');
+            Route::get('credentials', 'Account\AccountController@getCredentialSettings')->name('credential-settings');
+            Route::post('credentials', 'Account\AccountController@updatePassword')->name('update-password');
+        });
     });
 });
 

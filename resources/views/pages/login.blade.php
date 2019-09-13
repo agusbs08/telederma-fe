@@ -85,7 +85,9 @@
                 class="form-check-input"><label for="exampleCheck" class="form-check-label">Ingat saya</label>
             </div>
             <div class="divider row"></div>
-            {!! app('captcha')->display() !!}
+            <div class="m-2">
+              {!! app('captcha')->display() !!}
+            </div>
             <div class="alert alert-danger alert-dismissible fade show login-message" role="alert"
               style="display: none;">
             </div>

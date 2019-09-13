@@ -24,9 +24,15 @@ Route::middleware(['role:clinic'])->group(function(){
         });
         Route::prefix('officers')->group(function(){
             Route::get('/', 'Clinic\PuskesmasOfficerController@getOfficersListView')->name('puskesmas.get-officers-list');
+            Route::post('/', 'Clinic\PuskesmasOfficerController@registerOfficer')->name('puskesmas.register-officer');
         });
         Route::prefix('examinations')->group(function(){
+            Route::get('/', 'Clinic\PuskesmasExaminationController@getClinicsExaminationsView')->name('puskesmas.get-examinations');
             Route::get('/{examination_id}', 'Clinic\PuskesmasExaminationController@getExaminationDetailsView')->name('puskesmas.get-examination-details');
+        });
+        Route::prefix('live-interactive')->group(function(){
+            Route::get('/submission', 'Clinic\PuskesmasLiveInteractiveController@getSubmissionList')->name('puskesmas.get-live-interactive-subms-list');
+            Route::get('/propose', 'Clinic\PuskesmasLiveInteractiveController@proposeLiveInteractive')->name('puskesmas.propose-live-interactive');
         });
     });
 });

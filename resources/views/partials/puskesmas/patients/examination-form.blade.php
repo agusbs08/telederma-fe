@@ -103,7 +103,7 @@
           <div class="position-relative form-group"><label for="exampleEmail5">Petugas puskesmas/klinik yang
               menerima:</label>
             <select class="multiselect-dropdown form-control" id="officer">
-              <optgroup label="Nama Rumah Sakit">
+              <optgroup label="Nama Petugas Klinik">
                 @foreach ($officers as $officer)
                 <option value="{{ $officer['name'] }}">{{ $officer['name'] }} </option>
                 @endforeach

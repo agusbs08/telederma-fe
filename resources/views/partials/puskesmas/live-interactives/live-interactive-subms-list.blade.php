@@ -32,25 +32,25 @@
           <th>Detail Petugas</th>
         </tr>
       </thead>
-      <tbody>
+      {{-- <tbody>
         @if (sizeof($data) > 0)
         @foreach ($data as $i => $d)
         <tr>
           <td>{{ $i+1 }}</td>
-          <td>{{ $d['name'] }}</td>
-          <td>{{ date("d M, Y", strtotime(date($d['dob']))) }}</td>
-          <td>{{ $d['gender'] }}</td>
-          <td>{{ $d['identityNumber'] }}</td>
-          <td style="text-align: center; vertical-align: middle;">
-            <a href=""><button class="mb-2 mr-2 btn-icon btn-pill btn btn-info">
-                <i class="lnr-arrow-right-circle btn-icon-wrapper">
-                </i>Detail</button></a>
-          </td>
-        </tr>
-        @endforeach
-        @endif
-        </tr>
-      </tbody>
+      <td>{{ $d['name'] }}</td>
+      <td>{{ date("d M, Y", strtotime(date($d['dob']))) }}</td>
+      <td>{{ $d['gender'] }}</td>
+      <td>{{ $d['identityNumber'] }}</td>
+      <td style="text-align: center; vertical-align: middle;">
+        <a href=""><button class="mb-2 mr-2 btn-icon btn-pill btn btn-info">
+            <i class="lnr-arrow-right-circle btn-icon-wrapper">
+            </i>Detail</button></a>
+      </td>
+      </tr>
+      @endforeach
+      @endif
+      </tr>
+      </tbody> --}}
       <tfoot>
         <tr>
           <th>No</th>

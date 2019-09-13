@@ -1,23 +1,3 @@
-{{-- @php
-$class = "class=\"mm-active\"";
-$page = Request::segment(2);
-@endphp
-<li class="app-sidebar__heading">Menu</li>
-<li>
-  <a href="" @php echo $page=="dashboard" ? $class : null @endphp>
-    <i class="metismenu-icon pe-7s-monitor">
-    </i>Dashboard
-  </a>
-  <a href="{{ route('doctor.examinations') }}" @php echo $page=="examinations" ? $class : null @endphp>
-<i class="metismenu-icon pe-7s-eyedropper">
-</i>Pemeriksaan
-</a>
-<a href="{{ route('doctor.get-live-interactive') }}" @php echo $page=="live-interactive" ? $class : null @endphp>
-  <i class="metismenu-icon pe-7s-video">
-  </i>Live Interactive
-</a>
-</li> --}}
-
 @php
 $class = "class=mm-active";
 $page = Request::segment(2);
@@ -38,7 +18,7 @@ $page = Request::segment(2);
 <li>
   <a href="{{ route('doctor.get-live-interactive') }}" {{ $page === "live-interactive" ? $class : "" }}>
     <i class="metismenu-icon pe-7s-video">
-    </i>Petugas Klinik
+    </i>Live Interactive
   </a>
 </li>
 <li class="app-sidebar__heading">Pengaturan</li>

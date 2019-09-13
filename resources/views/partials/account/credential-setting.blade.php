@@ -13,7 +13,7 @@
 </div>
 <div class="main-card mb-3 card">
   <form id="credential-setting" action="{{ route('update-password') }}" method="POST">
-    <div class="card-header">Pengaturan Umum</div>
+    <div class="card-header">Pengaturan Password</div>
     <div class="card-body">
       <table class="mb-0 table table-hover">
         <tbody>

@@ -10,6 +10,18 @@ $page = Request::segment(2);
     </a>
 </li>
 <li>
+    <a href="{{ route('puskesmas.get-examinations') }}" {{ $page === "examinations" ? $class : "" }}>
+        <i class="metismenu-icon pe-7s-eyedropper">
+        </i>Pemeriksaan
+    </a>
+</li>
+<li>
+    <a href="{{ route('puskesmas.get-live-interactive-subms-list') }}" {{ $page === "live-interactive" ? $class : "" }}>
+        <i class="metismenu-icon pe-7s-video">
+        </i>Live Interactive
+    </a>
+</li>
+<li>
     <a href="{{ route('puskesmas.patients') }}" {{ $page === "patients" ? $class : "" }}>
         <i class="metismenu-icon pe-7s-users">
         </i>Pasien

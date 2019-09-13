@@ -398,10 +398,10 @@
 </html>
 
 {{-- modals --}}
-@if (Request::segment(1) == "puskesmas" && Request::segment(2) == "patients" && Request::segment(4) == "details")
-@include('partials.puskesmas.modals.examination-detail')
-@elseif (Request::segment(1) == "puskesmas" && Request::segment(2) == "patients")
+@if (Request::segment(1) == "puskesmas" && Request::segment(2) == "patients")
 @include('partials.puskesmas.modals.add-patient')
+@elseif (Request::segment(1) == "puskesmas" && Request::segment(2) == "officers")
+@include('partials.puskesmas.modals.add-officer')
 @elseif (Request::segment(1) == "admin" && Request::segment(2) == "doctors")
 @include('partials.admin.modals.add-doctor')
 @elseif (Request::segment(1) == "admin" && Request::segment(2) == "puskesmas")

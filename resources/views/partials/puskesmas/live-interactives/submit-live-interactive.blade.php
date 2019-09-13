@@ -7,20 +7,12 @@
         <i class="pe-7s-eyedropper icon-gradient bg-plum-plate">
         </i>
       </div>
-      <div>Live Interactive
+      <div>Pengajuan Live Interactive dengan Dokter
+        <div class="page-title-subheading">Diajukan pada.
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div id="video-element">
-  <div class="video-container">
-    <video id="selfview" class="my-video" src="" autoplay="true" muted="muted"></video>
-    <video id="remoteview" class="user-video" src="" autoplay="true"></video>
-  </div>
-  <span id="myid"></span>
-  <button id="endCall" style="display: none;" onclick="endCurrentCall()">End Call </button>
-  <canvas id="canvas-sc" width="640" height="480"></canvas>
-  <button id="takeSc" onclick="snap()">snapshot</button>
 </div>
 <div class="row">
   <div class="col-md-12">

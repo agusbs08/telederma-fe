@@ -97,4 +97,17 @@ class PuskesmasExaminationController extends Controller
       $response = $client->request('POST', 'examinations/' . $request->input('examinationId') . '/images');
       return json_decode($response->getBody(), true);
     }
+
+    public function getClinicsExaminationsView()
+    {
+      $guzzle_params = config('app.guzzle_params');
+      $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
+      $client = new Client($guzzle_params);
+      $response = $client->request('GET', 'examinations/clinics/' . Session::get('username'));
+      // dd(json_decode($response->getBody(), true));
+      return view('partials.puskesmas.examinations.examinations-list')
+        ->with('data', json_decode($response->getBody(), true))
+        ->with('pagename', 'puskesmas.get-clinics-examinations');
+    }
+
 }

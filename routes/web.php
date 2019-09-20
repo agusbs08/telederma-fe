@@ -32,7 +32,8 @@ Route::middleware(['role:clinic'])->group(function(){
         });
         Route::prefix('live-interactive')->group(function(){
             Route::get('/submission', 'Clinic\PuskesmasLiveInteractiveController@getSubmissionList')->name('puskesmas.get-live-interactive-subms-list');
-            Route::get('/propose', 'Clinic\PuskesmasLiveInteractiveController@proposeLiveInteractive')->name('puskesmas.propose-live-interactive');
+            Route::get('/submission/{id}', 'Clinic\PuskesmasLiveInteractiveController@getSubmissionDetails')->name('puskesmas.get-live-interactive-subms-details');
+            Route::post('/propose', 'Clinic\PuskesmasLiveInteractiveController@proposeLiveInteractive')->name('puskesmas.submit-live-interactive');
         });
     });
 });
@@ -49,7 +50,12 @@ Route::middleware(['role:doctor'])->group(function(){
             Route::get('{examination_id}', 'Doctor\DoctorExaminationsController@getDoctorExaminationDetailView')->name('doctor.examination-details');
         });
         Route::post('diagnose', 'Doctor\DoctorExaminationsController@postDiagnose')->name('doctor.post-diagnose');
-        Route::get('live-interactive', 'Doctor\DoctorExaminationsController@getLiveInteractive')->name('doctor.get-live-interactive');
+        Route::prefix('live-interactive')->group(function(){
+            Route::get('/submission', 'Doctor\DoctorLiveInteractiveController@getSubmissionList')->name('doctor.get-live-interactive-subms-list');
+            Route::get('/submission/{id}', 'Doctor\DoctorLiveInteractiveController@getSubmissionDetails')->name('doctor.get-live-interactive-subms-details');
+            Route::post('/submission/{id}/respond', 'Doctor\DoctorLiveInteractiveController@respondLiveInteractive')->name('doctor.respond-live-interactive-subms');
+        });
+        Route::get('live', 'Doctor\DoctorLiveInteractiveController@getLiveInteractive')->name('doctor.get-live-interactive');
     });
 });
 

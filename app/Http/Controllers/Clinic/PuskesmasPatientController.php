@@ -42,13 +42,17 @@ class PuskesmasPatientController extends Controller
       $guzzle_params = config('app.guzzle_params');
       $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
       $client = new Client($guzzle_params);
-      $patient_details = $client->request('GET', 'users/' . $patient_code);
       $patient_details = $client->request('GET', 'clinics/' . Session::get('username') . '/patients/' . $patient_code);
       $examinations = $client->request('GET', 'examinations/clinics/' . Session::get('username') . '/patients/' . $patient_code);
+      $hospitals = $client->request('GET', 'hospitals');
+      $officers = $client->request('GET', 'clinics/officers');
+      // dd(json_decode($patient_details->getBody(), true));
       return view('partials.puskesmas.patients.patient-detail')
-        ->with('pagename', 'puskesmas.get-patient-details-view')
+        ->with('hospitals', json_decode($hospitals->getBody(), true))
+        ->with('officers', json_decode($officers->getBody(), true))
         ->with('user_details', json_decode($patient_details->getBody(), true))
-        ->with('examinations_history', json_decode($examinations->getBody(), true));
+        ->with('examinations_history', json_decode($examinations->getBody(), true))
+        ->with('pagename', 'puskesmas.get-patient-details-view');
     }
 
 }

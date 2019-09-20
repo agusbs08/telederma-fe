@@ -73,9 +73,9 @@
           class="border-0 btn-transition btn btn-outline-primary"><i class="pe-7s-add-user btn-icon-wrapper"></i>
           Tambah
           Pemeriksaan</button></a>
-      <a href="{{ route('puskesmas.propose-live-interactive') }}"><button
-          class="border-0 btn-transition btn btn-outline-success"><i class="pe-7s-headphones btn-icon-wrapper"></i>
-          Ajukan Live Interactive</button></a>
+      <button class="border-0 btn-transition btn btn-outline-success" data-toggle="modal"
+        data-target="#addLiveSubsFormModal"><i class="pe-7s-headphones btn-icon-wrapper"></i>
+        Ajukan Live Interactive</button>
     </div>
   </div>
 </div>

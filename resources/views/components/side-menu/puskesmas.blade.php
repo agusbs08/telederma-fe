@@ -46,3 +46,10 @@ $page = Request::segment(2);
         </i>Keamanan & Login
     </a>
 </li>
+<li class="app-sidebar__heading">Lainnya</li>
+<li>
+    <a href="#" {{ $page === "" ? $class : "" }}>
+        <i class="metismenu-icon pe-7s-help1">
+        </i>Bantuan
+    </a>
+</li>

@@ -38,14 +38,10 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a>
-                                    <i aria-hidden="true" class="fa fa-home"></i>
+                                    <i aria-hidden="true" class="fa fa-user"></i>
+                                    &nbsp;
+                                    {{ Session::get('name') }}
                                 </a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a>Menu</a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a>Menu 1</a>
                             </li>
                         </ol>
                     </nav>
@@ -60,7 +56,7 @@
                         <div class="widget-content-left">
                             <div class="btn-group">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                    <img width="42" class="rounded-circle" src="{{ asset('images/avatars/3.jpg') }}"
+                                    <img width="42" class="rounded-circle" src="{{ Session::get('profile-picture') }}"
                                         alt="">
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
@@ -76,7 +72,7 @@
                                                     <div class="widget-content-wrapper">
                                                         <div class="widget-content-left mr-3">
                                                             <img width="42" class="rounded-circle"
-                                                                src="{{ asset('images/avatars/3.jpg') }}" alt="">
+                                                                src="{{ Session::get('profile-picture') }}" alt="">
                                                         </div>
                                                         <div class="widget-content-left">
                                                             <div class="widget-heading">{{ Session::get('name') }}

@@ -11,6 +11,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link href="{{asset('css/main.cba69814a806ecc7945a.css')}}" rel="stylesheet">
   <link href="{{asset('css/custom.css')}}" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="{{asset('images/t-logo.png')}}" />
   @if ($pagename == 'get-doctor-live-interactive-view')
   <link rel="stylesheet" href="{{ asset('css/video-call.css') }}">
   <script>

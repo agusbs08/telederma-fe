@@ -52,7 +52,8 @@ class AuthController extends Controller
         'auth-key' => $token,
         'authenticated' => "true",
         'username' => $userDetails['username'],
-        'role' => $userDetails['role']
+        'role' => $userDetails['role'],
+        'profile-picture' => $userDetails['profilePicture']
       ];
       if ($userDetails['role'] == 'doctor') {
         $userData['hospital'] = $userDetails['hospital'];

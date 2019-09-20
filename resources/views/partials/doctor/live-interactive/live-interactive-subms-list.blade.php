@@ -8,7 +8,7 @@
         </i>
       </div>
       <div>Pengajuan Live Interactive
-        <div class="page-title-subheading">Daftar pengajuan live interactive di {{ Session::get('name') }}
+        <div class="page-title-subheading">Daftar pengajuan live interactive di {{ Session::get('hospital') }}
         </div>
       </div>
     </div>
@@ -20,9 +20,7 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Nama Pasien</th>
-          <th>Petugas</th>
-          <th>RS Tujuan</th>
+          <th>Pengirim</th>
           <th>Tanggapan</th>
           <th>Waktu</th>
           <th>Detail</th>
@@ -33,13 +31,11 @@
         @foreach ($data as $i => $d)
         <tr>
           <td>{{ $i+1 }}</td>
-          <td>{{ $d['patient']['name'] }}</td>
-          <td>{{ $d['clinic']['officer'] }}</td>
-          <td>{{ $d['hospital'] }}</td>
+          <td>{{ $d['clinic']['name'] }}</td>
           <td>{{ sizeof($d['responses']) }} tanggapan</td>
           <td>{{ date("d M, Y, H:m", strtotime(date($d['createdAt']))) }} WIB</td>
           <td style="text-align: center; vertical-align: middle;">
-            <a href="{{ route('puskesmas.get-live-interactive-subms-details', ['id' => $d['_id']]) }}"><button
+            <a href="{{ route('doctor.get-live-interactive-subms-details', ['id' => $d['_id']]) }}"><button
                 class="mb-2 mr-2 btn-icon btn-pill btn btn-info">
                 <i class="lnr-arrow-right-circle btn-icon-wrapper">
                 </i>Detail</button></a>
@@ -51,9 +47,7 @@
       </tbody>
       <tfoot>
         <th>No</th>
-        <th>Nama Pasien</th>
-        <th>Petugas</th>
-        <th>RS Tujuan</th>
+        <th>Pengirim</th>
         <th>Tanggapan</th>
         <th>Waktu</th>
         <th>Detail</th>

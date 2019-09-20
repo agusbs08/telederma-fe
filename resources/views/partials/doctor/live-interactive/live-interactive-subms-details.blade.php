@@ -12,12 +12,14 @@
     </div>
     <div class="page-title-actions">
       <div class="d-inline-block">
-        <button type="button" class="btn-shadow btn btn-primary">
-          <span class="btn-icon-wrapper pr-2 opacity-7">
-            <i class="fa fa-video fa-w-20"></i>
-          </span>
-          Ke Halaman Live Interactive
-        </button>
+        <a href="{{ route('doctor.get-live-interactive') }}">
+          <button type="button" class="btn-shadow btn btn-primary">
+            <span class="btn-icon-wrapper pr-2 opacity-7">
+              <i class="fa fa-video fa-w-20"></i>
+            </span>
+            Ke Halaman Live Interactive
+          </button>
+        </a>
       </div>
     </div>
   </div>
@@ -79,6 +81,10 @@
   </div>
 </div>
 
+@if (sizeof($data['responses']) > 0)
+<h6>Tanggapan:</h6>
+@endif
+
 @foreach ($data['responses'] as $d)
 <div class="card mb-2">
   <div class="card-body">
@@ -96,6 +102,12 @@
         <div class="mt-2">
           {{ $d['comment'] }}
         </div>
+        @if ($d['doctor']['username'] == Session::get('username'))
+        <div class="small mt-2">
+          <a href="{{ route('doctor.delete-respond-live-interactive-subms', ['subs_id' => $data['_id'], 'resp_id' => $d['_id']]) }}"
+            class="text-muted">Batalkan tanggapan</a>
+        </div>
+        @endif
       </div>
     </div>
   </div>

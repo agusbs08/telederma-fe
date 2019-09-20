@@ -51,4 +51,14 @@ class DoctorLiveInteractiveController extends Controller
         ]);
         return redirect()->back();
     }
+
+    public function cancelResponse(Request $request, $subs_id, $resp_id)
+    {
+        // dd([$subs_id, $resp_id]);
+        $guzzle_params = config('app.guzzle_params');
+        $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
+        $client = new Client($guzzle_params);
+        $response = $client->request('DELETE', 'examinations/live-interactive/submissions/' . $subs_id. '/responses/' . $resp_id);
+        return redirect()->back();
+    }
 }

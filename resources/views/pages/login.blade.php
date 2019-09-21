@@ -51,9 +51,10 @@
         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
           <div class="app-logo"></div>
           <h4 class="mb-0">
-            <span class="d-block">Selamat datang,</span>
             <span>Silakan login ke akun Anda.</span></h4>
-          <h6 class="mt-3">Hubungi admin bila ingin membuat mendaftar sebagai puskesmas atau dokter.</h6>
+          <h6 class="mt-3">Hubungi admin di nomor +6281234463736 atau email ke admin@teledermatology.id bila ingin
+            mendaftar sebagai puskesmas atau
+            dokter.</h6>
           @if (session('errors'))
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <button type="button" class="close" aria-label="Close"></button>
@@ -80,21 +81,16 @@
                 </div>
               </div>
             </div>
-            <p></p>
-            <div class="position-relative form-check"><input name="check" id="exampleCheck" type="checkbox"
-                class="form-check-input"><label for="exampleCheck" class="form-check-label">Ingat saya</label>
+            <div class="g-recaptcha" data-callback="reCaptchaCallback" data-sitekey="{{ env('CAPTCHA_SITEKEY') }}">
             </div>
             <div class="divider row"></div>
-            <div class="m-2">
-              {!! app('captcha')->display() !!}
-            </div>
             <div class="alert alert-danger alert-dismissible fade show login-message" role="alert"
               style="display: none;">
             </div>
             <div class="d-flex align-items-center">
               <div class="ml-auto">
-                <a href="javascript:void(0);" class="btn-lg btn btn-link">Lupa password ?</a>
-                <button class="ladda-button mb-2 mr-2 btn btn-primary" data-style="zoom-in" onclick="login()">
+                <button class="ladda-button mb-2 mr-2 btn btn-primary" data-style="zoom-in" onclick="login()" disabled
+                  id="login-button">
                   <span class="ladda-label">Login
                   </span>
                   <span class="ladda-spinner">

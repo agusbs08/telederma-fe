@@ -1,7 +1,4 @@
 <!doctype html>
-<html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-{!! NoCaptcha::renderJs() !!}
 @include('components.header')
 
 <body>
@@ -12,6 +9,9 @@
   @if ($pagename == 'login')
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script>
+    function reCaptchaCallback() {
+      $('#login-button').removeAttr('disabled')
+    }
     function login() {
       if (!this.validateLogin()) return
       $.ajax({
@@ -31,7 +31,10 @@
             if (data.hasOwnProperty('msg')){
               $('.login-message').show().text(data.msg)
             } else {
-            window.location = data;
+              if (grecaptcha.getResponse() == "")
+                $('.login-message').show().text("Captcha harus diisi!");
+              else
+                window.location = data;
             }
           },
           error: (error) => {

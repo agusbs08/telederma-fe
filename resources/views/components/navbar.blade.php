@@ -77,9 +77,6 @@
                                                         <div class="widget-content-left">
                                                             <div class="widget-heading">{{ Session::get('name') }}
                                                             </div>
-                                                            <div class="widget-subheading opacity-8">
-                                                                {{ '@' . Session::get('username') }}
-                                                            </div>
                                                         </div>
                                                         <div class="widget-content-right mr-2">
                                                             <a href="{{ route('auth.logout') }}">

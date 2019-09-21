@@ -2,13 +2,15 @@
 $class = "class=mm-active";
 $page = Request::segment(2);
 @endphp
-<li class="app-sidebar__heading">Menu</li>
+<li class="app-sidebar__heading">Profil</li>
 <li>
-  <a href="" {{ $page === "dashboard" ? $class : "" }}>
-    <i class="metismenu-icon pe-7s-monitor">
-    </i>Dashboard
+  <a href="#" {{ $page === "dashboard" ? $class : "" }}>
+    <i class="metismenu-icon pe-7s-user">
+    </i>
+    Profil Saya
   </a>
 </li>
+<li class="app-sidebar__heading">Menu</li>
 <li>
   <a href="{{ route('doctor.examinations') }}" {{ $page === "examinations" ? $class : "" }}>
     <i class="metismenu-icon pe-7s-eyedropper">

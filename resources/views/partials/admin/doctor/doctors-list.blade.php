@@ -7,7 +7,7 @@
         <i class="pe-7s-magic-wand icon-gradient bg-tempting-azure">
         </i>
       </div>
-      <div>List Dokter
+      <div>Dokter
         <div class="page-title-subheading">Daftar Dokter yang Telah Terdaftar dalam Sistem
         </div>
       </div>
@@ -15,7 +15,7 @@
     <div class="page-title-actions">
       <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal"
         data-target="#addDoctorFormModal" onclick="openAddDoctorFormModal()">
-        <i class="fa fa-plus"></i> Tambah Dokter
+        <i class="fa fa-plus"></i> Register Dokter
       </button>
     </div>
   </div>
@@ -26,9 +26,10 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Nama-</th>
+          <th>Nama</th>
+          <th>Foto</th>
           <th>NIP</th>
-          <th>Dinas Rumah Sakit</th>
+          {{-- <th>Dinas Rumah Sakit</th> --}}
           <th>Tindakan</th>
         </tr>
       </thead>
@@ -37,10 +38,13 @@
         <tr>
           <td>{{ $i+1 }}</td>
           <td>{{ $d['name'] }}</td>
+          <td>
+            <img width="42" class="" src="{{ $d['profilePicture'] }}" alt="">
+          </td>
           <td>{{ $d['identityNumber'] }}</td>
-          <td>{{ $d['hospital'] }}</td>
+          {{-- <td>{{ $d['hospital'] }}</td> --}}
           <td style="text-align: center; vertical-align: middle;">
-            <a href="{{ route('admin.doctor-details', ['doctor_username' => $d['username']]) }}">
+            <a href="{{ route('admin.doctor-details', ['id' => $d['_id']]) }}">
               <button class="mb-2 mr-2 btn-icon btn-pill btn btn-primary"><i
                   class="lnr-arrow-right-circle btn-icon-wrapper">
                 </i>Detail
@@ -53,9 +57,10 @@
       <tfoot>
         <tr>
           <th>No</th>
-          <th>Nama-</th>
-          <th>Username</th>
-          <th>Rumah Sakit</th>
+          <th>Nama</th>
+          <th>Foto</th>
+          <th>NIP</th>
+          {{-- <th>Dinas Rumah Sakit</th> --}}
           <th>Tindakan</th>
         </tr>
       </tfoot>

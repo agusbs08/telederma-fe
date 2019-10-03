@@ -21,12 +21,12 @@
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
           },
           data: {
-              username: $('#username').val(),
+              email: $('#email').val(),
               password: $('#password').val()
           },
           success: (data) => {
-            $('#username,#password').removeClass('is-invalid')
-            $('#username,#password').removeAttr('aria-describedby aria-invalid')
+            $('#email,#password').removeClass('is-invalid')
+            $('#email,#password').removeAttr('aria-describedby aria-invalid')
             $('.login-message').hide()
             if (data.hasOwnProperty('msg')){
               $('.login-message').show().text(data.msg)

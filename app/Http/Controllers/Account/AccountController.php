@@ -17,6 +17,7 @@ class AccountController extends Controller
         $response = $client->request('GET', 'users/' . Session::get('username'));
         $userData = json_decode($response->getBody(), true);
         return view('partials.account.general-setting')
+            ->with('pagetitle', 'Pengaturan Umum')
             ->with('pagename', 'general-setting')
             ->with('user_data', json_decode($response->getBody(), true));
     }
@@ -24,6 +25,7 @@ class AccountController extends Controller
     public function getCredentialSettings()
     {
         return view('partials.account.credential-setting')
+            ->with('pagetitle', 'Pengaturan Keamanan')
             ->with('pagename', 'credential-setting');
     }
 
@@ -81,7 +83,6 @@ class AccountController extends Controller
                 'reNewPassword' => $request->input('re-new-password'),
             ]
         ]);
-        // dd(json_decode($response->getBody(), true));
         if ($response->getStatusCode() == 200){
             return redirect()->route('credential-settings')->with('password-update-success', 'Password diupdate');
         } else {

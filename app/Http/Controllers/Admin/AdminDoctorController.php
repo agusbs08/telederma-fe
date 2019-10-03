@@ -18,17 +18,19 @@ class AdminDoctorController extends Controller
             'query' => ['role' => 'doctor']
         ]);
         return view('partials.admin.doctor.doctors-list')
+            ->with('pagetitle', 'Daftar dokter')
             ->with('pagename', 'admin.doctors-list-view')
             ->with('doctors', json_decode($doctorResponse->getBody(), true));
     }
 
-    public function getAdminDoctorDetailView($doctor_username)
+    public function getAdminDoctorDetailView($doctorId)
     {
         $guzzle_params = config('app.guzzle_params');
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
         $client = new Client($guzzle_params);
-        $doctorResponse = $client->request('GET', 'users/' . $doctor_username);
+        $doctorResponse = $client->request('GET', 'users/doctor/' . $doctorId);
         return view('partials.admin.doctor.doctor-details')
+            ->with('pagetitle', 'Profil Dokter')
             ->with('pagename', 'admin.doctor-details-view')
             ->with('doctor_detail', json_decode($doctorResponse->getBody(), true));
     }
@@ -40,16 +42,17 @@ class AdminDoctorController extends Controller
         $client = new Client($guzzle_params);
         $response = $client->request('POST', 'register', [
             'form_params' => [
-                'email' => $request->input('email'),
-                'password' => $request->input('password'),
-                'username' => $request->input('username'),
+                'password' => "dokter-td-123",
                 'role' => 'doctor',
+                'email' => $request->input('email'),
                 'name' => $request->input('name'),
                 'phone' => $request->input('phone'),
-                'identityNumber' => $request->input('identityNumber'),
+                'identityNumber' => $request->input('nik'),
                 'dob' => $request->input('dob'),
-                'hospital' => $request->input('hospital')
+                'hospital' => $request->input('hospital'),
+                'gender' => $request->input('gender'),
             ]
         ]);
+        return redirect()->back();
     }
 }

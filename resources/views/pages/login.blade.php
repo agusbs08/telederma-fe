@@ -65,10 +65,9 @@
           <div>
             <div class="form-row">
               <div class="col-md-6">
-                <div class="position-relative form-group"><label for="username" class="">Username</label>
-                  <input name="username" id="username" placeholder="Masukkan username Anda" type="text"
-                    class="form-control">
-                  <em id="username-error" class="error invalid-feedback" style="display: none;">Username tidak boleh
+                <div class="position-relative form-group"><label for="email" class="">Email</label>
+                  <input name="email" id="email" placeholder="Masukkan email Anda" type="text" class="form-control">
+                  <em id="username-error" class="error invalid-feedback" style="display: none;">Email tidak boleh
                     kosong</em>
                 </div>
               </div>

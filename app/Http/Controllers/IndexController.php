@@ -17,7 +17,9 @@ class IndexController extends Controller
         elseif (Session::get('role') === 'admin')
           return redirect()->route('admin.doctors');
       } else {
-        return view('pages.login')->with('pagename', 'login');
+        return view('pages.login')
+          ->with('pagetitle', 'Login')
+          ->with('pagename', 'login');
       }
     }
 }

@@ -7,15 +7,15 @@
         <i class="pe-7s-home icon-gradient bg-tempting-azure">
         </i>
       </div>
-      <div>List Puskesmas
-        <div class="page-title-subheading">Daftar Puskesmas yang Telah Terdaftar dalam Sistem
+      <div>Daftar Klinik
+        <div class="page-title-subheading">Daftar Klinik yang Telah Terdaftar dalam Sistem
         </div>
       </div>
     </div>
     <div class="page-title-actions">
       <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal"
         data-target="#addPuskesmasFormModal">
-        <i class="fa fa-plus"></i> Tambah Puskesmas
+        <i class="fa fa-plus"></i> Tambah Klinik
       </button>
     </div>
   </div>
@@ -40,7 +40,7 @@
           <td>{{ $p['identityNumber'] }}</td>
           <td>{{ $p['email'] }}</td>
           <td style="text-align: center; vertical-align: middle;">
-            <a href="{{ route('admin.puskesmas-details', ['puskesmas_username' => $p['username']]) }}">
+            <a href="{{ route('admin.puskesmas-details', ['clinic_id' => $p['_id']]) }}">
               <button class="mb-2 mr-2 btn-icon btn-pill btn btn-primary"><i
                   class="lnr-arrow-right-circle btn-icon-wrapper">
                 </i>Detail

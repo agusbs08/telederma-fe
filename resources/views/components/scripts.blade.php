@@ -219,52 +219,44 @@
 @if ($pagename == 'admin.doctors-list-view')
 <script>
     function openAddDoctorFormModal(){
-            $.ajax({
-                type: "GET",
-                url: '{{ config('app.API_endpoint') }}hospitals',
-                headers: {
-                    'Authorization': 'Bearer {{ Session::get('auth-key') }}'
-                },
-                success: (res) => {
-                    $('#hospital').empty()
-                    $('#hospital').append('<option selected disabled>Pilih Rumah Sakit: </option>')
-                    res.forEach(r => {
-                        $("#hospital").append(new Option(r.name, r.name));
-                    })
-                },
-                error: (error) => {
-                    console.log(error)
-                }
-            });
-        }
-        function submitDoctor(){
-            const data = {
-                role: "doctor",
-                identityNumber: $('#nik').val(),
-                name: $('#name').val(),
-                dob: $('#birth-date').val(),
-                username: $('#username').val(),
-                email: $('#email').val(),
-                password: $('#password').val(),
-                confirmPassword: $('#confirm-password').val(),
-                hospital: $('#hospital').val(),
-                phone: $('#phone').val()
+        $.ajax({
+            type: "GET",
+            url: '{{ config('app.API_endpoint') }}' + 'hospitals',
+            headers: {
+                'Authorization': 'Bearer {{ Session::get('auth-key') }}'
+            },
+            success: (res) => {
+                $('#hospital').empty()
+                res.forEach(r => {
+                    $("#hospital").append(new Option(r.name, r._id));
+                })
+            },
+            error: (error) => {
+                console.log(error)
             }
-            $.ajax({
-                type: "POST",
-                url: "{{ route('admin.submit-doctors') }}",
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                data: data,
-                success: () => {
-                    location.reload();
-                },
-                error: (error) => {
-                    console.log(error)
+        });
+    }
+    function submitDoctor(){
+        event.preventDefault()
+        $.ajax({
+            type: "POST",
+            url: "{{ config('app.API_endpoint') }}" + 'users/check',
+            data: {"email": $('#email').val()},
+            success: (response) => {
+                console.log(response)
+                if (parseInt(response.count) >= 1){
+                    $('#sub-msg').show().text("Email sudah digunakan")
+                    console.log("used-in") 
+                } else {
+                    console.log("email unregistered")
+                    document.getElementById("registerControlForm").submit()
                 }
-            });
-        }
+            },
+            error: (error) => {
+                console.log(error)
+            }
+        });
+    }
 </script>
 @endif
 @if ($pagename == 'admin.puskesmas-list-view')

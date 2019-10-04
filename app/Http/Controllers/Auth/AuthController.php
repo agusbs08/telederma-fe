@@ -31,7 +31,8 @@ class AuthController extends Controller
       if ($loginResponse->getStatusCode() == 200){
         $token = json_decode($loginResponse->getBody(), true)['token'];
         $id = json_decode($loginResponse->getBody(), true)['id'];
-        $userDetails = $this->setLoginSession($id, $token);
+        $role = json_decode($loginResponse->getBody(), true)['role'];
+        $userDetails = $this->setLoginSession($id, $token, $role);
         if ($userDetails['role'] == 'clinic')
           return route('puskesmas.patients', [], false);
         elseif ($userDetails['role'] == 'doctor')
@@ -43,12 +44,12 @@ class AuthController extends Controller
       }
     }
 
-    function setLoginSession($id, $token)
+    function setLoginSession($id, $token, $role)
     {
       $guzzle_params = config('app.guzzle_params');
       $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . $token];
       $client = new Client($guzzle_params);
-      $getUserDetailResponse = $client->request('GET', 'users/' . $id);
+      $getUserDetailResponse = $client->request('GET', 'users/' . $role . '/' . $id);
       $userDetails = json_decode($getUserDetailResponse->getBody(), true);
       $userData = [
         'user-id' => $id,

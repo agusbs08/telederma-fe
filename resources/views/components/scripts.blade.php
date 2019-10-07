@@ -263,12 +263,9 @@
 <script>
     function submitPuskesmas(){
             const data = {
-                role: "puskesmas",
                 name: $('#name').val(),
                 username: $('#username').val(),
                 email: $('#email').val(),
-                password: $('#password').val(),
-                confirmPassword: $('#confirm-password').val(),
                 phone: $('#phone').val(),
                 identityNumber: $('#identity-number').val()
             }

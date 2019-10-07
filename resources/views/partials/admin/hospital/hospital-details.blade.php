@@ -8,29 +8,12 @@
         <div class="menu-header-content btn-pane-right">
           <div>
             <h5 class="menu-header-title">{{ $hospital_detail['name'] }}</h5>
-            <h6 class="menu-header-subtitle">{{ $hospital_detail['phone'] }}</h6>
           </div>
           <div class="menu-header-btn-pane">
-            <button class="ladda-button btn btn-pill btn-dark" data-style="slide-right"><span
-                class="ladda-label">Pengaturan Akun</span><span class="ladda-spinner"></span></button>
           </div>
         </div>
       </div>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="bg-warm-flame list-group-item">
-        <div class="widget-content">
-          <div class="text-center">
-            <h5 class="widget-heading opacity-4">Performa</h5>
-            <h5>
-              <span><b class="text-danger">12</b> pasien</span>
-              <span> - </span>
-              <span><b class="text-success">5</b> pemeriksaan</span>
-            </h5>
-          </div>
-        </div>
-      </li>
-    </ul>
     <div class="card-header card-header-tab-animation">
       <ul class="nav">
         <li class="nav-item"><a data-toggle="tab" href="#tab-eg115-0" class="nav-link show active">Informasi Umum</a>
@@ -55,6 +38,11 @@
             <strong>Telepon:</strong>
             <br>
             {{ $hospital_detail['phone'] }}
+          </p>
+          <p>
+            <strong>website:</strong>
+            <br>
+            <a href="{{ $hospital_detail['website'] }}">{{ $hospital_detail['website'] }}</a>
           </p>
         </div>
         <div class="tab-pane show" id="tab-eg115-1" role="tabpanel">

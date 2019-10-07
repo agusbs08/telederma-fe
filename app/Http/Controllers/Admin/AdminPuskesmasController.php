@@ -45,12 +45,12 @@ class AdminPuskesmasController extends Controller
             'form_params' => [
                 'email' => $request->input('email'),
                 'password' => "klinik-td-123",
-                'username' => $request->input('username'),
                 'role' => 'clinic',
                 'name' => $request->input('name'),
                 'phone' => $request->input('phone'),
                 'identityNumber' => $request->input('identityNumber'),
             ]
         ]);
+        return redirect()->back();
     }
 }

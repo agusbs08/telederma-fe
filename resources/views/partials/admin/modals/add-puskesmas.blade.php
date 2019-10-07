@@ -3,35 +3,30 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Puskesmas</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Pendaftaran Klinik</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form class="">
-          <div class="position-relative form-group"><label for="email" class="">Email</label><input name="email"
-              id="email" placeholder="contoh: klinik@email.com" type="email" class="form-control"></div>
-          <div class="position-relative form-group"><label for="name" class="">Nama Puskesmas</label><input name="name"
-              id="name" placeholder="contoh: Puskesmas Kelurahan Kemang" type="text" class="form-control"></div>
-          <div class="position-relative form-group"><label for="username" class="">Username</label><input
-              name="username" id="username" placeholder="contoh: puskemang" type="text" class="form-control"></div>
-          <div class="position-relative form-group"><label for="phone" class="">Telepon</label><input name="username"
-              id="phone" placeholder="contoh: 032332" type="text" class="form-control"></div>
+      <form action="{{ route('admin.submit-clinic') }}" method="POST">
+        <div class="modal-body">
+          <div class="position-relative form-group"><label for="email" class="">Email</label><input required
+              name="email" id="email" placeholder="Tuliskan email ..." type="email" class="form-control"></div>
+          <div class="position-relative form-group"><label for="name" class="">Nama Puskesmas</label><input required
+              name="name" id="name" placeholder="Tuliskan nama klinik ..." type="text" class="form-control"></div>
+          <div class="position-relative form-group"><label for="phone" class="">Telepon</label><input required
+              name="phone" id="phone" placeholder="Tuliskan telepon klinik ..." type="text" class="form-control">
+          </div>
           <div class="position-relative form-group"><label for="identity-number" class="">No. Klinik /
-              Puskesmas</label><input name="username" id="identity-number" placeholder="contoh: 3332341233" type="text"
-              class="form-control"></div>
-          <div class="position-relative form-group"><label for="password" class="">Password</label><input
-              name="password" id="password" placeholder="***********" type="password" class="form-control"></div>
-          <div class="position-relative form-group"><label for="confirm-password" class="">Konfirmasi
-              Password</label><input name="confirm-password" id="confirm-password" placeholder="***********"
-              type="password" class="form-control"></div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-        <button type="button" class="btn btn-primary" onclick="submitPuskesmas()">Simpan</button>
-      </div>
+              Puskesmas</label><input required name="identityNumber" id="identity-number"
+              placeholder="Tuliskan no. klinik ..." type="text" class="form-control"></div>
+          @csrf
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

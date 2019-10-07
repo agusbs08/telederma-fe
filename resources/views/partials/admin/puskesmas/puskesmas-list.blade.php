@@ -15,7 +15,7 @@
     <div class="page-title-actions">
       <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal"
         data-target="#addPuskesmasFormModal">
-        <i class="fa fa-plus"></i> Tambah Klinik
+        <i class="fa fa-plus"></i> Daftarkan Klinik
       </button>
     </div>
   </div>
@@ -26,7 +26,7 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Nama-</th>
+          <th>Nama</th>
           <th>No. Reg</th>
           <th>Email</th>
           <th>Tindakan</th>
@@ -53,8 +53,8 @@
       <tfoot>
         <tr>
           <th>No</th>
-          <th>Nama-</th>
-          <th>Username</th>
+          <th>Nama</th>
+          <th>No. Reg</th>
           <th>Email</th>
           <th>Tindakan</th>
         </tr>

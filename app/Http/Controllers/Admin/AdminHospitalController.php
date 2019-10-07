@@ -17,6 +17,7 @@ class AdminHospitalController extends Controller
         $hospitalResponse = $client->request('GET', 'hospitals');
         return view('partials.admin.hospital.hospitals-list')
             ->with('pagename', 'admin.hospitals-list-view')
+            ->with('pagetitle', 'Daftar Rumah Sakit')
             ->with('hospitals', json_decode($hospitalResponse->getBody(), true));
     }
 
@@ -26,14 +27,10 @@ class AdminHospitalController extends Controller
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
         $client = new Client($guzzle_params);
         $hospitalResponse = $client->request('GET', 'hospitals/' . $hospital_id);
-        $doctorResponse = $client->request('GET', 'users', [
-            'query' => [
-                'role' => 'doctor',
-                'hospital' => json_decode($hospitalResponse->getBody(), true)['name']
-            ]
-        ]);
+        $doctorResponse = $client->request('GET', 'hospitals/' . $hospital_id . '/doctors');
         return view('partials.admin.hospital.hospital-details')
             ->with('pagename', 'admin.hospital-details-view')
+            ->with('pagetitle', 'Profil Rumah Sakit')
             ->with('hospital_detail', json_decode($hospitalResponse->getBody(), true))
             ->with('doctors', json_decode($doctorResponse->getBody(), true));
     }

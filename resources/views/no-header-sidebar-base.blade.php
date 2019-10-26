@@ -31,10 +31,11 @@
             if (data.hasOwnProperty('msg')){
               $('.login-message').show().text(data.msg)
             } else {
-              if (grecaptcha.getResponse() == "")
-                $('.login-message').show().text("Captcha harus diisi!");
-              else
-                window.location = data;
+              // if (grecaptcha.getResponse() == "")
+              //   $('.login-message').show().text("Captcha harus diisi!");
+              // else
+              //   window.location = data;
+              window.location = data;
             }
           },
           error: (error) => {

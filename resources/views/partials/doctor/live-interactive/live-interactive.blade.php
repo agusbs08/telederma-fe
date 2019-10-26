@@ -20,7 +20,7 @@
   <span id="myid"></span>
   <button id="endCall" style="display: none;" onclick="endCurrentCall()">End Call </button>
   <canvas id="canvas-sc" width="640" height="480"></canvas>
-  <button id="takeSc" onclick="snap()">snapshot</button>
+  <button class="btn btn-primary" id="takeSc" onclick="snap()">Ambil Gambar</button>
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -50,7 +50,15 @@
               type="text" class="form-control">
           </div>
         </div>
-        <fieldset id="recipe-field">
+        <div class="position-relative row form-group"><label for="\" class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="toggle-resep" onchange="showRecipeField()">
+              <label class="custom-control-label" for="toggle-resep">Sertakan Resep</label>
+            </div>
+          </div>
+        </div>
+        <fieldset id="recipe-field" style="display: none;">
           <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Resep</label>
             <div class="col-sm-10">
               <div class="form-row">
@@ -68,7 +76,8 @@
         </fieldset>
       </div>
       <div class="d-block text-center card-footer">
-        <button href="" class="btn-wide btn-shadow btn btn-block btn-primary" onclick="submitDiagnose()">Submit Hasil
+        <button href="" class="btn-wide btn-shadow btn btn-block btn-primary" onclick="submitLiveExamination()">Submit
+          Hasil
           Diagnosa</button>
       </div>
     </div>

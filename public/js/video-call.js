@@ -1,33 +1,33 @@
 // document.getElementById("selfview").volume = 0;
 
 var video = document.getElementById("selfview");
-var canvas = document.getElementById("canvas-sc");
-var context = canvas.getContext("2d");
-var w, h, ratio;
+// var canvas = document.getElementById("canvas-sc");
+// var context = canvas.getContext("2d");
+// var w, h, ratio;
 
-video.addEventListener(
-    "loadedmetadata",
-    function() {
-        ratio = video.videoWidth / video.videoHeight;
-        w = video.videoWidth - 100;
-        h = parseInt(w / ratio, 10);
-        canvas.width = w;
-        canvas.height = h;
-    },
-    false
-);
+// video.addEventListener(
+//     "loadedmetadata",
+//     function() {
+//         ratio = video.videoWidth / video.videoHeight;
+//         w = video.videoWidth - 100;
+//         h = parseInt(w / ratio, 10);
+//         canvas.width = w;
+//         canvas.height = h;
+//     },
+//     false
+// );
 
-function snap() {
-    context.fillRect(0, 0, w, h);
-    context.drawImage(video, 0, 0, w, h);
-}
+// function snap() {
+//     context.fillRect(0, 0, w, h);
+//     context.drawImage(video, 0, 0, w, h);
+// }
 console.log(user_id);
-var user_id = Math.random(10000).toString();
-var name = "Jancok";
+//var user_id = Math.random(10000).toString();
+//var name = "Jancok";
 var pusher = new Pusher("ed6c4e67e5c5bf35c1ef", {
     cluster: "ap1",
     encrypted: true,
-    authEndpoint: `/pusher/auth/${user_id}/${name}`,
+    authEndpoint: `/pusher/auth/${user_id}/${user_id}`,
     auth: {
         params: user_id,
         headers: {
@@ -101,7 +101,7 @@ function render() {
         list +=
             `<li>` +
             user +
-            ` <input type="button" style="float:right;"  value="Call" onclick="callUser('` +
+            ` <input class="btn btn-primary" type="button" style="float:right;"  value="Call" onclick="callUser('` +
             user +
             `')" id="makeCall" /></li>`;
     });

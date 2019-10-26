@@ -6,7 +6,7 @@
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
         @include('components.navbar')
-        @include('components.ui-theme-setting')
+        {{-- @include('components.ui-theme-setting') --}}
         <div class="app-main">
             @include('components.sidebar')
             <div class="app-main__outer">

@@ -12,12 +12,12 @@
     </div>
     <div class="page-title-actions">
       <div class="d-inline-block">
-        <button type="button" class="btn-shadow btn btn-primary">
+        <a href="{{ route('live-patient', ['id' => Session::get('name')]) }}" class="btn-shadow btn btn-primary">
           <span class="btn-icon-wrapper pr-2 opacity-7">
             <i class="fa fa-video fa-w-20"></i>
           </span>
           Ke Halaman Live Interactive
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -80,14 +80,15 @@
         <a href="javascript:void(0)">{{ $d['doctor']['name'] }}</a>
         <div class="text-muted small">Anggota sejak {{ date('d-M-Y', strtotime($d['doctor']['registerDate'])) }}
           &nbsp;·&nbsp;
-          {{ $d['doctor']['numberOfDiagnoses'] }}
-          diagnosa.</div>
+          {{-- {{ $d['doctor']['numberOfDiagnoses'] }}
+          diagnosa. --}}
+        </div>
         <div class="mt-2">
           {{ $d['comment'] }}
         </div>
-        <div class="small mt-2">
+        {{-- <div class="small mt-2">
           <a href="javascript:void(0)" class="btn btn-primary btn-sm">Kontak Dokter</a>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>

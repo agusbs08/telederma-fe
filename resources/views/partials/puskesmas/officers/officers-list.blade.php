@@ -29,7 +29,7 @@
           <th>Tanggal Lahir</th>
           <th>Gender</th>
           <th>No. Identitas</th>
-          <th>Detail Petugas</th>
+          {{-- <th>Detail Petugas</th> --}}
         </tr>
       </thead>
       <tbody>
@@ -41,11 +41,11 @@
           <td>{{ date("d M, Y", strtotime(date($d['dob']))) }}</td>
           <td>{{ $d['gender'] }}</td>
           <td>{{ $d['identityNumber'] }}</td>
-          <td style="text-align: center; vertical-align: middle;">
+          {{-- <td style="text-align: center; vertical-align: middle;">
             <a href=""><button class="mb-2 mr-2 btn-icon btn-pill btn btn-info">
                 <i class="lnr-arrow-right-circle btn-icon-wrapper">
                 </i>Detail</button></a>
-          </td>
+          </td> --}}
         </tr>
         @endforeach
         @endif
@@ -58,7 +58,7 @@
           <th>Gender</th>
           <th>Tanggal Lahir</th>
           <th>No. Identitas</th>
-          <th>Detail Petugas</th>
+          {{-- <th>Detail Petugas</th> --}}
         </tr>
       </tfoot>
     </table>

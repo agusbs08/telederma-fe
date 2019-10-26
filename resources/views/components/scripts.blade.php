@@ -49,50 +49,51 @@
 <script src="{{ asset('js/diagnoses-recommendation.js') }}"></script>
 <script>
     function submitExamination() {
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('puskesmas.submit-examination') }}",
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                data: {
-                    hospital: $('#hospital').val(),
-                    type: 'Store and Forward',
-                    patientId: '{{ $patientId }}',
-                    automatedDiagnoseResult: automatedDiagnoseResult,
-                    description: $('#description').val(),
-                    officer: $('#officer').val(),
-                },
-                success: (res) => {
-                    console.log(res)
-                    let id = res.examination._id
-                    let formData = new FormData()
-                    $.each($("input[type='file']")[0].files, function(i, file) {
-                        formData.append('images', file);
-                    });
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ config('app.API_endpoint') }}" + 'examinations/' + id + "/images",
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
-                        },
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: (data) => {
-                            window.location = '/puskesmas/patients/{{$patientId}}/details'
-                        },
-                        error: (error) => {
-                            console.log(error)
-                        }
-                    });
-                },
-                error: (error) => {
-                    console.log(error)
-                }
-            })
-        }
+        let examinationData = {
+                hospital: $('#hospital').val(),
+                type: 'Store and Forward',
+                patientId: '{{ $patientId }}',
+                automatedDiagnoseResult: automatedDiagnoseResult,
+                description: $('#description').val(),
+                officer: $('#officer').val(),
+            }
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('puskesmas.submit-examination') }}",
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: examinationData,
+            success: (res) => {
+                console.log(res)
+                let id = res.examination._id
+                let formData = new FormData()
+                $.each($("input[type='file']")[0].files, function(i, file) {
+                    formData.append('images', file);
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "{{ config('app.API_endpoint') }}" + 'examinations/' + id + "/images",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: (data) => {
+                        window.location = '/puskesmas/patients/{{$patientId}}/details'
+                    },
+                    error: (error) => {
+                        console.log(error)
+                    }
+                });
+            },
+            error: (error) => {
+                console.log(error)
+            }
+        })
+    }
 </script>
 @endif
 @if($pagename == 'puskesmas.get-patient-list-view')
@@ -126,63 +127,207 @@
 @if ($pagename == 'get-doctor-live-interactive-view')
 <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
 <script src="{{ asset('js/video-call-doctor.js') }}"></script>
+<script>
+    function showRecipeField(){
+        $('#recipe-field').toggle()
+    }
+    $('#add-recipe-form').click(() => {
+        let fieldWrapper = $("<div class=\"position-relative row form-group\"></div>");
+        let element = "<label class=\"col-sm-2 col-form-label\"></label>"
+        element += "<div class=\"col-sm-10\">"
+        element += "<div class=\"form-row\">"
+        element += "<div class=\"col-md-4 position-relative form-group\">"
+        element += "<input name=\"medicine-name\" placeholder=\"nama obat\" type=\"text\" class=\"medicine-name mr-2 form-control\">"
+        element += "</div>"
+        element += "<div class=\"col-md-2 position-relative form-group \">"
+        element += "<input name=\"usage-rule\" placeholder=\"aturan pakai\" type=\"text\" class=\"usage-rule mr-2 form-control\">"
+        element += "</div>"
+        element += "<div class=\"col-md-4 position-relative form-group \">"
+        element += "<input name=\"recipe-desc\" placeholder=\"keterangan\" type=\"text\" class=\"recipe-desc mr-2 form-control\">"
+        element += "</div>"
+        element += "<div class=\"col-md-2 position-relative form-group \">"
+        element += "<button class=\"btn btn-danger btn-block btn-remove-field\" type=\"button\">Hapus Resep</button></div></div></div>";
+        element += "</div></div></div></div>"
+        $(document).on("click", ".btn-remove-field", function(){
+            $(this).closest('.row').remove()
+        });
+        fieldWrapper.append($(element));
+        $('#recipe-field').append(fieldWrapper);
+    })
+    function submitLiveDiagnose(){
+        let data = {}
+        data.desc = $('#description').val()
+        data.diagnoseCost = $('#diagnose-cost').val()
+        data.diseaseName = $('#disease-name').val()
+        data.recipes = []
+        let noRecipe = document.getElementsByName('medicine-name').length
+        for(let i=0; i < noRecipe; i++){
+            data.recipes.push({
+                'medicineName': document.getElementsByName('medicine-name')[i].value,
+                'usageRule': document.getElementsByName('usage-rule')[i].value,
+                'recipeDesc': document.getElementsByName('recipe-desc')[i].value,
+            })
+        }
+        $.ajax({
+            type: "POST",
+            url: '{{ route("doctor.post-diagnose") }}',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: data,
+            success: (res) => {
+                window.location = '//localhost:8000/doctor/examinations'
+            },
+            error: (error) => {
+                console.error(error)
+            }
+        });
+    }
+    function submitLiveExamination() {
+        let data = {
+                hospital: '{{ Session::get("hospital") }}',
+                type: 'Live Interactive',
+                officer: '{{ $data["officer"] }}',
+                patientId: '{{ $data["patientId"] }}',
+                clinicId: '{{ $data["clinicId"] }}',
+                automatedDiagnoseResult: [ 
+                    {
+                        "probability" : 0.741,
+                        "class" : "nv, Melanocytic Nevi"
+                    }, 
+                    {
+                        "probability" : 0.195,
+                        "class" : "bkl, Benign Keratosis"
+                    }, 
+                    {
+                        "probability" : 0.02,
+                        "class" : "bcc, Basal Cell Carcinoma"
+                    }, 
+                    {
+                        "probability" : 0.017,
+                        "class" : "mel, Melanoma"
+                    }, 
+                    {
+                        "probability" : 0.014,
+                        "class" : "akiec, Actinic Keratoses"
+                    }
+                ],
+                description: 'Pemeriksaan ini dilakukan secara live oleh dokter',
+            }
+        data.desc = $('#description').val()
+        data.diagnoseCost = $('#diagnose-cost').val()
+        data.diseaseName = $('#disease-name').val()
+        data.recipes = []
+        let noRecipe = document.getElementsByName('medicine-name').length
+        for(let i=0; i < noRecipe; i++){
+            data.recipes.push({
+                'medicineName': document.getElementsByName('medicine-name')[i].value,
+                'usageRule': document.getElementsByName('usage-rule')[i].value,
+                'recipeDesc': document.getElementsByName('recipe-desc')[i].value,
+            })
+        }
+        console.log(data)
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('doctor.submit-live-diagnose') }}",
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: data,
+            success: (res) => {
+                console.log(res)
+                // let id = res.examination._id
+                // let formData = new FormData()
+                // $.each($("input[type='file']")[0].files, function(i, file) {
+                //     formData.append('images', file);
+                // });
+                // $.ajax({
+                //     type: "POST",
+                //     url: "{{ config('app.API_endpoint') }}" + 'examinations/' + id + "/images",
+                //     headers: {
+                //         'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                //         'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
+                //     },
+                //     data: formData,
+                //     processData: false,
+                //     contentType: false,
+                //     success: (data) => {
+                //         window.location = '/puskesmas/patients/' + '{{ $data["patientId"] }}'
+                //     },
+                //     error: (error) => {
+                //         console.log(error)
+                //     }
+                // });
+            },
+            error: (error) => {
+                console.log(error)
+            }
+        })
+    }
+</script>
+@endif
+@if ($pagename == 'puskesmas.main-live-interactive')
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+<script src="{{ asset('js/video-call.js') }}"></script>
 @endif
 @if ($pagename == 'get-doctor-examination-detail-view')
 <script>
     $('#add-recipe-form').click(() => {
-            let fieldWrapper = $("<div class=\"position-relative row form-group\"></div>");
-            let element = "<label class=\"col-sm-2 col-form-label\"></label>"
-            element += "<div class=\"col-sm-10\">"
-            element += "<div class=\"form-row\">"
-            element += "<div class=\"col-md-4 position-relative form-group\">"
-            element += "<input name=\"medicine-name\" placeholder=\"nama obat\" type=\"text\" class=\"medicine-name mr-2 form-control\">"
-            element += "</div>"
-            element += "<div class=\"col-md-2 position-relative form-group \">"
-            element += "<input name=\"usage-rule\" placeholder=\"aturan pakai\" type=\"text\" class=\"usage-rule mr-2 form-control\">"
-            element += "</div>"
-            element += "<div class=\"col-md-4 position-relative form-group \">"
-            element += "<input name=\"recipe-desc\" placeholder=\"keterangan\" type=\"text\" class=\"recipe-desc mr-2 form-control\">"
-            element += "</div>"
-            element += "<div class=\"col-md-2 position-relative form-group \">"
-            element += "<button class=\"btn btn-danger btn-block btn-remove-field\" type=\"button\">Hapus Resep</button></div></div></div>";
-            element += "</div></div></div></div>"
-            $(document).on("click", ".btn-remove-field", function(){
-                $(this).closest('.row').remove()
-            });
-            fieldWrapper.append($(element));
-            $('#recipe-field').append(fieldWrapper);
-        })
-        function submitDiagnose(){
-            let data = {}
-            data.examinationId = '{{ $examination_id }}'
-            data.desc = $('#description').val()
-            data.diagnoseCost = $('#diagnose-cost').val()
-            data.diseaseName = $('#disease-name').val()
-            data.recipes = []
-            let noRecipe = document.getElementsByName('medicine-name').length
-            for(let i=0; i < noRecipe; i++){
-                data.recipes.push({
-                    'medicineName': document.getElementsByName('medicine-name')[i].value,
-                    'usageRule': document.getElementsByName('usage-rule')[i].value,
-                    'recipeDesc': document.getElementsByName('recipe-desc')[i].value,
-                })
-            }
-            $.ajax({
-                type: "POST",
-                url: '{{ route("doctor.post-diagnose") }}',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                data: data,
-                success: (res) => {
-                    // console.log(res)
-                    window.location = '//localhost:8000/doctor/examinations'
-                },
-                error: (error) => {
-                    console.error(error)
-                }
-            });
+        let fieldWrapper = $("<div class=\"position-relative row form-group\"></div>");
+        let element = "<label class=\"col-sm-2 col-form-label\"></label>"
+        element += "<div class=\"col-sm-10\">"
+        element += "<div class=\"form-row\">"
+        element += "<div class=\"col-md-4 position-relative form-group\">"
+        element += "<input name=\"medicine-name\" placeholder=\"nama obat\" type=\"text\" class=\"medicine-name mr-2 form-control\">"
+        element += "</div>"
+        element += "<div class=\"col-md-2 position-relative form-group \">"
+        element += "<input name=\"usage-rule\" placeholder=\"aturan pakai\" type=\"text\" class=\"usage-rule mr-2 form-control\">"
+        element += "</div>"
+        element += "<div class=\"col-md-4 position-relative form-group \">"
+        element += "<input name=\"recipe-desc\" placeholder=\"keterangan\" type=\"text\" class=\"recipe-desc mr-2 form-control\">"
+        element += "</div>"
+        element += "<div class=\"col-md-2 position-relative form-group \">"
+        element += "<button class=\"btn btn-danger btn-block btn-remove-field\" type=\"button\">Hapus Resep</button></div></div></div>";
+        element += "</div></div></div></div>"
+        $(document).on("click", ".btn-remove-field", function(){
+            $(this).closest('.row').remove()
+        });
+        fieldWrapper.append($(element));
+        $('#recipe-field').append(fieldWrapper);
+    })
+    function submitDiagnose(){
+        let data = {}
+        data.examinationId = '{{ $examination_id }}'
+        data.desc = $('#description').val()
+        data.diagnoseCost = $('#diagnose-cost').val()
+        data.diseaseName = $('#disease-name').val()
+        data.recipes = []
+        let noRecipe = document.getElementsByName('medicine-name').length
+        for(let i=0; i < noRecipe; i++){
+            data.recipes.push({
+                'medicineName': document.getElementsByName('medicine-name')[i].value,
+                'usageRule': document.getElementsByName('usage-rule')[i].value,
+                'recipeDesc': document.getElementsByName('recipe-desc')[i].value,
+            })
         }
+        $.ajax({
+            type: "POST",
+            url: '{{ route("doctor.post-diagnose") }}',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: data,
+            success: (res) => {
+                window.location = '//localhost:8000/doctor/examinations'
+            },
+            error: (error) => {
+                console.error(error)
+            }
+        });
+    }
+    function showRecipeField(){
+        $('#recipe-field').toggle()
+    }
 </script>
 @endif
 @if ($pagename == 'puskesmas.get-patient-details-view')

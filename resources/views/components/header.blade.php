@@ -6,7 +6,6 @@
   <meta http-equiv="Content-Language" content="en">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>{{ $pagetitle }} | Teledermatology</title>
-  {{-- <title>Teledermatology</title> --}}
   <meta name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
   <meta name="description" content="T">
@@ -15,10 +14,14 @@
   <link href="{{asset('css/main.cba69814a806ecc7945a.css')}}" rel="stylesheet">
   <link href="{{asset('css/custom.css')}}" rel="stylesheet">
   <link rel="shortcut icon" type="image/png" href="{{asset('images/t-logo.png')}}" />
-  @if ($pagename == 'get-doctor-live-interactive-view')
+  @if ($pagename == 'get-doctor-live-interactive-view' || $pagename == 'puskesmas.main-live-interactive')
   <link rel="stylesheet" href="{{ asset('css/video-call.css') }}">
+  {{-- <script>
+    window.csrfToken = "{{ csrf_token() }}";
+  </script> --}}
   <script>
     window.csrfToken = "{{ csrf_token() }}";
+        var user_id = "{{ Session::get('name') }}"
   </script>
   @endif
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,900&display=swap" rel="stylesheet">

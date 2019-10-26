@@ -12,7 +12,14 @@
     </div>
     <div class="page-title-actions">
       <div class="d-inline-block">
-        <a href="{{ route('doctor.get-live-interactive') }}">
+        <a href="{{ route('doctor.get-live-interactive', [
+          'officer' => $data['clinic']['officer'],
+          'patient' => $data['patient']['name'],
+          'patientIdentity' => $data['patient']['nik'],
+          'patientDOB' => $data['patient']['dob'],
+          'patientId' => $data['patient']['id'],
+          'clinicId' => $data['clinic']['id']
+        ]) }}">
           <button type="button" class="btn-shadow btn btn-primary">
             <span class="btn-icon-wrapper pr-2 opacity-7">
               <i class="fa fa-video fa-w-20"></i>
@@ -97,12 +104,13 @@
         <a href="javascript:void(0)">{{ $d['doctor']['name'] }}</a>
         <div class="text-muted small">Anggota sejak {{ date('d-M-Y', strtotime($d['doctor']['registerDate'])) }}
           &nbsp;·&nbsp;
-          {{ $d['doctor']['numberOfDiagnoses'] }}
-          diagnosa.</div>
+          {{-- {{ $d['doctor']['numberOfDiagnoses'] }} --}}
+          {{-- diagnosa. --}}
+        </div>
         <div class="mt-2">
           {{ $d['comment'] }}
         </div>
-        @if ($d['doctor']['username'] == Session::get('username'))
+        @if ($d['doctor']['id'] == Session::get('user-id'))
         <div class="small mt-2">
           <a href="{{ route('doctor.delete-respond-live-interactive-subms', ['subs_id' => $data['_id'], 'resp_id' => $d['_id']]) }}"
             class="text-muted">Batalkan tanggapan</a>

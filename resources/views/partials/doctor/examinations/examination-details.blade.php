@@ -99,7 +99,15 @@
               type="text" class="form-control">
           </div>
         </div>
-        <fieldset id="recipe-field">
+        <div class="position-relative row form-group"><label for="\" class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="toggle-resep" onchange="showRecipeField()">
+              <label class="custom-control-label" for="toggle-resep">Sertakan Resep</label>
+            </div>
+          </div>
+        </div>
+        <fieldset id="recipe-field" style="display: none;">
           <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Resep</label>
             <div class="col-sm-10">
               <div class="form-row">

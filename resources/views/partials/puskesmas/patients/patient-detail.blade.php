@@ -8,11 +8,6 @@
           style="background-image: url('{{ asset('images/dropdown-header/city2.jpg') }}');">
         </div>
         <div class="menu-header-content">
-          <div class="avatar-icon-wrapper avatar-icon-lg">
-            <div class="avatar-icon rounded btn-hover-shine"><img src="{{ $user_details['profilePicture'] }}"
-                alt="Avatar 5">
-            </div>
-          </div>
           <div>
             <h5 class="menu-header-title">{{ $user_details['name'] }}</h5>
             <h6 class="menu-header-subtitle">NIK : {{ $user_details['nik'] }}</h6>

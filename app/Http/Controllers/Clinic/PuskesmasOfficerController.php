@@ -16,6 +16,7 @@ class PuskesmasOfficerController extends Controller
       $client = new Client($guzzle_params);
       $response = $client->request('GET', 'clinics/officers');
       return view('partials.puskesmas.officers.officers-list')
+        ->with('pagetitle', 'Daftar Petugas')
         ->with('pagename', 'puskesmas.get-officers-list-view')
         ->with('data', json_decode($response->getBody(), true));
     }

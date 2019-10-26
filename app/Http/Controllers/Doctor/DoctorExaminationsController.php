@@ -18,6 +18,7 @@ class DoctorExaminationsController extends Controller
             'query' => ['hospital' => Session::get('hospital')]
         ]);
         return view('partials.doctor.examinations.examinations-list')
+            ->with('pagetitle', 'Daftar Pemeriksaan')
             ->with('pagename', 'doctor-get-examination-list')
             ->with('examinations', json_decode($response->getBody(), true));
     }
@@ -29,6 +30,7 @@ class DoctorExaminationsController extends Controller
         $client = new Client($guzzle_params);
         $examinationDetailResponse = $client->request('GET', 'examinations/' . $examination_id);
         return view('partials.doctor.examinations.examination-details')
+            ->with('pagetitle', 'Detail Pemeriksaan')
             ->with('pagename', 'get-doctor-examination-detail-view')
             ->with('examination_id', $examination_id)
             ->with('examination_details', json_decode($examinationDetailResponse->getBody(), true));

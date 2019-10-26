@@ -49,7 +49,7 @@
       </div>
       <div class="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8">
         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
-          <div class="app-logo"></div>
+          {{-- <div class="app-logo"></div> --}}
           <h4 class="mb-0">
             <span>Silakan login ke akun Anda.</span></h4>
           <h6 class="mt-3">Hubungi admin di nomor +6281234463736 atau email ke admin@teledermatology.id bila ingin

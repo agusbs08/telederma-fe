@@ -14,7 +14,7 @@ class AccountController extends Controller
         $guzzle_params = config('app.guzzle_params');
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
         $client = new Client($guzzle_params);
-        $response = $client->request('GET', 'users/' . Session::get('username'));
+        $response = $client->request('GET', 'users/' . Session::get('role') . '/' . Session::get('user-id'));
         $userData = json_decode($response->getBody(), true);
         return view('partials.account.general-setting')
             ->with('pagetitle', 'Pengaturan Umum')

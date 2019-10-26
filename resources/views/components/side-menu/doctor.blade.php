@@ -17,12 +17,12 @@ $page = Request::segment(2);
     </i>Pemeriksaan
   </a>
 </li>
-<li>
+{{-- <li>
   <a href="{{ route('doctor.get-live-interactive') }}" {{ $page === "live" ? $class : "" }}>
-    <i class="metismenu-icon pe-7s-video">
-    </i>Live Interactive
-  </a>
-</li>
+<i class="metismenu-icon pe-7s-video">
+</i>Live Interactive
+</a>
+</li> --}}
 <li>
   <a href="{{ route('doctor.get-live-interactive-subms-list') }}" {{ $page === "live-interactive" ? $class : "" }}>
     <i class="metismenu-icon pe-7s-note2">

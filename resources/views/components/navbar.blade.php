@@ -1,6 +1,7 @@
 <div class="app-header header-shadow">
     <div class="app-header__logo">
-        <div class="logo-src"></div>
+        {{-- <div class="logo-src"></div> --}}
+        <h5 style="margin-top: 5px;">TELEDERMATOLOGY</h5>
         <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
@@ -49,7 +50,7 @@
             </ul>
         </div>
         <div class="app-header-right">
-            @include('components.notification-banner')
+            {{-- @include('components.notification-banner') --}}
             <div class="header-btn-lg pr-0">
                 <div class="widget-content p-0">
                     <div class="widget-content-wrapper">

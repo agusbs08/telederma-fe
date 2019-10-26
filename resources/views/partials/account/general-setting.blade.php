@@ -59,12 +59,6 @@
                 value="{{ $user_data['email'] }}"></td>
           </tr>
           <tr>
-            <th scope="row">Username</th>
-            <td><input name="username" type="text" class="form-control setting-input" disabled required
-                value="{{ $user_data['username'] }}">
-            </td>
-          </tr>
-          <tr>
             <th scope="row">Nama</th>
             <td><input name="name" type="text" class="form-control setting-input" disabled required
                 value="{{ $user_data['name'] }}"></td>
@@ -95,3 +89,6 @@
   </form>
 </div>
 @endsection
+{{-- @php
+dd($user_data);
+@endphp --}}

@@ -22,7 +22,7 @@ function snap() {
     context.fillRect(0, 0, w, h);
     context.drawImage(video, 0, 0, w, h);
 }
-var user_id = Math.random(10000).toString();
+//var user_id = Math.random(10000).toString();
 var name = "BGSD";
 console.log(user_id);
 var pusher = new Pusher("ed6c4e67e5c5bf35c1ef", {
@@ -65,7 +65,7 @@ function start() {
         });
 }
 
-// start();
+start();
 
 const channel = pusher.subscribe("presence-videocall");
 
@@ -78,7 +78,7 @@ channel.bind("pusher:subscription_succeeded", members => {
     } catch (err) {
         console.log("Syalalal");
     }
-    document.getElementById("myid").innerHTML = ` My caller id is : ` + id;
+    // document.getElementById("myid").innerHTML = ` My caller id is : ` + id;
     members.each(member => {
         if (member.id != channel.members.me.id) {
             users.push(member.id);
@@ -256,55 +256,71 @@ channel.bind("client-sdp", function(msg) {
     if (msg.room == id) {
         console.log("sdp received");
         var answer = confirm(
-            "You have a call from: " + msg.from + "Would you like to answer?"
+            "Anda mendapat panggilan live-interactive dari: " +
+                msg.from +
+                ". Mulai?"
         );
         if (!answer) {
             return channel.trigger("client-reject", {
                 room: msg.room,
                 rejected: id
             });
+        } else {
+            room = msg.room;
+            var sessionDesc = new RTCSessionDescription(msg.sdp);
+            caller.addStream(localUserMedia);
+            caller.setRemoteDescription(sessionDesc);
+            console.log("answer created");
+            caller.createAnswer().then(function(sdp) {
+                caller.setLocalDescription(new RTCSessionDescription(sdp));
+                channel.trigger("client-answer", {
+                    sdp: sdp,
+                    room: room
+                });
+            });
         }
         // var permission = start();
         // if(!permission){
         //     return channel.trigger("client-reject", { room: msg.room, rejected: id });
         // }
-        navigator.mediaDevices
-            .getUserMedia({
-                video: true,
-                audio: true
-            })
-            .then(stream => {
-                try {
-                    document.getElementById("selfview").srcObject = stream;
-                    localUserMedia = stream;
-                } catch (err) {
-                    document.getElementById(
-                        "selfview"
-                    ).src = URL.createObjectURL(stream);
-                    localUserMedia = stream;
-                } finally {
-                    room = msg.room;
-                    var sessionDesc = new RTCSessionDescription(msg.sdp);
-                    caller.addStream(localUserMedia);
-                    caller.setRemoteDescription(sessionDesc);
-
-                    caller.createAnswer().then(function(sdp) {
-                        caller.setLocalDescription(
-                            new RTCSessionDescription(sdp)
-                        );
-                        channel.trigger("client-answer", {
-                            sdp: sdp,
-                            room: room
-                        });
-                    });
-                }
-            })
-            .catch(err => {
-                return channel.trigger("client-reject", {
-                    room: msg.room,
-                    rejected: id
-                });
-            });
+        // batas
+        // navigator.mediaDevices
+        //     .getUserMedia({
+        //         video: true,
+        //         audio: true
+        //     })
+        //     .then(stream => {
+        //         try {
+        //             document.getElementById("selfview").srcObject = stream;
+        //             localUserMedia = stream;
+        //         } catch (err) {
+        //             document.getElementById(
+        //                 "selfview"
+        //             ).src = URL.createObjectURL(stream);
+        //             localUserMedia = stream;
+        //         } finally {
+        //             room = msg.room;
+        //             var sessionDesc = new RTCSessionDescription(msg.sdp);
+        //             caller.addStream(localUserMedia);
+        //             caller.setRemoteDescription(sessionDesc);
+        //             console.log("answer created");
+        //             caller.createAnswer().then(function(sdp) {
+        //                 caller.setLocalDescription(
+        //                     new RTCSessionDescription(sdp)
+        //                 );
+        //                 channel.trigger("client-answer", {
+        //                     sdp: sdp,
+        //                     room: room
+        //                 });
+        //             });
+        //         }
+        //     })
+        //     .catch(err => {
+        //         return channel.trigger("client-reject", {
+        //             room: msg.room,
+        //             rejected: id
+        //         });
+        //     });
 
         // getCam()
         //   .then(stream => {

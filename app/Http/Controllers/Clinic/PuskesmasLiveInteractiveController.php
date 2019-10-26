@@ -9,6 +9,14 @@ use Session;
 
 class PuskesmasLiveInteractiveController extends Controller
 {
+    public function liveInteractive(Request $request)
+    {
+        return view('partials.puskesmas.live-interactives.main-live-interactive')
+            ->with('pagename', 'puskesmas.main-live-interactive')
+            ->with('pagetitle', 'Live');
+    }
+
+
     public function getSubmissionList()
     {
         $guzzle_params = config('app.guzzle_params');
@@ -17,6 +25,7 @@ class PuskesmasLiveInteractiveController extends Controller
         $response = $client->request('GET', 'examinations/live-interactive/submissions');
         return view('partials.puskesmas.live-interactives.live-interactive-subms-list')
             ->with('pagename', 'puskesmas.live-interactive-subms-list')
+            ->with('pagetitle', 'Daftar Pengajuan Live')
             ->with('data', json_decode($response->getBody(), true));
     }
 
@@ -28,7 +37,7 @@ class PuskesmasLiveInteractiveController extends Controller
         $response = $client->request('POST', 'examinations/live-interactive/submissions', [
             'form_params' => [
                 'patient' => [
-                    'email' => $request->input('patient-email'),
+                    'id' => $request->input('patient-id'),
                     'nik' => $request->input('patient-nik'),
                     'name' => $request->input('patient-name'),
                     'dob' => $request->input('patient-dob')
@@ -50,7 +59,8 @@ class PuskesmasLiveInteractiveController extends Controller
         $client = new Client($guzzle_params);
         $response = $client->request('GET', 'examinations/live-interactive/submissions/' . $id);
         return view('partials.puskesmas.live-interactives.live-interactive-subms-details')
-        ->with('data', json_decode($response->getBody(), true))
-        ->with('pagename', 'puskesmas.live-interactive-subms-details');
+            ->with('pagetitle', 'Detail Pengajuan')
+            ->with('data', json_decode($response->getBody(), true))
+            ->with('pagename', 'puskesmas.live-interactive-subms-details');
     }
 }

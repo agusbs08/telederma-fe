@@ -14,7 +14,7 @@ class PuskesmasPatientController extends Controller
       $guzzle_params = config('app.guzzle_params');
       $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
       $client = new Client($guzzle_params);
-      $submitPatientResponse = $client->request('POST', 'clinics/' . Session::get('username') . '/patients', [
+      $submitPatientResponse = $client->request('POST', 'clinics/' . Session::get('user-id') . '/patients', [
         'form_params' => [
           'phone' => $request->input('phone'),
           'name' => $request->input('name'),
@@ -31,9 +31,11 @@ class PuskesmasPatientController extends Controller
       $guzzle_params = config('app.guzzle_params');
       $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
       $client = new Client($guzzle_params);
-      $response = $client->request('GET', 'clinics/' . Session::get('username') . '/patients');
+      $response = $client->request('GET', 'clinics/' . Session::get('user-id') . '/patients');
+      // dd(json_decode($response->getBody(), true));
       return view('partials.puskesmas.patients.patients-list')
         ->with('pagename', 'puskesmas.get-patient-list-view')
+        ->with('pagetitle', 'Daftar Pasien')
         ->with('data', json_decode($response->getBody(), true));
     }
 
@@ -42,16 +44,16 @@ class PuskesmasPatientController extends Controller
       $guzzle_params = config('app.guzzle_params');
       $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
       $client = new Client($guzzle_params);
-      $patient_details = $client->request('GET', 'clinics/' . Session::get('username') . '/patients/' . $patient_code);
-      $examinations = $client->request('GET', 'examinations/clinics/' . Session::get('username') . '/patients/' . $patient_code);
+      $patient_details = $client->request('GET', 'clinics/' . Session::get('user-id') . '/patients/' . $patient_code);
+      $examinations = $client->request('GET', 'examinations/clinics/' . Session::get('user-id') . '/patients/' . $patient_code);
       $hospitals = $client->request('GET', 'hospitals');
       $officers = $client->request('GET', 'clinics/officers');
-      // dd(json_decode($patient_details->getBody(), true));
       return view('partials.puskesmas.patients.patient-detail')
         ->with('hospitals', json_decode($hospitals->getBody(), true))
         ->with('officers', json_decode($officers->getBody(), true))
         ->with('user_details', json_decode($patient_details->getBody(), true))
         ->with('examinations_history', json_decode($examinations->getBody(), true))
+        ->with('pagetitle', 'Detail Pasien')
         ->with('pagename', 'puskesmas.get-patient-details-view');
     }
 

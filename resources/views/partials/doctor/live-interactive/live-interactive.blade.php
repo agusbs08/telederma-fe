@@ -1,28 +1,41 @@
 @extends('base')
 @section('content')
-<div class="app-page-title">
-  <div class="page-title-wrapper">
-    <div class="page-title-heading">
-      <div class="page-title-icon">
-        <i class="pe-7s-eyedropper icon-gradient bg-plum-plate">
-        </i>
-      </div>
-      <div>Live Interactive
+
+{{-- <div class="row">
+  <div class="col-lg-12">
+    <div class="card-shadow-primary border mb-3 card card-body border-primary">
+      <h5 class="card-title">Live Interactive</h5>
+      <div id="video-element">
+        <div class="video-container">
+          <video id="selfview" class="my-video" src="" autoplay="true" muted="muted"></video>
+          <video id="remoteview" class="user-video" src="" autoplay="true" muted="muted"></video>
+        </div>
+        <button id="endCall" class="btn btn-danger" style="display: none;" onclick="endCurrentCall()">
+          <i class="pe-7s-close-circle btn-icon-wrapper"> </i>
+          Akhiri Live Interactive</button>
+        <canvas id="canvas-sc" width="640" height="480"></canvas>
+        <button class="btn btn-primary" id="takeSc" onclick="snap()">Ambil Gambar</button>
       </div>
     </div>
   </div>
-</div>
-<div id="video-element">
-  <div class="video-container">
-    <video id="selfview" class="my-video" src="" autoplay="true" muted="muted"></video>
-    <video id="remoteview" class="user-video" src="" autoplay="true" muted="muted"></video>
-  </div>
-  <span id="myid"></span>
-  <button id="endCall" style="display: none;" onclick="endCurrentCall()">End Call </button>
-  <canvas id="canvas-sc" width="640" height="480"></canvas>
-  <button class="btn btn-primary" id="takeSc" onclick="snap()">Ambil Gambar</button>
-</div>
+</div> --}}
+
 <div class="row">
+  <div class="col-lg-12">
+    <div class="card-shadow-primary border mb-3 card card-body border-primary">
+      <h5 class="card-title">Live Interactive</h5>
+      <div class="video-container mb-3">
+        <video id="selfview" class="my-video" src="" autoplay="true" muted="muted"></video>
+        <video id="remoteview" class="user-video" src="" autoplay="true" muted="muted"></video>
+      </div>
+      <button id="endCall" class="btn btn-danger" style="display: none;" onclick="endCurrentCall()">
+        <i class="pe-7s-close-circle btn-icon-wrapper"> </i>
+        Akhiri Live Interactive</button>
+    </div>
+  </div>
+</div>
+
+{{-- <div class="row">
   <div class="col-md-12">
     <div class="main-card mb-3 card">
       <div class="card-body">
@@ -75,9 +88,6 @@
           </div>
         </fieldset>
       </div>
-      {{-- <input id="inp_img" name="img" type="file" value="" style="display: none;"> --}}
-      {{-- <input name="file" id="examination-image" type="file" class="form-control-file" multiple="multiple"
-        style="display: none;"> --}}
       <input id="inp_img" name="img" type="hidden" value="" multiple="multiple">
       <div class="d-block text-center card-footer">
         <button href="" class="btn-wide btn-shadow btn btn-block btn-primary" onclick="submitLiveExamination()">Submit
@@ -86,5 +96,5 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 @endsection

@@ -49,7 +49,7 @@ channel.bind("pusher:subscription_succeeded", members => {
     } catch (err) {
         console.log("Syalalal");
     }
-    document.getElementById("myid").innerHTML = `ID anda adalah ${id}`;
+    // document.getElementById("myid").innerHTML = `ID anda adalah ${id}`;
     members.each(member => {
         if (member.id != channel.members.me.id) {
             users.push(member.id);
@@ -82,14 +82,15 @@ function render() {
             `<div class="widget-content p-0">` +
             `<div class="widget-content-wrapper">` +
             `<div class="widget-content-left mr-3">` +
-            `<img width="42" class="rounded-circle" src="http://192.168.8.102:8000/images/avatars/1.jpg" alt="">` +
+            `<img width="42" class="rounded-circle" src="http://192.168.8.100:8000/images/avatars/1.jpg" alt="">` +
             `</div>` +
             `<div class="widget-content-left">` +
             `<div class="widget-heading">${user}</div>` +
             `</div>` +
             `<div class="widget-content-right">` +
             `<div role="group" class="btn-group-sm btn-group">` +
-            `<input class="btn btn-primary" type="button" style="float:right;"  value="Panggil" onclick="callUser('${user}')" id="makeCall" />` +
+            `<button class="btn-wide mb-2 mr-2 btn-icon btn btn-success btn-lg" style="float:right;"  onclick="callUser('${user}')" id="makeCall">` +
+            `<i class="pe-7s-call btn-icon-wrapper"> </i> Hubungi</button>` +
             `</div>` +
             `</div>` +
             `</div>` +

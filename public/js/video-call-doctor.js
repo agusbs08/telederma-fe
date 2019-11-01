@@ -2,7 +2,7 @@
 
 var video = document.getElementById("remoteview");
 var canvas = document.getElementById("canvas-sc");
-var context = canvas.getContext("2d");
+// var context = canvas.getContext("2d");
 var w, h, ratio;
 
 video.addEventListener(

@@ -96,8 +96,8 @@
 <div class="card mb-2">
   <div class="card-body">
     <div class="media">
-      <img style="width: 40px; height: auto;" src="{{ $d['doctor']['profilePicture'] }}" alt=""
-        class="d-block ui-w-40 rounded-circle">
+      <img style="width: 40px; height: auto;" src="{{ config('app.backend_url') . $d['doctor']['profilePicture'] }}"
+        alt="" class="d-block ui-w-40 rounded-circle">
       <div class="media-body ml-4">
         <div class="float-right text-muted small">
           {{  date('d M', strtotime($d['createdAt'])) }}</div>

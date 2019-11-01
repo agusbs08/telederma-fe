@@ -8,7 +8,8 @@
           style="background-image: url('{{  asset('images/dropdown-header/city4.jpg') }}"></div>
         <div class="menu-header-content btn-pane-right">
           <div class="avatar-icon-wrapper mr-2 avatar-icon-xl">
-            <div class="avatar-icon rounded"><img src="{{ $clinic_detail['profilePicture'] }}" alt="Avatar 5"></div>
+            <div class="avatar-icon rounded"><img
+                src="{{ config('app.backend_url') . $clinic_detail['profilePicture'] }}" alt="Avatar 5"></div>
           </div>
           <div>
             <h5 class="menu-header-title">{{ $clinic_detail['name'] }}</h5>

@@ -37,7 +37,6 @@ class AccountController extends Controller
         $response = $client->request('POST', 'users/settings/general', [
             'form_params' => [
                 'email' => $request->input('email'),
-                'username' => $request->input('username'),
                 'name' => $request->input('name'),
                 'phone' => $request->input('phone'),
                 'identityNumber' => $request->input('identity-number'),
@@ -45,8 +44,7 @@ class AccountController extends Controller
         ]);
         if ($response->getStatusCode() == 200){
             session([
-                'name' => $request->input('name'), 
-                'username' => $request->input('username')]
+                'name' => $request->input('name')]
             );
             return redirect()->route('account-settings')->with('general-info-update-success', 'Profil berhasil diupdate!');
         }
@@ -66,6 +64,7 @@ class AccountController extends Controller
         ];
         $client = new Client($guzzle_params);
         $response = $client->request('POST', 'users/settings/profile-picture');
+        $request->session()->put('profile-picture', json_decode($response->getBody(), true)["path"]);
         if ($response->getStatusCode() == 200){
             return redirect()->route('account-settings')->with('prof-pic-update-success', 'Foto profil berhasil diupdate!');
         }

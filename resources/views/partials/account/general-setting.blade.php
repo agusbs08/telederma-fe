@@ -18,8 +18,8 @@
   <div class="card-body">
     <div class="row">
       <div class="col-4">
-        <img class="profile-picture-box" src="{{ $user_data['profilePicture'] }}" alt="foto-profil"
-          style="width:100%;max-width:250px;">
+        <img class="profile-picture-box" src="{{ config('app.backend_url') . $user_data['profilePicture'] }}"
+          alt="foto-profil" style="width:100%;max-width:250px;">
       </div>
       <div class="col-8">
         <div class="row">

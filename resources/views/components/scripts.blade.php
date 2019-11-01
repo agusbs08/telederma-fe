@@ -73,7 +73,7 @@
                 });
                 $.ajax({
                     type: "POST",
-                    url: "{{ config('app.API_endpoint') }}" + 'examinations/' + id + "/images",
+                    url: "{{ config('app.api_endpoint') }}" + 'examinations/' + id + "/images",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
@@ -226,7 +226,6 @@
                 'recipeDesc': document.getElementsByName('recipe-desc')[i].value,
             })
         }
-        console.log(data)
         $.ajax({
             type: 'POST',
             url: "{{ route('doctor.submit-live-diagnose') }}",
@@ -236,28 +235,30 @@
             data: data,
             success: (res) => {
                 console.log(res)
-                // let id = res.examination._id
-                // let formData = new FormData()
-                // $.each($("input[type='file']")[0].files, function(i, file) {
-                //     formData.append('images', file);
-                // });
-                // $.ajax({
-                //     type: "POST",
-                //     url: "{{ config('app.API_endpoint') }}" + 'examinations/' + id + "/images",
-                //     headers: {
-                //         'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                //         'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
-                //     },
-                //     data: formData,
-                //     processData: false,
-                //     contentType: false,
-                //     success: (data) => {
-                //         window.location = '/puskesmas/patients/' + '{{ $data["patientId"] }}'
-                //     },
-                //     error: (error) => {
-                //         console.log(error)
-                //     }
-                // });
+                let id = res.examination._id
+                let formData = new FormData()
+                $.each($("input[type='hidden']")[0].files, function(i, file) {
+                    formData.append('images', file);
+                });
+                console.log(formData)
+                $.ajax({
+                    type: "POST",
+                    url: "{{ config('app.api_endpoint') }}" + 'examinations/' + id + "/images",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Authorization': "Bearer " + "{{ Session::get('auth-key') }}"
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: (data) => {
+                        console.log(data)
+                        // window.location = '/puskesmas/patients/' + '{{ $data["patientId"] }}'
+                    },
+                    error: (error) => {
+                        console.log(error)
+                    }
+                });
             },
             error: (error) => {
                 console.log(error)
@@ -366,7 +367,7 @@
     function openAddDoctorFormModal(){
         $.ajax({
             type: "GET",
-            url: '{{ config('app.API_endpoint') }}' + 'hospitals',
+            url: '{{ config('app.api_endpoint') }}' + 'hospitals',
             headers: {
                 'Authorization': 'Bearer {{ Session::get('auth-key') }}'
             },
@@ -385,7 +386,7 @@
         event.preventDefault()
         $.ajax({
             type: "POST",
-            url: "{{ config('app.API_endpoint') }}" + 'users/check',
+            url: "{{ config('app.api_endpoint') }}" + 'users/check',
             data: {"email": $('#email').val()},
             success: (response) => {
                 console.log(response)

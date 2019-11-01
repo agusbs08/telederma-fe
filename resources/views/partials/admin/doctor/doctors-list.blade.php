@@ -8,14 +8,14 @@
         </i>
       </div>
       <div>Dokter
-        <div class="page-title-subheading">Daftar Dokter yang Telah Terdaftar dalam Sistem
+        <div class="page-title-subheading">Total {{ count($doctors) }} dokter telah terdaftar.
         </div>
       </div>
     </div>
     <div class="page-title-actions">
       <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal"
         data-target="#addDoctorFormModal" onclick="openAddDoctorFormModal()">
-        <i class="fa fa-plus"></i> Register Dokter
+        <i class="fa fa-plus"></i> Daftarkan Dokter
       </button>
     </div>
   </div>
@@ -29,7 +29,6 @@
           <th>Nama</th>
           <th>Foto</th>
           <th>NIP</th>
-          {{-- <th>Dinas Rumah Sakit</th> --}}
           <th>Tindakan</th>
         </tr>
       </thead>
@@ -39,10 +38,9 @@
           <td>{{ $i+1 }}</td>
           <td>{{ $d['name'] }}</td>
           <td>
-            <img width="42" class="" src="{{ $d['profilePicture'] }}" alt="">
+            <img width="42" class="" src="{{ config('app.backend_url') . $d['profilePicture'] }}" alt="">
           </td>
           <td>{{ $d['identityNumber'] }}</td>
-          {{-- <td>{{ $d['hospital'] }}</td> --}}
           <td style="text-align: center; vertical-align: middle;">
             <a href="{{ route('admin.doctor-details', ['id' => $d['_id']]) }}">
               <button class="mb-2 mr-2 btn-icon btn-pill btn btn-primary"><i

@@ -51,8 +51,8 @@
             <p>{{ $examination_details['results']['manual'] }}</p>
           </div>
           <div class="tab-pane show" id="tab-eg115-1" role="tabpanel">
-            @foreach ($examination_details['images']['microscopic'] as $i)
-            <img style="width:100%;max-width:300px;margin:5px;" src="{{ config('app.server_url') . $i['url'] }}" alt=""
+            @foreach ($examination_details['images'] as $i)
+            <img style="width:100%;max-width:300px;margin:5px;" src="{{ config('app.backend_url') . $i['url'] }}" alt=""
               id="skin-image">
             @endforeach
           </div>
@@ -117,7 +117,7 @@
             <table class="mb-0 table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>No</th>
                   <th>Nama Obat</th>
                   <th>Aturan Pakai</th>
                   <th>Keterangan</th>

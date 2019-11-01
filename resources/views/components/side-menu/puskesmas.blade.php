@@ -7,7 +7,7 @@ $page = Request::segment(2);
     <a href="#" {{ $page === "dashboard" ? $class : "" }}>
         <i class="metismenu-icon pe-7s-user">
         </i>
-        Profil Saya
+        <strong>{{ Session::get('name') }}</strong>
     </a>
 </li>
 <li class="app-sidebar__heading">Menu</li>

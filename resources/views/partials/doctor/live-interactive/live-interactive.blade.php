@@ -15,7 +15,7 @@
 <div id="video-element">
   <div class="video-container">
     <video id="selfview" class="my-video" src="" autoplay="true" muted="muted"></video>
-    <video id="remoteview" class="user-video" src="" autoplay="true"></video>
+    <video id="remoteview" class="user-video" src="" autoplay="true" muted="muted"></video>
   </div>
   <span id="myid"></span>
   <button id="endCall" style="display: none;" onclick="endCurrentCall()">End Call </button>
@@ -75,6 +75,10 @@
           </div>
         </fieldset>
       </div>
+      {{-- <input id="inp_img" name="img" type="file" value="" style="display: none;"> --}}
+      {{-- <input name="file" id="examination-image" type="file" class="form-control-file" multiple="multiple"
+        style="display: none;"> --}}
+      <input id="inp_img" name="img" type="hidden" value="" multiple="multiple">
       <div class="d-block text-center card-footer">
         <button href="" class="btn-wide btn-shadow btn btn-block btn-primary" onclick="submitLiveExamination()">Submit
           Hasil

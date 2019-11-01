@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | API & Backend Parameter
@@ -9,12 +8,11 @@ return [
     */
 
     'guzzle_params' => [
-        'base_uri' => 'http://localhost:8080/api/',
+        'base_uri' => 'http://192.168.8.102:8080/api/',
         'http_errors' => false
     ],
-
-    'API_endpoint' => 'http://localhost:8080/api/',
-    'server_url' => 'http://localhost:8080',
+    'api_endpoint' => 'http://192.168.8.102:8080/api/',
+    'backend_url' => 'http://192.168.8.102:8080',
 
     /*
     |--------------------------------------------------------------------------

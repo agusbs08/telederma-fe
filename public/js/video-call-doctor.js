@@ -21,6 +21,8 @@ function snap() {
     console.log("snap");
     context.fillRect(0, 0, w, h);
     context.drawImage(video, 0, 0, w, h);
+    const snappedCanvas = document.getElementById("canvas-sc");
+    document.getElementById("inp_img").value = snappedCanvas.toDataURL();
 }
 //var user_id = Math.random(10000).toString();
 var name = "BGSD";
@@ -361,7 +363,11 @@ channel.bind("client-answer", function(answer) {
 channel.bind("client-reject", function(answer) {
     if (answer.room == room) {
         console.log("Call declined");
-        alert("call to " + answer.rejected + "was politely declined");
+        alert(
+            "Panggilan ke " +
+                answer.rejected +
+                " ditolak ! Coba beberapa saat lagi!"
+        );
         endCall();
     }
 });

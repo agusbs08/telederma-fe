@@ -8,7 +8,7 @@
         </i>
       </div>
       <div>Daftar Klinik
-        <div class="page-title-subheading">Daftar Klinik yang Telah Terdaftar dalam Sistem
+        <div class="page-title-subheading">Total {{ count($puskesmas) }} klinik/puskesmas telah terdaftar.
         </div>
       </div>
     </div>

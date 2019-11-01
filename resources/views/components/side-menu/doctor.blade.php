@@ -7,7 +7,7 @@ $page = Request::segment(2);
   <a href="#" {{ $page === "dashboard" ? $class : "" }}>
     <i class="metismenu-icon pe-7s-user">
     </i>
-    Profil Saya
+    <strong>{{ Session::get('name') }}</strong>
   </a>
 </li>
 <li class="app-sidebar__heading">Menu</li>
@@ -17,12 +17,6 @@ $page = Request::segment(2);
     </i>Pemeriksaan
   </a>
 </li>
-{{-- <li>
-  <a href="{{ route('doctor.get-live-interactive') }}" {{ $page === "live" ? $class : "" }}>
-<i class="metismenu-icon pe-7s-video">
-</i>Live Interactive
-</a>
-</li> --}}
 <li>
   <a href="{{ route('doctor.get-live-interactive-subms-list') }}" {{ $page === "live-interactive" ? $class : "" }}>
     <i class="metismenu-icon pe-7s-note2">

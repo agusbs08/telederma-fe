@@ -1,29 +1,7 @@
-// document.getElementById("selfview").volume = 0;
-
 var video = document.getElementById("selfview");
-// var canvas = document.getElementById("canvas-sc");
-// var context = canvas.getContext("2d");
-// var w, h, ratio;
 
-// video.addEventListener(
-//     "loadedmetadata",
-//     function() {
-//         ratio = video.videoWidth / video.videoHeight;
-//         w = video.videoWidth - 100;
-//         h = parseInt(w / ratio, 10);
-//         canvas.width = w;
-//         canvas.height = h;
-//     },
-//     false
-// );
-
-// function snap() {
-//     context.fillRect(0, 0, w, h);
-//     context.drawImage(video, 0, 0, w, h);
-// }
 console.log(user_id);
-//var user_id = Math.random(10000).toString();
-//var name = "Jancok";
+
 var pusher = new Pusher("ed6c4e67e5c5bf35c1ef", {
     cluster: "ap1",
     encrypted: true,
@@ -35,6 +13,7 @@ var pusher = new Pusher("ed6c4e67e5c5bf35c1ef", {
         }
     }
 });
+
 var usersOnline,
     id,
     users = [],
@@ -70,7 +49,7 @@ channel.bind("pusher:subscription_succeeded", members => {
     } catch (err) {
         console.log("Syalalal");
     }
-    document.getElementById("myid").innerHTML = ` My caller id is : ` + id;
+    document.getElementById("myid").innerHTML = `ID anda adalah ${id}`;
     members.each(member => {
         if (member.id != channel.members.me.id) {
             users.push(member.id);
@@ -99,11 +78,23 @@ function render() {
     var list = "";
     users.forEach(function(user) {
         list +=
-            `<li>` +
-            user +
-            ` <input class="btn btn-primary" type="button" style="float:right;"  value="Call" onclick="callUser('` +
-            user +
-            `')" id="makeCall" /></li>`;
+            `<li class="list-group-item">` +
+            `<div class="widget-content p-0">` +
+            `<div class="widget-content-wrapper">` +
+            `<div class="widget-content-left mr-3">` +
+            `<img width="42" class="rounded-circle" src="http://192.168.8.102:8000/images/avatars/1.jpg" alt="">` +
+            `</div>` +
+            `<div class="widget-content-left">` +
+            `<div class="widget-heading">${user}</div>` +
+            `</div>` +
+            `<div class="widget-content-right">` +
+            `<div role="group" class="btn-group-sm btn-group">` +
+            `<input class="btn btn-primary" type="button" style="float:right;"  value="Panggil" onclick="callUser('${user}')" id="makeCall" />` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</li>`;
     });
     document.getElementById("users").innerHTML = list;
 }
@@ -311,7 +302,11 @@ channel.bind("client-answer", function(answer) {
 channel.bind("client-reject", function(answer) {
     if (answer.room == room) {
         console.log("Call declined");
-        alert("call to " + answer.rejected + "was politely declined");
+        alert(
+            "Panggilan ke " +
+                answer.rejected +
+                " ditolak! Coba beberapa saat lagi!"
+        );
         endCall();
     }
 });

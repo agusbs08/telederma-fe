@@ -54,7 +54,8 @@
                   <div class="dropdown-menu-header-inner bg-primary">
                     <div class="menu-header-content">
                       <div class="avatar-icon-wrapper mb-3 avatar-icon-xl">
-                        <div class="avatar-icon"><img src="{{ $doctor['profilePicture'] }}" alt="Avatar 5"></div>
+                        <div class="avatar-icon"><img src="{{ config('app.backend_url') . $doctor['profilePicture'] }}"
+                            alt="Avatar 5"></div>
                       </div>
                       <div>
                         <h5 class="menu-header-title">{{ $doctor['name'] }}</h5>

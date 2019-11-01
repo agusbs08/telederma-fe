@@ -9,14 +9,14 @@
         </i>
       </div>
       <div>Rumah Sakit
-        <div class="page-title-subheading">Daftar Rumah Sakit yang Telah Terdaftar dalam Sistem
+        <div class="page-title-subheading">Total {{ count($hospitals) }} Rumah Sakit terdaftar.
         </div>
       </div>
     </div>
     <div class="page-title-actions">
       <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal"
         data-target="#addHospitalFormModal" onclick="openAddHospitalFormModal()">
-        <i class="fa fa-plus"></i> Daftarkan RS
+        <i class="fa fa-plus"></i> Daftarkan Rumah Sakit
       </button>
     </div>
   </div>

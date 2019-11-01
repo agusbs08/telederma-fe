@@ -66,7 +66,7 @@
     <div class="text-center d-block card-footer">
       <a href="{{route('puskesmas.examination-form', ['patient_code' => $user_details['_id']])}}"><button
           class="border-0 btn-transition btn btn-outline-primary"><i class="pe-7s-add-user btn-icon-wrapper"></i>
-          Tambah
+          Lakukan
           Pemeriksaan</button></a>
       <button class="border-0 btn-transition btn btn-outline-success" data-toggle="modal"
         data-target="#addLiveSubsFormModal"><i class="pe-7s-headphones btn-icon-wrapper"></i>

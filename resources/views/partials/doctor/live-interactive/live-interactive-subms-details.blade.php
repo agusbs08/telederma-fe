@@ -13,12 +13,7 @@
     <div class="page-title-actions">
       <div class="d-inline-block">
         <a href="{{ route('doctor.get-live-interactive', [
-          'officer' => $data['clinic']['officer'],
-          'patient' => $data['patient']['name'],
-          'patientIdentity' => $data['patient']['nik'],
-          'patientDOB' => $data['patient']['dob'],
-          'patientId' => $data['patient']['id'],
-          'clinicId' => $data['clinic']['id']
+          'id' => $data['_id']
         ]) }}">
           <button type="button" class="btn-shadow btn btn-primary">
             <span class="btn-icon-wrapper pr-2 opacity-7">

@@ -12,6 +12,11 @@
         </div>
       </div>
     </div>
+    <div class="page-title-actions">
+      <a href="{{ route('puskesmas.patients') }}" class=" btn-shadow mr-3 btn btn-primary">
+        <i class="fa fa-plus"></i> Ajukan Live Interactive
+      </a>
+    </div>
   </div>
 </div>
 <div class="main-card mb-3 card">

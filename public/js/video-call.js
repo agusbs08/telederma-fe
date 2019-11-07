@@ -82,7 +82,7 @@ function render() {
             `<div class="widget-content p-0">` +
             `<div class="widget-content-wrapper">` +
             `<div class="widget-content-left mr-3">` +
-            `<img width="42" class="rounded-circle" src="http://192.168.8.100:8000/images/avatars/1.jpg" alt="">` +
+            `<img width="42" class="rounded-circle" src="http://172.20.10.5:8000/images/avatars/1.jpg" alt="">` +
             `</div>` +
             `<div class="widget-content-left">` +
             `<div class="widget-heading">${user}</div>` +
@@ -119,7 +119,7 @@ function prepareCaller() {
     };
     //onaddstream handler to receive remote feed and show in remoteview video element
     caller.onaddstream = function(evt) {
-        toggleEndCallButton("block");
+        // toggleEndCallButton("block");
         console.log("onaddstream called");
         try {
             document.getElementById("remoteview").srcObject = evt.stream;
@@ -201,7 +201,7 @@ function endCall() {
         track.stop();
     }
     prepareCaller();
-    toggleEndCallButton("none");
+    // toggleEndCallButton("none");
 }
 
 function endCurrentCall() {
@@ -222,17 +222,17 @@ function onIceCandidate(peer, evt) {
     }
 }
 
-function toggleEndCallButton() {
-    if (document.getElementById("endCall").style.display == "block") {
-        document.getElementById("endCall").style.display = "none";
-    } else {
-        document.getElementById("endCall").style.display = "block";
-    }
-}
+// function toggleEndCallButton() {
+//     if (document.getElementById("endCall").style.display == "block") {
+//         document.getElementById("endCall").style.display = "none";
+//     } else {
+//         document.getElementById("endCall").style.display = "block";
+//     }
+// }
 
-function toggleEndCallButton(action) {
-    document.getElementById("endCall").style.display = action;
-}
+// function toggleEndCallButton(action) {
+//     document.getElementById("endCall").style.display = action;
+// }
 
 //Listening for the candidate message from a peer sent from onicecandidate handler
 channel.bind("client-candidate", function(msg) {

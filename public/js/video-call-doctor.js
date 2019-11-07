@@ -1,7 +1,7 @@
 // document.getElementById("selfview").volume = 0;
 
 var video = document.getElementById("remoteview");
-var canvas = document.getElementById("canvas-sc");
+// var canvas = document.getElementById("canvas-sc");
 // var context = canvas.getContext("2d");
 var w, h, ratio;
 
@@ -11,8 +11,8 @@ video.addEventListener(
         ratio = video.videoWidth / video.videoHeight;
         w = video.videoWidth - 100;
         h = parseInt(w / ratio, 10);
-        canvas.width = w;
-        canvas.height = h;
+        // canvas.width = w;
+        // canvas.height = h;
     },
     false
 );
@@ -25,7 +25,7 @@ function snap() {
     document.getElementById("inp_img").value = snappedCanvas.toDataURL();
 }
 //var user_id = Math.random(10000).toString();
-var name = "BGSD";
+var name = "dev";
 console.log(user_id);
 var pusher = new Pusher("ed6c4e67e5c5bf35c1ef", {
     cluster: "ap1",
@@ -219,12 +219,28 @@ function endCall() {
     toggleEndCallButton();
 }
 
-function endCurrentCall() {
-    channel.trigger("client-endcall", {
-        room: room
-    });
-    endCall();
-}
+// function endCurrentCall() {
+//     channel.trigger("client-endcall", {
+//         room: room
+//     });
+//     endCall();
+//     $.ajax({
+//         type: "GET",
+//         url:
+//             "http://172.20.10.5:3000/doctor/live-interactive/submission/" +
+//             submission_id +
+//             "/after-live",
+//         headers: {
+//             "X-CSRF-TOKEN": window.csrfToken
+//         },
+//         success: res => {
+//             console.log(res);
+//         },
+//         error: error => {
+//             console.log(error);
+//         }
+//     });
+// }
 
 //Send the ICE Candidate to the remote peer
 function onIceCandidate(peer, evt) {

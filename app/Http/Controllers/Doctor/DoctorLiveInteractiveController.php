@@ -17,18 +17,31 @@ class DoctorLiveInteractiveController extends Controller
         $client = new Client($guzzle_params);
         $response = json_decode($client->request('GET', 'examinations/live-interactive/submissions/' . $liveSubmissionId)->getBody(), true);
         $data = [
+            "liveSubmissionId" => $liveSubmissionId,
             "officer" => $response["clinic"]["officer"],
             "patient" => $response["patient"]["name"],
             "patientIdentity" => $response["patient"]["nik"],
             "patientDOB" => $response["patient"]["dob"],
             "patientId" => $response["patient"]["id"],
-            "clinicId" => $response["clinic"]["id"]
+            "clinicId" => $response["clinic"]["id"],
         ];
         $getPatientResponse = json_decode($client->request('GET', '/examinations/live-interactive/submissions/' . $liveSubmissionId)->getBody(), true);
         return view('partials.doctor.live-interactive.live-interactive')
             ->with('data', $data)
             ->with('pagetitle', 'Live Interactive')
             ->with('pagename', 'get-doctor-live-interactive-view');
+    }
+
+    public function afterLiveExamination(Request $request, $subs_id)
+    {
+        $guzzle_params = config('app.guzzle_params');
+        $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
+        $client = new Client($guzzle_params);
+        $client->request('PATCH', 'examinations/live-interactive/submissions/' . $subs_id, [
+            'query' => [
+                "action" => 'post-life-int'
+            ]
+        ]);
     }
 
     public function submitLiveExamination(Request $request)

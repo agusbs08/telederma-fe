@@ -8,11 +8,11 @@ return [
     */
 
     'guzzle_params' => [
-        'base_uri' => 'http://192.168.8.100:8080/api/',
+        'base_uri' => 'http://172.20.10.5:8080/api/',
         'http_errors' => false
     ],
-    'api_endpoint' => 'http://192.168.8.100:8080/api/',
-    'backend_url' => 'http://192.168.8.100:8080',
+    'api_endpoint' => 'http://172.20.10.5:8080/api/',
+    'backend_url' => 'http://172.20.10.5:8080',
 
     /*
     |--------------------------------------------------------------------------

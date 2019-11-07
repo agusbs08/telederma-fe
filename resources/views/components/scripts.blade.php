@@ -253,7 +253,6 @@
                     contentType: false,
                     success: (data) => {
                         console.log(data)
-                        // window.location = '/puskesmas/patients/' + '{{ $data["patientId"] }}'
                     },
                     error: (error) => {
                         console.log(error)
@@ -264,6 +263,29 @@
                 console.log(error)
             }
         })
+    }
+    function endCurrentCall() {
+        const result = confirm("Apakah Anda yakin ingin menutup sesi live-interactive?");
+        if (result){
+            channel.trigger("client-endcall", {
+                room: room
+            });
+            endCall();
+            $.ajax({
+                type: "GET",
+                url:
+                    "{{ route('doctor.after-live', ['id' => $data['liveSubmissionId']]) }}",
+                headers: {
+                    "X-CSRF-TOKEN": '{{ csrf_token() }}',
+                },
+                success: res => {
+                    console.log(res);
+                },
+                error: error => {
+                    console.log(error);
+                }
+            });
+        }
     }
 </script>
 @endif

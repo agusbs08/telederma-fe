@@ -55,6 +55,7 @@ Route::middleware(['role:doctor'])->group(function(){
             Route::get('/submission', 'Doctor\DoctorLiveInteractiveController@getSubmissionList')->name('doctor.get-live-interactive-subms-list');
             Route::get('/submission/{id}', 'Doctor\DoctorLiveInteractiveController@getSubmissionDetails')->name('doctor.get-live-interactive-subms-details');
             Route::post('/submission/{id}/respond', 'Doctor\DoctorLiveInteractiveController@respondLiveInteractive')->name('doctor.respond-live-interactive-subms');
+            Route::get('/submission/{subs_id}/after-live', 'Doctor\DoctorLiveInteractiveController@afterLiveExamination')->name('doctor.after-live');
             Route::get('/submission/{subs_id}/respond/{resp_id}', 'Doctor\DoctorLiveInteractiveController@cancelResponse')->name('doctor.delete-respond-live-interactive-subms');
         });
         Route::get('live', 'Doctor\DoctorLiveInteractiveController@getLiveInteractive')->name('doctor.get-live-interactive');

@@ -12,8 +12,17 @@
         </div>
       </div>
     </div>
+    <div class="page-title-actions">
+      <div class="position-relative form-group">
+        <select type="select" id="live-status-filter" name="" class="custom-select" onchange="reloadWithFilter()">
+          <option value="available" {{ $filter === 'available' ? 'selected' : '' }}>Pengajuan Tersedia</option>
+          <option value="done" {{ $filter === 'done' ? 'selected' : '' }}>Pengajuan Sudah Dilakukan</option>
+        </select>
+      </div>
+    </div>
   </div>
 </div>
+
 <div class="main-card mb-3 card">
   <div class="card-body">
     <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
@@ -22,15 +31,17 @@
           <th>No</th>
           <th>Pengirim</th>
           <th>Tanggapan</th>
-          <th>Waktu</th>
+          <th>Diajukan pada-</th>
           <th>Detail</th>
         </tr>
       </thead>
       <tbody>
         @if (sizeof($data) > 0)
-        @foreach ($data as $i => $d)
+        @php $i = 0; @endphp
+        @foreach ($data as $d)
+        @php $i++; @endphp
         <tr>
-          <td>{{ $i+1 }}</td>
+          <td>{{ $i }}</td>
           <td>{{ $d['clinic']['name'] }}</td>
           <td>{{ sizeof($d['responses']) }} tanggapan</td>
           <td>{{ date("d M, Y, H:m", strtotime(date($d['createdAt']))) }} WIB</td>
@@ -49,10 +60,11 @@
         <th>No</th>
         <th>Pengirim</th>
         <th>Tanggapan</th>
-        <th>Waktu</th>
+        <th>Diajukan pada-</th>
         <th>Detail</th>
       </tfoot>
     </table>
   </div>
 </div>
+
 @endsection

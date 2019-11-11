@@ -18,7 +18,8 @@ $page = Request::segment(2);
     </a>
 </li>
 <li>
-    <a href="{{ route('puskesmas.get-live-interactive-subms-list') }}" {{ $page === "live-interactive" ? $class : "" }}>
+    <a href="{{ route('puskesmas.get-live-interactive-subms-list', ['filter' => 'available']) }}"
+        {{ $page === "live-interactive" ? $class : "" }}>
         <i class="metismenu-icon pe-7s-video">
         </i>Live Interactive
     </a>

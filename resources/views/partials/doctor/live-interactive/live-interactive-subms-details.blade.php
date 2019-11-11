@@ -15,11 +15,12 @@
         <a href="{{ route('doctor.get-live-interactive', [
           'id' => $data['_id']
         ]) }}">
-          <button type="button" class="btn-shadow btn btn-primary">
+          <button type="button" class="btn-shadow btn btn-{{ $data['isLiveDone'] === true ? 'secondary' : 'primary' }}"
+            {{ $data['isLiveDone'] === true ? 'disabled' : '' }}>
             <span class="btn-icon-wrapper pr-2 opacity-7">
               <i class="fa fa-video fa-w-20"></i>
             </span>
-            Ke Halaman Live Interactive
+            Ke Halaman Live Interactive {{ $data['isLiveDone'] === true ? '(Sudah Berlangsung)' : '' }}
           </button>
         </a>
       </div>
@@ -70,6 +71,7 @@
       </a>
     </div>
   </div>
+  @if ($data['isLiveDone'] === false)
   <div class="card-body">
     <form action="{{ route('doctor.respond-live-interactive-subms', ['id' => $data['_id']]) }}" method="POST">
       <div class="form-group">
@@ -81,6 +83,7 @@
       <button class="btn btn-primary mt-1">Kirim</button>
     </form>
   </div>
+  @endif
 </div>
 
 @if (sizeof($data['responses']) > 0)

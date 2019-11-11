@@ -455,3 +455,23 @@
         }
 </script>
 @endif
+@if ($pagename == 'doctor.live-interactive-subms-list')
+<script>
+    function reloadWithFilter() {
+        if ($('#live-status-filter').val() == 'done')
+            window.location = "{{ route('doctor.get-live-interactive-subms-list', ['filter' => 'done']) }}"
+        else if ($('#live-status-filter').val() == 'available')
+            window.location = "{{ route('doctor.get-live-interactive-subms-list', ['filter' => 'available']) }}"
+    }
+</script>
+@endif
+@if ($pagename == 'puskesmas.live-interactive-subms-list')
+<script>
+    function reloadWithFilter() {
+        if ($('#live-status-filter').val() == 'done')
+            window.location = "{{ route('puskesmas.get-live-interactive-subms-list', ['filter' => 'done']) }}"
+        else if ($('#live-status-filter').val() == 'available')
+            window.location = "{{ route('puskesmas.get-live-interactive-subms-list', ['filter' => 'available']) }}"
+    }
+</script>
+@endif

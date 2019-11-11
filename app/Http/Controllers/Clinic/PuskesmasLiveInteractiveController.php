@@ -17,16 +17,29 @@ class PuskesmasLiveInteractiveController extends Controller
     }
 
 
-    public function getSubmissionList()
+    public function getSubmissionList(Request $request)
     {
         $guzzle_params = config('app.guzzle_params');
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
         $client = new Client($guzzle_params);
-        $response = $client->request('GET', 'examinations/live-interactive/submissions');
+        $response = $client->request('GET', 'examinations/live-interactive/submissions', [
+            'query' => ['clinic' => Session::get('user-id')]
+        ]);
+        $filter = $request->query()['filter'];
+        if ($filter == 'done'){
+            $data = array_filter(json_decode($response->getBody(), true), function ($var) {
+                return ($var['isLiveDone'] == true);
+            });
+        } else {
+            $data = array_filter(json_decode($response->getBody(), true), function ($var) {
+                return ($var['isLiveDone'] == false);
+            });
+        }
         return view('partials.puskesmas.live-interactives.live-interactive-subms-list')
             ->with('pagename', 'puskesmas.live-interactive-subms-list')
             ->with('pagetitle', 'Daftar Pengajuan Live')
-            ->with('data', json_decode($response->getBody(), true));
+            ->with('filter', $filter)
+            ->with('data', $data);
     }
 
     public function proposeLiveInteractive(Request $request)

@@ -13,9 +13,15 @@
       </div>
     </div>
     <div class="page-title-actions">
-      <a href="{{ route('puskesmas.patients') }}" class=" btn-shadow mr-3 btn btn-primary">
-        <i class="fa fa-plus"></i> Ajukan Live Interactive
-      </a>
+      <div class="position-relative form-group">
+        <select type="select" id="live-status-filter" name="" class="custom-select" onchange="reloadWithFilter()">
+          <option value="available" {{ $filter === 'available' ? 'selected' : '' }}>Pengajuan Belum Dilakukan</option>
+          <option value="done" {{ $filter === 'done' ? 'selected' : '' }}>Pengajuan Sudah Dilakukan</option>
+        </select>
+      </div>
+      {{-- <a href="{{ route('puskesmas.patients') }}" class=" btn-shadow mr-3 btn btn-primary">
+      <i class="fa fa-plus"></i> Ajukan Live Interactive
+      </a> --}}
     </div>
   </div>
 </div>
@@ -35,9 +41,11 @@
       </thead>
       <tbody>
         @if (sizeof($data) > 0)
-        @foreach ($data as $i => $d)
+        @php $i = 0; @endphp
+        @foreach ($data as $d)
+        @php $i++; @endphp
         <tr>
-          <td>{{ $i+1 }}</td>
+          <td>{{ $i }}</td>
           <td>{{ $d['patient']['name'] }}</td>
           <td>{{ $d['clinic']['officer'] }}</td>
           <td>{{ $d['hospital'] }}</td>

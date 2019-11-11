@@ -82,7 +82,7 @@ function render() {
             `<div class="widget-content p-0">` +
             `<div class="widget-content-wrapper">` +
             `<div class="widget-content-left mr-3">` +
-            `<img width="42" class="rounded-circle" src="http://172.20.10.5:8000/images/avatars/1.jpg" alt="">` +
+            `<img width="42" class="rounded-circle" src="http://192.168.8.100:8000/images/avatars/1.jpg" alt="">` +
             `</div>` +
             `<div class="widget-content-left">` +
             `<div class="widget-heading">${user}</div>` +
@@ -205,10 +205,10 @@ function endCall() {
 }
 
 function endCurrentCall() {
+    const confirm = confirm("Apakah Anda yakin?")
     channel.trigger("client-endcall", {
         room: room
     });
-
     endCall();
 }
 

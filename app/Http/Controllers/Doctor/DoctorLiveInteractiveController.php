@@ -93,8 +93,7 @@ class DoctorLiveInteractiveController extends Controller
         return json_decode($submitExaminationResponse->getBody(), true);
     }
 
-
-    public function getSubmissionList()
+    public function getSubmissionList(Request $request)
     {
         $guzzle_params = config('app.guzzle_params');
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
@@ -102,10 +101,21 @@ class DoctorLiveInteractiveController extends Controller
         $response = $client->request('GET', 'examinations/live-interactive/submissions', [
             'query' => ['hospital' => Session::get('hospital')]
         ]);
+        $filter = $request->query()['filter'];
+        if ($filter == 'done'){
+            $data = array_filter(json_decode($response->getBody(), true), function ($var) {
+                return ($var['isLiveDone'] == true);
+            });
+        } else {
+            $data = array_filter(json_decode($response->getBody(), true), function ($var) {
+                return ($var['isLiveDone'] == false);
+            });
+        }
         return view('partials.doctor.live-interactive.live-interactive-subms-list')
             ->with('pagetitle', 'Daftar Pengajuan Live')
-            ->with('pagename', 'puskesmas.live-interactive-subms-list')
-            ->with('data', json_decode($response->getBody(), true));
+            ->with('pagename', 'doctor.live-interactive-subms-list')
+            ->with('filter', $filter)
+            ->with('data', $data);
     }
 
     public function getSubmissionDetails(Request $request, $id)

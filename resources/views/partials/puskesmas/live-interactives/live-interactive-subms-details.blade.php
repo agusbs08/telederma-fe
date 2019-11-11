@@ -12,11 +12,13 @@
     </div>
     <div class="page-title-actions">
       <div class="d-inline-block">
-        <a href="{{ route('live-patient', ['id' => Session::get('name')]) }}" class="btn-shadow btn btn-primary">
+        <a href="{{ route('live-patient', ['id' => Session::get('name')]) }}"
+          class="btn-shadow btn btn-{{ $data['isLiveDone'] === true ? 'secondary' : 'primary' }}"
+          {{ $data['isLiveDone'] === true ? 'disabled' : '' }}>
           <span class="btn-icon-wrapper pr-2 opacity-7">
             <i class="fa fa-video fa-w-20"></i>
           </span>
-          Ke Halaman Live Interactive
+          Ke Halaman Live Interactive {{ $data['isLiveDone'] === true ? '(Sudah Berlangsung)' : '' }}
         </a>
       </div>
     </div>

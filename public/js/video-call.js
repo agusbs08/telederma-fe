@@ -205,7 +205,7 @@ function endCall() {
 }
 
 function endCurrentCall() {
-    const confirm = confirm("Apakah Anda yakin?")
+    const confirm = confirm("Apakah Anda yakin?");
     channel.trigger("client-endcall", {
         room: room
     });

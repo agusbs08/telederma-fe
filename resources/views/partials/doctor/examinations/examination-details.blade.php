@@ -87,8 +87,7 @@
           <div class="col-sm-10">
             <div class="input-group">
               <div class="input-group-prepend"><span class="input-group-text">Rp </span></div>
-              <input placeholder="tuliskan biaya pemeriksaan" step="1" type="number" class="form-control"
-                id="diagnose-cost">
+              <input placeholder="tuliskan biaya pemeriksaan" type="text" class="form-control" id="diagnose-cost">
               <div class="input-group-append"><span class="input-group-text">.00</span></div>
             </div>
           </div>

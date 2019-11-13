@@ -11,7 +11,7 @@ function readURL(input) {
 $("#examination-image").change(function() {
     readURL(this);
     (async function() {
-        $("#examination-image-preview").show();
+        $("#examination-image-preview-card").show();
         $("#loading-spinner").show();
         const SKIN_CLASSES = {
             0: "akiec, Actinic Keratoses",
@@ -48,6 +48,7 @@ $("#examination-image").change(function() {
 
         $("#loading-spinner").hide();
         $(".automated-diagnose-wrapper").show();
+        $(".automated-diagnose-result-wrapper").empty();
         automatedDiagnoseResult.forEach(t => {
             $(".automated-diagnose-result-wrapper").append(
                 '<li class="nav-item">' +

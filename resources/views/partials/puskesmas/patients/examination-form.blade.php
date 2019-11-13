@@ -51,20 +51,27 @@
                 <button type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
                   aria-controls="collapseTwo" class="text-left m-0 p-0 btn btn-link btn-block">
                   <span class="form-heading">Upload Foto Pemeriksaan
-                    <p>Unggah foto dari kamera mikroskopis.</p>
+                    <p>Unggah foto dari PC Anda</p>
                   </span>
                 </button>
               </div>
               <div data-parent="#accordion" id="collapseTwo" class="collapse show">
                 <div class="card-body">
-                  <div class="position-relative form-group"><label for="exampleFile" class="">Gambar</label>
-                    <input name="file" id="examination-image" type="file" class="form-control-file" multiple="multiple">
-                    <img id="examination-image-preview" src="#" alt="skin image"
-                      style="display: none; margin: 5px; width:100%; max-width:400px;" class="img-responsive" />
-                    <small class="form-text text-muted">Anda dapat mengupload maksimal 5 gambar.</small>
-                    <div class="loader-wrapper justify-content-center align-items-center" style="margin: 10px auto;">
-                      <div id="loading-spinner" class="loader" style="display: none;">
-                        <div class="line-scale">
+                  <div class="position-relative form-group">
+                    <label for="exampleFile" class="">Preview Foto</label>
+                    <input name="file" id="examination-image" type="file" class="form-control-file" accept="image/*">
+
+                    <small class="form-text text-muted">Silakan mengupload foto penyakit secara jelas dan mudah diamati
+                      dokter.</small>
+                    <div id="loading-spinner" style="margin: 30px 10px 30px 10px; display: none;"
+                      class="loader-wrapper justify-content-center align-items-center">
+                      <h5 class="card-title">Analyzing . . .</h5>
+                      <div class="loader">
+                        <div class="ball-grid-beat">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
                           <div></div>
                           <div></div>
                           <div></div>
@@ -77,6 +84,11 @@
                 </div>
               </div>
             </div>
+            <div class="card main-card element-block-example" id="examination-image-preview-card" style="display: none">
+              <div class="card-header"><i class="header-icon lnr-camera icon-gradient bg-warm-flame"> </i>Preview Foto
+              </div>
+              <img id="examination-image-preview" src="#" alt="skin image" style="width:100%;" class="img-responsive" />
+            </div>
             <div class="card automated-diagnose-wrapper" style="display: none;">
               <div class="card-header"><i class="header-icon lnr-screen icon-gradient bg-warm-flame"> </i>Hasil
                 Diagnosa
@@ -88,6 +100,7 @@
               </div>
             </div>
           </div>
+
         </div>
         <div id="step-322">
           <div class="position-relative form-group"><label for="exampleEmail5">Pilih Rumah Sakit yang Akan

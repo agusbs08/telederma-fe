@@ -125,6 +125,9 @@
 </script>
 @endif
 @if ($pagename == 'get-doctor-live-interactive-view')
+<script>
+    console.log("ad")
+</script>
 <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
 <script src="{{ asset('js/video-call-doctor.js') }}"></script>
 <script>

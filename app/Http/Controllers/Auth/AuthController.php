@@ -71,7 +71,7 @@ class AuthController extends Controller
       $guzzle_params = config('app.guzzle_params');
       $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
       $client = new Client($guzzle_params);
-      $response = $client->request('POST', 'users/me/logoutall');
+      $response = $client->request('POST', 'users/me/logout');
       Session::flush();
       return redirect()->route('auth.getLoginView');
     }

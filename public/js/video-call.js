@@ -124,6 +124,7 @@ function prepareCaller() {
         try {
             document.getElementById("remoteview").srcObject = evt.stream;
         } catch (err) {
+            console.log(err);
             document.getElementById("remoteview").src = URL.createObjectURL(
                 evt.stream
             );
@@ -321,6 +322,4 @@ channel.bind("client-endcall", function(answer) {
 
 window.onbeforeunload = function() {
     return "Do you really want to leave our brilliant application?";
-    //if we return nothing here (just calling return;) then there will be no pop-up question at all
-    //return;
 };

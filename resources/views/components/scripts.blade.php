@@ -282,7 +282,7 @@
                     "X-CSRF-TOKEN": '{{ csrf_token() }}',
                 },
                 success: res => {
-                    console.log(res);
+                    window.location = "{{ route('doctor.get-live-interactive-subms-details', ['id' => $data['liveSubmissionId']]) }}"
                 },
                 error: error => {
                     console.log(error);

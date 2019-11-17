@@ -272,17 +272,23 @@ channel.bind("client-candidate", function(msg) {
 channel.bind("client-sdp", function(msg) {
     if (msg.room == id) {
         console.log("sdp received");
-        var answer = confirm(
-            "Anda mendapat panggilan live-interactive dari: " +
-                msg.from +
-                ". Mulai?"
-        );
+        // var caller = msg.from;
+        // console.log(caller);
+        // confirm(
+        //     "Anda mendapat panggilan live-interactive dari: " +
+        //         // caller +
+        //         ". Mulai?"
+        // );
+        var answer = true;
+        console.log(answer);
         if (!answer) {
+            console.log("anjing diam");
             return channel.trigger("client-reject", {
                 room: msg.room,
                 rejected: id
             });
         } else {
+            console.log("anjing lari");
             room = msg.room;
             var sessionDesc = new RTCSessionDescription(msg.sdp);
             caller.addStream(localUserMedia);

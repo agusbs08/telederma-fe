@@ -86,6 +86,62 @@
   @endif
 </div>
 
+{{-- <div class="main-card mb-3 card">
+  <div class="card-body">
+    <h5 class="card-title">Hasil Diagnosa</h5>
+    <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Deskripsi</label>
+      <div class="col-sm-10">
+        <textarea rows="5" class="form-control autosize-input" id="description"
+          placeholder="tuliskan hasil diagnosa"></textarea>
+      </div>
+    </div>
+    <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Biaya
+        Pemeriksaan</label>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <div class="input-group-prepend"><span class="input-group-text">Rp </span></div>
+          <input placeholder="tuliskan biaya pemeriksaan" type="text" class="form-control" id="diagnose-cost">
+          <div class="input-group-append"><span class="input-group-text">.00</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="position-relative row form-group"><label for="\" class="col-sm-2 col-form-label">Penyakit</label>
+      <div class="col-sm-10">
+        <input name="password" id="disease-name" placeholder="tuliskan nama penyakit kulit yang diderita" type="text"
+          class="form-control">
+      </div>
+    </div>
+    <div class="position-relative row form-group"><label for="\" class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-10">
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="toggle-resep" onchange="showRecipeField()">
+          <label class="custom-control-label" for="toggle-resep">Sertakan Resep</label>
+        </div>
+      </div>
+    </div>
+    <fieldset id="recipe-field" style="display: none;">
+      <div class="position-relative row form-group"><label for="" class="col-sm-2 col-form-label">Resep</label>
+        <div class="col-sm-10">
+          <div class="form-row">
+            <div class="col-md-4 position-relative form-group"><input name="medicine-name" placeholder="nama obat"
+                type="text" class="form-control"></div>
+            <div class="col-md-2 position-relative form-group"><input name="usage-rule" placeholder="aturan pakai"
+                type="text" class="form-control"></div>
+            <div class="col-md-4 position-relative form-group"><input name="recipe-desc" placeholder="keterangan"
+                type="text" class="form-control"></div>
+            <div class="col-md-2 position-relative form-group"><button class="btn btn-primary btn-block"
+                id="add-recipe-form" type="button">Tambah</button></div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="d-block text-center card-footer">
+    <button href="" class="btn-wide btn-shadow btn btn-block btn-primary" onclick="submitDiagnose()">Submit Hasil
+      Diagnosa</button>
+  </div>
+</div> --}}
+
 @if (sizeof($data['responses']) > 0)
 <h6>Tanggapan:</h6>
 @endif

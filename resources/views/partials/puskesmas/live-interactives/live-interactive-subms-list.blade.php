@@ -15,13 +15,10 @@
     <div class="page-title-actions">
       <div class="position-relative form-group">
         <select type="select" id="live-status-filter" name="" class="custom-select" onchange="reloadWithFilter()">
-          <option value="available" {{ $filter === 'available' ? 'selected' : '' }}>Pengajuan Belum Dilakukan</option>
-          <option value="done" {{ $filter === 'done' ? 'selected' : '' }}>Pengajuan Sudah Dilakukan</option>
+          <option value="available" {{ $filter === 'available' ? 'selected' : '' }}>Pengajuan Belum Diterima</option>
+          <option value="done" {{ $filter === 'done' ? 'selected' : '' }}>Pengajuan Sudah Diterima</option>
         </select>
       </div>
-      {{-- <a href="{{ route('puskesmas.patients') }}" class=" btn-shadow mr-3 btn btn-primary">
-      <i class="fa fa-plus"></i> Ajukan Live Interactive
-      </a> --}}
     </div>
   </div>
 </div>

@@ -32,7 +32,8 @@
           <div class="position-relative form-group"><label for="phone" class="">Telepon/HP</label><input required
               name="phone" id="phone" placeholder="Masukkan nomor ponsel ..." type="text" class="form-control"></div>
           <div class="position-relative form-group">
-            <label for="hospital" class="">Rumah Sakit Dinas</label>
+            <label for="hospital" class="">Rumah Sakit Dinas (tambahkan <a
+                href="{{ route('admin.hospitals') }}">disini</a> jika belum ada)</label>
             <select name="hospital" id="hospital" class="form-control">
             </select>
           </div>

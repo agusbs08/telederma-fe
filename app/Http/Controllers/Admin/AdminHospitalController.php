@@ -37,6 +37,7 @@ class AdminHospitalController extends Controller
 
     public function submitHospital(Request $request)
     {
+        // dd($request->all());
         $guzzle_params = config('app.guzzle_params');
         $guzzle_params['headers'] = ['Authorization' => 'Bearer ' . Session::get('auth-key')];
         $client = new Client($guzzle_params);
@@ -49,5 +50,6 @@ class AdminHospitalController extends Controller
                 'website' => $request->input('website'),
             ]
         ]);
+        return redirect()->back();
     }
 }

@@ -35,9 +35,9 @@
       <div class="form-wizard-content">
         <div id="step-122">
           <div class="card-body">
-            <div class="position-relative form-group"><label for="exampleEmail5">Hasil pemeriksaan awal (gejala dan
+            <div class="position-relative form-group"><label for="">Hasil pemeriksaan awal (gejala dan
                 keluhan dari pasien).</label><textarea rows="1" class="form-control autosize-input"
-                style="height: 35px;" id="description"></textarea>
+                style="height: 35px;" id="description" placeholder="Tuliskan hasil pemeriksaan disini ..."></textarea>
               <div class="invalid-feedback">You will not be able to see this</div>
               <small class="form-text text-muted">Isikan secara detail agar dokter lebih mudah dalam melakukan
                 diagnosa.</small>

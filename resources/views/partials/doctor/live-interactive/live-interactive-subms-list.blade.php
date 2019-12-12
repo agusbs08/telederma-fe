@@ -44,7 +44,7 @@
           <td>{{ $i }}</td>
           <td>{{ $d['clinic']['name'] }}</td>
           <td>{{ sizeof($d['responses']) }} tanggapan</td>
-          <td>{{ date("d M, Y, H:m", strtotime(date($d['createdAt']))) }} WIB</td>
+          <td>{{ date("d M, Y, H:m", strtotime(date($d['createdAt'])) +  25200) }} WIB</td>
           <td style="text-align: center; vertical-align: middle;">
             <a href="{{ route('doctor.get-live-interactive-subms-details', ['id' => $d['_id']]) }}"><button
                 class="mb-2 mr-2 btn-icon btn-pill btn btn-info">

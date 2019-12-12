@@ -32,7 +32,7 @@
         <a href="javascript:void(0)">{{ $data['hospital'] }}</a>
         <div class="text-muted small">
           Diajukan pada
-          {{  date('d-M-Y', strtotime($data['createdAt'])) . ', pukul: ' . date('H:i', strtotime($data['createdAt']))}}.
+          {{  date('d-M-Y', strtotime($data['createdAt'])) . ', pukul: ' . date('H:i', strtotime($data['createdAt']) +  25200)}}.
           Petugas: {{ $data['clinic']['officer'] }}
         </div>
       </div>

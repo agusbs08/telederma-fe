@@ -42,7 +42,7 @@
           <td>{{ $d['doctor']['hospital'] }}</td>
           <td>{{ $d['type'] }}</td>
           <td>{{ $d['checked'] ? "Sudah" : "Belum" }} ditanggapi</td>
-          <td>{{ date("d M, Y", strtotime(date($d['createdAt']))) }}</td>
+          <td>{{ date("d M, Y", strtotime(date($d['createdAt'])) +  25200) }}</td>
           <td style="text-align: center; vertical-align: middle;">
             <a href="{{ route('puskesmas.get-examination-details', ['examination_id' => $d['_id']]) }}"><button
                 class="mb-2 mr-2 btn-icon btn-pill btn btn-info">

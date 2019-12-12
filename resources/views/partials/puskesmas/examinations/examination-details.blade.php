@@ -10,7 +10,7 @@
       <div>Detail Pemeriksaan
         <div class="page-title-subheading">Diajukan pada
           {{ date('d-m-Y', strtotime($examination_details['createdAt'])) }},
-          pukul {{ date('H:i', strtotime($examination_details['createdAt'])) }} WIB oleh
+          pukul {{ date('H:i', strtotime($examination_details['createdAt']) +  25200) }} WIB oleh
           {{ $examination_details['clinic']['name'] }} ke {{ $examination_details['doctor']['hospital'] }}.
         </div>
         <div class="page-title-subheading">
@@ -138,7 +138,7 @@
         </div>
         <hr>
         <p>Diperiksa oleh
-          {{ $examination_details['doctor']['name'] . ' dari ' . $examination_details['doctor']['hospital'] . ' pada ' . date('d-M-Y', strtotime($examination_details['createdAt'])) . ', pukul: ' . date('H:i', strtotime($examination_details['createdAt'])) . ' WIB'}}
+          {{ $examination_details['doctor']['name'] . ' dari ' . $examination_details['doctor']['hospital'] . ' pada ' . date('d-M-Y', strtotime($examination_details['createdAt'])) . ', pukul: ' . date('H:i', strtotime($examination_details['createdAt']) +  25200) . ' WIB'}}
         </p>
       </div>
     </div>

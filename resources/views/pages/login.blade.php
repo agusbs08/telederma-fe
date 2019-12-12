@@ -60,9 +60,9 @@
   <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
     {{-- <div class="app-logo"></div> --}}
     {{-- <img src="{{ asset('images/logo-uni.png') }}" alt="" style="height: 50px; width: auto;"> --}}
-    <h4 class="mb-0">
-      <span>Silakan login ke akun Anda.</span></h4>
-    <h6 class="mt-3">Hubungi admin di nomor +6281234463736 atau email ke admin@teledermatology.id bila ingin
+    <h3 class="mb-0">
+      <span>Silakan login ke akun Anda.</span></h3>
+    <h6 class="mt-3">Hubungi admin bila ingin
       mendaftar sebagai puskesmas atau
       dokter.</h6>
     @if (session('errors'))
@@ -90,24 +90,24 @@
           </div>
         </div>
       </div>
-      <div class="g-recaptcha" data-callback="reCaptchaCallback" data-sitekey="{{ env('CAPTCHA_SITEKEY') }}">
-      </div>
-      <div class="divider row"></div>
-      <div class="alert alert-danger alert-dismissible fade show login-message" role="alert" style="display: none;">
-      </div>
-      <div class="d-flex align-items-center">
-        <div class="ml-auto">
-          <button class="ladda-button mb-2 mr-2 btn btn-primary" data-style="zoom-in" onclick="login()" disabled
-            id="login-button">
-            <span class="ladda-label">Login
-            </span>
-            <span class="ladda-spinner">
-            </span>
-          </button>
-        </div>
+      {{-- <div class="g-recaptcha" data-callback="reCaptchaCallback" data-sitekey="{{ env('CAPTCHA_SITEKEY') }}">
+    </div> --}}
+    <div class="divider row"></div>
+    <div class="alert alert-danger alert-dismissible fade show login-message" role="alert" style="display: none;">
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="ml-auto">
+        <button class="ladda-button mb-2 mr-2 btn btn-primary" data-style="zoom-in" onclick="login()" disabled
+          id="login-button">
+          <span class="ladda-label">Masuk
+          </span>
+          <span class="ladda-spinner">
+          </span>
+        </button>
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>
 </div>
